@@ -1,0 +1,33 @@
+{
+  "name": "lynt",
+  "description": "A zero config JavaScript linter",
+  "author": "Saad Quadri",
+  "license": "MIT",
+  "version": "0.0.0-prerelease",
+  "main": "lib/index.js",
+  "bin": {
+    "lynt": "lib/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "./lib/cli.js test --typescript"
+  },
+  "dependencies": {
+    "@types/eslint": "^4.16.0",
+    "@types/meow": "^4.0.1",
+    "@types/node": "^9.6.5",
+    "eslint": "^4.19.1",
+    "meow": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^2.8.1"
+  },
+  "keywords": [
+    "linter",
+    "eslint",
+    "eslint",
+    "lint",
+    "lynt"
+  ]
+}
