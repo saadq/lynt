@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "./lib/cli.js test --typescript"
+    "format": "prettier src/**/*.ts --write --no-semi --single-quote"
   },
   "dependencies": {
     "@types/eslint": "^4.16.0",
@@ -21,6 +21,7 @@
     "meow": "^4.0.0"
   },
   "devDependencies": {
+    "prettier": "^1.12.1",
     "typescript": "^2.8.1"
   },
   "keywords": [

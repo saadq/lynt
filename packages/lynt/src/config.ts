@@ -1,4 +1,5 @@
 import { CLIEngine } from 'eslint'
+import fs from 'fs'
 import { Options } from '.'
 
 function getConfig(options: Options) {
@@ -14,8 +15,21 @@ function getConfig(options: Options) {
     },
     envs: ['es6', 'node'],
     rules: {
-      'prefer-const': 'error'
+      'prefer-const': 'error',
+      'no-undef': 'error'
     }
+  }
+
+  const ignoreFile = '.lyntignore'
+
+  if (fs.existsSync(ignoreFile)) {
+    config.ignorePath = ignoreFile
+  } else if (options.ignore) {
+    config.ignorePattern = options.ignore
+  }
+
+  if (options.jest && config.envs) {
+    config.envs.push('jest')
   }
 
   return config

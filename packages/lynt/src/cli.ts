@@ -8,22 +8,21 @@ const template = `
     $ lynt [files] <options>
 
   Options
-    --typescript   Add support for TypeScript
-    --flow         Add support for Flowtype
-    --react        Add support for React
+    --jest     Add support for Jest globals
+    --ignore   Glob patterns for paths to ignore
 
   Examples
     $ lynt src
-    $ lynt src --typescript
-    $ lynt src --typescript --react
+    $ lynt src --jest
+    $ lynt src --ignore dist
+    $ lynt src --ignore dist --ignore build
 `
 
 const cli = meow({
   help: template,
   flags: {
-    typescript: 'boolean',
-    flow: 'boolean',
-    react: 'boolean'
+    jest: 'boolean',
+    ignore: 'string'
   }
 })
 

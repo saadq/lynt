@@ -2,22 +2,28 @@ import { CLIEngine } from 'eslint'
 import { resolve } from 'path'
 import getConfig from './config'
 
-type Options = Partial<{
-  typescript: boolean
-  flow: boolean
-  react: boolean
-}>
+interface Options {
+  jest?: boolean
+  ignore?: string | Array<string>
+}
 
 function lynt(paths: Array<string>, options: Options = {}) {
+  if (!paths || !Array.isArray(paths)) {
+    throw new Error('You must pass an array of paths to lynt()')
+  }
+
   const config = getConfig(options)
   const engine = new CLIEngine(config)
   const report = engine.executeOnFiles(paths.map(path => resolve(path)))
   const formatter = engine.getFormatter('stylish')
-  process.stdout.write(formatter(report.results))
+  const results = formatter(report.results)
 
   if (report.errorCount > 0) {
+    process.stderr.write(results)
     process.exit(1)
   }
+
+  process.stdout.write(results)
 }
 
 export { Options }
