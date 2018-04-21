@@ -32,6 +32,12 @@ function getConfig(options: Options) {
     config.envs.push('jest')
   }
 
+  if (options.global) {
+    config.globals = Array.isArray(options.global)
+      ? options.global
+      : [options.global]
+  }
+
   return config
 }
 

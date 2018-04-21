@@ -10,19 +10,23 @@ const template = `
   Options
     --jest     Add support for Jest globals
     --ignore   Glob patterns for paths to ignore
+    --global   Add support for a given global variable
 
   Examples
     $ lynt src
     $ lynt src --jest
     $ lynt src --ignore dist
     $ lynt src --ignore dist --ignore build
+    $ lynt src --global chrome
+    $ lynt src --global chrome --global atom
 `
 
 const cli = meow({
   help: template,
   flags: {
     jest: 'boolean',
-    ignore: 'string'
+    ignore: 'string',
+    global: 'string'
   }
 })
 
