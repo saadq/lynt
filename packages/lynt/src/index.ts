@@ -5,6 +5,7 @@ import getConfig from './config'
 interface Options {
   jest?: boolean
   ignore?: string | Array<string>
+  global?: string | Array<string>
 }
 
 function lynt(paths: Array<string>, options: Options = {}) {
