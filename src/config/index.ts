@@ -2,10 +2,10 @@ import { CLIEngine, Linter } from 'eslint'
 import { existsSync } from 'fs'
 import { LyntOptions } from '..'
 
-const baseConfig = require('./base.json')
+const baseConfig: CLIEngine.Options = require('./base.json')
 
-function getReactConfig(config: CLIEngine.Options): CLIEngine.Options {
-  const reactConfig = require('./react.json')
+function getReactConfig(config: CLIEngine.Options) {
+  const reactRules: CLIEngine.Options['rules'] = require('./react.json')
   return {
     ...config,
     parser: 'babel-eslint',
@@ -19,7 +19,7 @@ function getReactConfig(config: CLIEngine.Options): CLIEngine.Options {
     plugins: [...config.plugins!, 'react'],
     rules: {
       ...config.rules,
-      ...reactConfig.rules
+      ...reactRules
     }
   }
 }
