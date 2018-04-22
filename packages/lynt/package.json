@@ -17,6 +17,7 @@
     "@types/eslint": "^4.16.0",
     "@types/meow": "^4.0.1",
     "@types/node": "^9.6.5",
+    "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "meow": "^4.0.0"
   },
