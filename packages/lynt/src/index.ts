@@ -3,6 +3,7 @@ import { resolve } from 'path'
 import getConfig from './config'
 
 interface LyntOptions {
+  react?: boolean
   jest?: boolean
   ignore?: string | Array<string>
   global?: string | Array<string>
