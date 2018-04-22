@@ -6,7 +6,7 @@ const baseConfig: CLIEngine.Options = require('./base.json')
 
 function getReactConfig(config: CLIEngine.Options) {
   const reactRules: CLIEngine.Options['rules'] = require('./react.json')
-  return {
+  const reactConfig:CLIEngine.Options = {
     ...config,
     parser: 'babel-eslint',
     parserOptions: {
@@ -22,6 +22,23 @@ function getReactConfig(config: CLIEngine.Options) {
       ...reactRules
     }
   }
+
+  return reactConfig
+}
+
+function getFlowConfig(config: CLIEngine.Options) {
+  const flowRules: CLIEngine.Options['rules'] = require('./flow.json')
+  const flowConfig: CLIEngine.Options = {
+    ...config,
+    parser: 'babel-eslint',
+    plugins: [...config.plugins!, 'flowtype'],
+    rules: {
+      ...config.rules,
+      ...flowRules
+    }
+  }
+
+  return flowConfig
 }
 
 function getJestConfig(config: CLIEngine.Options) {
@@ -41,6 +58,10 @@ function getConfig(options: LyntOptions) {
 
   if (options.react) {
     config = getReactConfig(config)
+  }
+
+  if (options.flow) {
+    config = getFlowConfig(config)
   }
 
   if (options.jest) {
