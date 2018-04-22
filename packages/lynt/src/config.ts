@@ -1,5 +1,5 @@
 import { CLIEngine } from 'eslint'
-import fs from 'fs'
+import { existsSync } from 'fs'
 import { Options } from '.'
 
 function getConfig(options: Options) {
@@ -127,7 +127,7 @@ function getConfig(options: Options) {
 
   const ignoreFile = '.lyntignore'
 
-  if (fs.existsSync(ignoreFile)) {
+  if (existsSync(ignoreFile)) {
     config.ignorePath = ignoreFile
   } else if (options.ignore) {
     config.ignorePattern = options.ignore
