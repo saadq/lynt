@@ -9,6 +9,7 @@ const template = `
 
   Options
     --react    Add support for React
+    --flow     Add support for FlowType
     --jest     Add support for Jest globals
     --ignore   Glob patterns for paths to ignore
     --global   Add support for a given global variable
@@ -26,6 +27,7 @@ const cli = meow({
   help: template,
   flags: {
     react: 'boolean',
+    flow: 'boolean',
     jest: 'boolean',
     ignore: 'string',
     global: 'string'
