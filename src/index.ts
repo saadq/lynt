@@ -2,13 +2,13 @@ import { CLIEngine } from 'eslint'
 import { resolve } from 'path'
 import getConfig from './config'
 
-interface Options {
+interface LyntOptions {
   jest?: boolean
   ignore?: string | Array<string>
   global?: string | Array<string>
 }
 
-function lynt(paths: Array<string>, options: Options = {}) {
+function lynt(paths: Array<string>, options: LyntOptions = {}) {
   if (!paths || !Array.isArray(paths)) {
     throw new Error('You must pass an array of paths to lynt()')
   }
@@ -27,5 +27,5 @@ function lynt(paths: Array<string>, options: Options = {}) {
   process.stdout.write(results)
 }
 
-export { Options }
+export { LyntOptions }
 export default lynt
