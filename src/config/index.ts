@@ -6,7 +6,7 @@ const baseConfig: CLIEngine.Options = require('./base.json')
 
 function getReactConfig(config: CLIEngine.Options) {
   const reactRules: CLIEngine.Options['rules'] = require('./react.json')
-  const reactConfig:CLIEngine.Options = {
+  const reactConfig: CLIEngine.Options = {
     ...config,
     parser: 'babel-eslint',
     parserOptions: {

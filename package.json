@@ -13,7 +13,7 @@
     "build": "tsc && cp src/config/*.json lib/config",
     "clean": "trash lib",
     "dev": "tsc --watch",
-    "format": "prettier src/**/*.ts --write --no-semi --single-quote"
+    "format": "prettier \"src/**/*.ts\" --write --no-semi --single-quote"
   },
   "dependencies": {
     "@types/eslint": "^4.16.0",
