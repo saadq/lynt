@@ -8,8 +8,8 @@ const template = `
     $ lynt [files] <options>
 
   Options
-    --react    Add support for React
     --flow     Add support for FlowType
+    --react    Add support for React
     --jest     Add support for Jest globals
     --ignore   Glob patterns for paths to ignore
     --global   Add support for a given global variable
