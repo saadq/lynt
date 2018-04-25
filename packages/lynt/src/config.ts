@@ -1,6 +1,6 @@
 import { CLIEngine, Linter } from 'eslint'
 import { existsSync } from 'fs'
-import { LyntOptions } from '.'
+import { LyntOptions } from './types'
 
 const baseConfig: CLIEngine.Options = {
   parserOptions: {

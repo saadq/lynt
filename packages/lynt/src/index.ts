@@ -1,33 +1,21 @@
-import { CLIEngine } from 'eslint'
-import { resolve } from 'path'
-import getConfig from './config'
+import Linter from './linter'
+import { LyntOptions, LyntResults } from './types'
 
-interface LyntOptions {
-  flow?: boolean
-  react?: boolean
-  jest?: boolean
-  ignore?: string | Array<string>
-  global?: string | Array<string>
-}
-
-function lynt(paths: Array<string>, options: LyntOptions = {}) {
+/**
+ * Uses ESLint or TSLint to lint a given set of files.
+ *
+ * @param paths An array of file globs that you want to lint
+ * @param options A configuration object that lets you customize how lynt works.
+ */
+function lynt(paths: Array<string>, options: LyntOptions = {}): LyntResults {
   if (!paths || !Array.isArray(paths)) {
     throw new Error('You must pass an array of paths to lynt()')
   }
 
-  const config = getConfig(options)
-  const engine = new CLIEngine(config)
-  const report = engine.executeOnFiles(paths.map(path => resolve(path)))
-  const formatter = engine.getFormatter('stylish')
-  const results = formatter(report.results)
+  const linter = new Linter(options)
+  const results = linter.lint(paths)
 
-  if (report.errorCount > 0) {
-    process.stderr.write(results)
-    process.exit(1)
-  }
-
-  process.stdout.write(results)
+  return results
 }
 
-export { LyntOptions }
 export default lynt
