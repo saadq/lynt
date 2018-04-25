@@ -20,15 +20,17 @@
     "@types/meow": "^4.0.1",
     "@types/node": "^9.6.5",
     "babel-eslint": "^8.2.3",
+    "deglob": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-plugin-flowtype": "^2.46.3",
     "eslint-plugin-react": "^7.7.0",
-    "meow": "^4.0.0"
+    "meow": "^4.0.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3"
   },
   "devDependencies": {
     "prettier": "^1.12.1",
-    "trash-cli": "^1.4.0",
-    "typescript": "^2.8.1"
+    "trash-cli": "^1.4.0"
   },
   "keywords": [
     "linter",

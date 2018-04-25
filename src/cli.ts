@@ -2,17 +2,20 @@
 
 import meow from 'meow'
 import lynt from '.'
+import { LyntResults } from './types'
 
-const template = `
+const help = `
   Usage
     $ lynt [files] <options>
 
   Options
-    --flow     Add support for FlowType
-    --react    Add support for React
-    --jest     Add support for Jest globals
-    --ignore   Glob patterns for paths to ignore
-    --global   Add support for a given global variable
+    --typescript   Add support for TypeScript.
+    --flow         Add support for FlowType.
+    --react        Add support for React.
+    --jest         Add support for Jest globals.
+    --ignore       Glob patterns for paths to ignore.
+    --global       Add support for a given global variable.
+    --json         Get lint results in JSON format instead of default "stylish" format.
 
   Examples
     $ lynt src
@@ -24,14 +27,23 @@ const template = `
 `
 
 const cli = meow({
-  help: template,
+  help,
   flags: {
-    react: 'boolean',
+    typescript: 'boolean',
     flow: 'boolean',
+    react: 'boolean',
     jest: 'boolean',
     ignore: 'string',
-    global: 'string'
+    global: 'string',
+    json: 'boolean'
   }
 })
 
-lynt(cli.input, cli.flags)
+const { errorCount, output } = lynt(cli.input, cli.flags)
+
+if (errorCount > 0) {
+  process.stderr.write(output)
+  process.exit(1)
+}
+
+process.stdout.write(output)
