@@ -1,7 +1,9 @@
 import { CLIEngine } from 'eslint'
 import { Linter as TSLinter, Configuration } from 'tslint'
-import { resolve } from 'path'
-import getConfig from './config'
+import globby from 'globby'
+import { readFileSync, writeFileSync } from 'fs'
+import { join, resolve } from 'path'
+import { getESLintConfig, getTSLintConfig } from './config'
 import { LyntOptions, LyntResults } from './types'
 
 class Linter {
@@ -20,10 +22,11 @@ class Linter {
    * @param paths Glob patterns of files to lint.
    */
   eslint(paths: Array<string>): LyntResults {
-    const config = getConfig(this.options)
+    const config = getESLintConfig(this.options)
     const engine = new CLIEngine(config)
-    const report = engine.executeOnFiles(paths.map(path => resolve(path)))
-    const formatter = engine.getFormatter(this.options.json ? 'json' : 'stylish')
+    const report = engine.executeOnFiles(paths)
+    const format = this.options.json ? 'json' : 'stylish'
+    const formatter = engine.getFormatter(format)
     const output = formatter(report.results)
 
     const results: LyntResults = {
@@ -39,7 +42,35 @@ class Linter {
    *
    * @param paths Glob patterns of files to lint.
    */
-  tslint(paths: Array<string>): any {}
+  tslint(paths: Array<string>): LyntResults {
+    const configData = JSON.stringify(getTSLintConfig(this.options), null, 2)
+    const configPath = join(__dirname, 'tslint.json')
+    const configFile = writeFileSync(configPath, configData)
+    const configuration = Configuration.findConfiguration(configPath).results
+
+    const options = {
+      fix: false,
+      formatter: 'stylish'
+    }
+
+    const linter = new TSLinter(options)
+    const filesToLint = globby.sync(paths)
+
+    filesToLint.forEach(file => {
+      const fileContents = readFileSync(file, 'utf8')
+      linter.lint(file, fileContents, configuration)
+    })
+
+    const result = linter.getResult()
+    console.log(result.output)
+
+    const results: LyntResults = {
+      errorCount: 0,
+      output: ''
+    }
+
+    return results
+  }
 
   /**
    * Lints files using TypeScript or ESLint based on the user's configured options.

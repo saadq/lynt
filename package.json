@@ -8,6 +8,9 @@
   "bin": {
     "lynt": "lib/cli.js"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc",
@@ -17,13 +20,14 @@
   },
   "dependencies": {
     "@types/eslint": "^4.16.0",
+    "@types/globby": "^6.1.0",
     "@types/meow": "^4.0.1",
     "@types/node": "^9.6.5",
     "babel-eslint": "^8.2.3",
-    "deglob": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-plugin-flowtype": "^2.46.3",
     "eslint-plugin-react": "^7.7.0",
+    "globby": "^8.0.1",
     "meow": "^4.0.0",
     "tslint": "^5.9.1",
     "typescript": "^2.8.3"
@@ -33,10 +37,11 @@
     "trash-cli": "^1.4.0"
   },
   "keywords": [
-    "linter",
-    "eslint",
     "eslint",
     "lint",
-    "lynt"
-  ]
+    "linter",
+    "lynt",
+    "tslint"
+  ],
+  "typings": "lib/index.d.ts"
 }
