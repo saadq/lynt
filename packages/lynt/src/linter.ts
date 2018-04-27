@@ -1,6 +1,5 @@
 import { CLIEngine } from 'eslint'
 import { Linter as TSLinter, Configuration } from 'tslint'
-import { Program } from 'typescript'
 import globby from 'globby'
 import { readFileSync, writeFileSync } from 'fs'
 import { join, resolve } from 'path'
@@ -11,6 +10,8 @@ class Linter {
   options: LyntOptions
 
   /**
+   * Create a new Linter instance.
+   *
    * @param options Settings for customizing lynt.
    */
   constructor(options: LyntOptions) {
@@ -21,7 +22,6 @@ class Linter {
    * Lint files using ESLint.
    *
    * @param paths Glob patterns of files to lint.
-   *
    * @return A results object with an errorCount and output.
    */
   eslint(paths: Array<string>): LyntResults {
@@ -44,7 +44,6 @@ class Linter {
    * Lint files using TSLint.
    *
    * @param paths Glob patterns of files to lint.
-   *
    * @return A results object with an errorCount and output.
    */
   tslint(paths: Array<string>): LyntResults {
@@ -62,12 +61,11 @@ class Linter {
       formatter: this.options.json ? 'json' : 'stylish'
     }
 
-    let program: Program
     let linter: TSLinter
     let filesToLint: Array<string>
 
     if (this.options.project) {
-      program = TSLinter.createProgram(configPath, this.options.project)
+      const program = TSLinter.createProgram(configPath, this.options.project)
       linter = new TSLinter(options, program)
       filesToLint = TSLinter.getFileNames(program)
     } else {
@@ -94,7 +92,6 @@ class Linter {
    * Lints files using TypeScript or ESLint based on the user's configured options.
    *
    * @param paths Glob patterns of files to lint.
-   *
    * @return A results object with an errorCount and output.
    */
   lint(paths: Array<string>): LyntResults {
