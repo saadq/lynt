@@ -23,6 +23,9 @@ interface LyntOptions {
 
   /** Get lint results in JSON format instead of default "stylish" format. */
   json?: string | Array<string>
+
+  /** Specify your project's main directory if it isn't in the root. */
+  project?: string
 }
 
 interface LyntResults {
