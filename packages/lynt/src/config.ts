@@ -1,8 +1,7 @@
-import { CLIEngine, Linter } from 'eslint'
 import { existsSync } from 'fs'
-import { LyntOptions } from './types'
+import { LyntOptions, ESLintConfig } from './types'
 
-const baseConfig: CLIEngine.Options = {
+const baseConfig: ESLintConfig = {
   parserOptions: {
     ecmaVersion: 8,
     ecmaFeatures: {
@@ -138,7 +137,7 @@ const baseConfig: CLIEngine.Options = {
   }
 }
 
-function getReactConfig(config: CLIEngine.Options): CLIEngine.Options {
+function getReactConfig(config: ESLintConfig): ESLintConfig {
   return {
     ...config,
     parser: 'babel-eslint',
@@ -177,7 +176,7 @@ function getReactConfig(config: CLIEngine.Options): CLIEngine.Options {
   }
 }
 
-function getFlowConfig(config: CLIEngine.Options): CLIEngine.Options {
+function getFlowConfig(config: ESLintConfig): ESLintConfig {
   return {
     ...config,
     parser: 'babel-eslint',
@@ -195,15 +194,15 @@ function getFlowConfig(config: CLIEngine.Options): CLIEngine.Options {
   }
 }
 
-function getJestConfig(config: CLIEngine.Options): CLIEngine.Options {
+function getJestConfig(config: ESLintConfig): ESLintConfig {
   return {
     ...config,
     envs: [...config.envs!, 'jest']
   }
 }
 
-function getConfig(options: LyntOptions): CLIEngine.Options {
-  let config: CLIEngine.Options = {
+function getESLintConfig(options: LyntOptions): ESLintConfig {
+  let config: ESLintConfig = {
     ...baseConfig,
     useEslintrc: false
   }
@@ -246,4 +245,16 @@ function getConfig(options: LyntOptions): CLIEngine.Options {
   return config
 }
 
-export default getConfig
+function getTSLintConfig(options: LyntOptions) {
+  const config = {
+    defaultSeverity: 'error',
+    jsRules: {},
+    rules: {
+      semicolon: [true, 'never']
+    }
+  }
+
+  return config
+}
+
+export { getESLintConfig, getTSLintConfig }

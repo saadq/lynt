@@ -1,3 +1,7 @@
+import { CLIEngine } from 'eslint'
+
+type ESLintConfig = CLIEngine.Options
+
 interface LyntOptions {
   /** Add TypeScript support by using TSLint. */
   typescript?: boolean
@@ -29,4 +33,4 @@ interface LyntResults {
   output: string
 }
 
-export { LyntOptions, LyntResults }
+export { LyntOptions, LyntResults, ESLintConfig }
