@@ -61,12 +61,11 @@ class Linter {
       linter.lint(file, fileContents, configuration)
     })
 
-    const result = linter.getResult()
-    console.log(result.output)
+    const { errorCount, output } = linter.getResult()
 
     const results: LyntResults = {
-      errorCount: 0,
-      output: ''
+      errorCount,
+      output
     }
 
     return results

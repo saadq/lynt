@@ -248,9 +248,8 @@ function getESLintConfig(options: LyntOptions): ESLintConfig {
 function getTSLintConfig(options: LyntOptions) {
   const config = {
     defaultSeverity: 'error',
-    jsRules: {},
     rules: {
-      semicolon: [true, 'never']
+      semicolon: [true, 'always']
     }
   }
 
