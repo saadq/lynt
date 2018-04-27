@@ -9,6 +9,7 @@ const help = `
     $ lynt [files] <options>
 
   Options
+    --project      Specify your project's main directory if it isn't in the root (only use with --typescript).
     --typescript   Add support for TypeScript.
     --flow         Add support for FlowType.
     --react        Add support for React.
@@ -35,7 +36,8 @@ const cli = meow({
     jest: 'boolean',
     ignore: 'string',
     global: 'string',
-    json: 'boolean'
+    json: 'boolean',
+    project: 'string'
   }
 })
 

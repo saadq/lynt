@@ -1,5 +1,6 @@
 import { CLIEngine } from 'eslint'
 import { Linter as TSLinter, Configuration } from 'tslint'
+import { Program } from 'typescript'
 import globby from 'globby'
 import { readFileSync, writeFileSync } from 'fs'
 import { join, resolve } from 'path'
@@ -20,6 +21,8 @@ class Linter {
    * Lint files using ESLint.
    *
    * @param paths Glob patterns of files to lint.
+   *
+   * @return A results object with an errorCount and output.
    */
   eslint(paths: Array<string>): LyntResults {
     const config = getESLintConfig(this.options)
@@ -41,8 +44,14 @@ class Linter {
    * Lint files using TSLint.
    *
    * @param paths Glob patterns of files to lint.
+   *
+   * @return A results object with an errorCount and output.
    */
   tslint(paths: Array<string>): LyntResults {
+    if (paths.length === 0 && !this.options.project) {
+      this.options.project = '.'
+    }
+
     const configData = JSON.stringify(getTSLintConfig(this.options), null, 2)
     const configPath = join(__dirname, 'tslint.json')
     const configFile = writeFileSync(configPath, configData)
@@ -50,11 +59,21 @@ class Linter {
 
     const options = {
       fix: false,
-      formatter: 'stylish'
+      formatter: this.options.json ? 'json' : 'stylish'
     }
 
-    const linter = new TSLinter(options)
-    const filesToLint = globby.sync(paths)
+    let program: Program
+    let linter: TSLinter
+    let filesToLint: Array<string>
+
+    if (this.options.project) {
+      program = TSLinter.createProgram(configPath, this.options.project)
+      linter = new TSLinter(options, program)
+      filesToLint = TSLinter.getFileNames(program)
+    } else {
+      linter = new TSLinter(options)
+      filesToLint = globby.sync(paths)
+    }
 
     filesToLint.forEach(file => {
       const fileContents = readFileSync(file, 'utf8')
@@ -75,6 +94,8 @@ class Linter {
    * Lints files using TypeScript or ESLint based on the user's configured options.
    *
    * @param paths Glob patterns of files to lint.
+   *
+   * @return A results object with an errorCount and output.
    */
   lint(paths: Array<string>): LyntResults {
     if (this.options.typescript) {
