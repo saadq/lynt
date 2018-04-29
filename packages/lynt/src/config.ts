@@ -1,5 +1,5 @@
 import { existsSync } from 'fs'
-import { LyntOptions, ESLintConfig } from './types'
+import { LyntOptions, ESLintConfig, TSLintConfig } from './types'
 
 const baseConfig: ESLintConfig = {
   parserOptions: {
@@ -245,8 +245,9 @@ function getESLintConfig(options: LyntOptions): ESLintConfig {
 }
 
 function getTSLintConfig(options: LyntOptions) {
-  const config = {
+  let config: TSLintConfig  = {
     defaultSeverity: 'error',
+    rulesDirectory: ['tslint-microsoft-contrib'],
     rules: {
       // TypeScript-specific
       'adjacent-overload-signatures': true,
@@ -332,13 +333,16 @@ function getTSLintConfig(options: LyntOptions) {
   }
 
   if (options.react) {
-    Object.assign({}, config, {
+    config = {
+      ...config,
       rules: {
         ...config.rules,
         'jsx-key': true,
-        'jsx-no-string-ref': true
+        'jsx-no-string-ref': true,
+        'react-anchor-blank-noopener': true,
+        'react-iframe-missing-sandbox': true
       }
-    })
+    }
   }
 
   return config
