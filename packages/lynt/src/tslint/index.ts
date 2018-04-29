@@ -3,7 +3,7 @@ import { Linter as TSLint, Configuration, ILinterOptions } from 'tslint'
 import globby from 'globby'
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
-import getTSLintConfig from './config'
+import getConfig from './config'
 import { LyntOptions, LyntResults } from '../types'
 
 class TSLinter {
@@ -29,7 +29,7 @@ class TSLinter {
       this.options.project = '.'
     }
 
-    const configData = JSON.stringify(getTSLintConfig(this.options), null, 2)
+    const configData = JSON.stringify(getConfig(this.options), null, 2)
     const configPath = join(__dirname, 'tslint.json')
     writeFileSync(configPath, configData)
     const configuration = Configuration.findConfiguration(configPath).results
