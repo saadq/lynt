@@ -1,18 +1,12 @@
 import { LyntOptions, TSLintConfig } from '../types'
 
-function getReactConfig(config: TSLintConfig): TSLintConfig {
-  return {
-    ...config,
-    rules: {
-      ...config.rules,
-      'jsx-key': true,
-      'jsx-no-string-ref': true,
-      'react-anchor-blank-noopener': true,
-      'react-iframe-missing-sandbox': true
-    }
-  }
-}
-
+/**
+ * Get the TSLint config for lynt. Optionally adds extra React rules if the
+ * `react` flag is passed.
+ *
+ * @param options A configuration object that lets you customize how lynt works.
+ * @return An object that is compatible with TSLint's config format.
+ */
 function getConfig(options: LyntOptions) {
   let config: TSLintConfig = {
     defaultSeverity: 'error',
@@ -106,6 +100,25 @@ function getConfig(options: LyntOptions) {
   }
 
   return config
+}
+
+/**
+ * Takes the base TSLint config and adds additional React rules to it.
+ *
+ * @param config The current TSLint config.
+ * @return A new object with the base config as well as additional React rules.
+ */
+function getReactConfig(config: TSLintConfig): TSLintConfig {
+  return {
+    ...config,
+    rules: {
+      ...config.rules,
+      'jsx-key': true,
+      'jsx-no-string-ref': true,
+      'react-anchor-blank-noopener': true,
+      'react-iframe-missing-sandbox': true
+    }
+  }
 }
 
 export default getConfig

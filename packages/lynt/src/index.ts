@@ -5,8 +5,8 @@ import { LyntOptions, LyntResults, Lynt } from './types'
  *
  * @param paths An array of file globs that you want to lint
  * @param options A configuration object that lets you customize how lynt works.
- * @return An object with an `errorCount` as well as an `output` property which
- *         will be in "stylish" format by default.
+ *
+ * @return A results object with an errorCount and output.
  */
 function lynt(paths: Array<string>, options: LyntOptions = {}): LyntResults {
   if (!paths || !Array.isArray(paths)) {
@@ -17,12 +17,11 @@ function lynt(paths: Array<string>, options: LyntOptions = {}): LyntResults {
     throw new TypeError('You cannot use both Flow and Typescript at once.')
   }
 
-  const Linter = options.typescript
+  const lint: Lynt = options.typescript
     ? require('./tslint').default
     : require('./eslint').default
 
-  const linter: Lynt = new Linter(options)
-  const results = linter.lint(paths)
+  const results = lint(paths, options)
 
   return results
 }
