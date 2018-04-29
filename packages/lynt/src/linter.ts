@@ -65,7 +65,10 @@ class Linter {
     let filesToLint: Array<string>
 
     if (this.options.project) {
-      const program = TSLinter.createProgram('tsconfig.json', this.options.project)
+      const program = TSLinter.createProgram(
+        'tsconfig.json',
+        this.options.project
+      )
       linter = new TSLinter(options, program)
       filesToLint = TSLinter.getFileNames(program)
     } else {
