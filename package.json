@@ -3,7 +3,7 @@
   "description": "A zero config JavaScript linter",
   "author": "Saad Quadri",
   "license": "MIT",
-  "version": "0.0.0-alpha",
+  "version": "0.0.1-alpha",
   "main": "lib/index.js",
   "bin": {
     "lynt": "lib/cli.js"
@@ -16,7 +16,8 @@
     "build": "tsc",
     "clean": "trash lib",
     "dev": "tsc --watch",
-    "format": "prettier \"src/**/*.ts\" --write --no-semi --single-quote"
+    "format": "prettier \"src/**/*.ts\" --write --no-semi --single-quote",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@types/eslint": "^4.16.0",

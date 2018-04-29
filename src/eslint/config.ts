@@ -1,6 +1,13 @@
 import { existsSync } from 'fs'
 import { LyntOptions, ESLintConfig } from '../types'
 
+/**
+ * Get the ESLint config for lynt. Optionally adds extra React or Flow rules if
+ * their corresponding flags are passed.
+ *
+ * @param options A configuration object that lets you customize how lynt works.
+ * @return An object that is compatible with ESLint's config format.
+ */
 function getConfig(options: LyntOptions): ESLintConfig {
   let config: ESLintConfig = {
     useEslintrc: false,
@@ -24,7 +31,6 @@ function getConfig(options: LyntOptions): ESLintConfig {
       'no-empty-character-class': 'error',
       'no-ex-assign': 'error',
       'no-extra-boolean-cast': 'error',
-      'no-extra-semi': 'error',
       'no-func-assign': 'error',
       'no-inner-declarations': 'error',
       'no-invalid-regexp': 'error',
@@ -172,6 +178,12 @@ function getConfig(options: LyntOptions): ESLintConfig {
   return config
 }
 
+/**
+ * Takes the base ESLint config and adds additional React rules to it.
+ *
+ * @param config The current ESLint config.
+ * @return A new object with the base config as well as additional React rules.
+ */
 function getReactConfig(config: ESLintConfig): ESLintConfig {
   return {
     ...config,
@@ -211,6 +223,12 @@ function getReactConfig(config: ESLintConfig): ESLintConfig {
   }
 }
 
+/**
+ * Takes the base ESLint config and adds additional Flowtype rules to it.
+ *
+ * @param config The current ESLint config.
+ * @return A new object with the base config as well as additional React rules.
+ */
 function getFlowConfig(config: ESLintConfig): ESLintConfig {
   return {
     ...config,

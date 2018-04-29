@@ -37,9 +37,7 @@ interface LyntResults {
   output: string
 }
 
-interface Lynt {
-  /** Lints the given file paths with ESLint or TSLint. */
-  lint(paths: Array<string>): LyntResults
-}
+/** Lints the given file paths with ESLint or TSLint. */
+type Lynt = (paths: Array<string>, options: LyntOptions) => LyntResults
 
 export { LyntOptions, LyntResults, ESLintConfig, TSLintConfig, Lynt }
