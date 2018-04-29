@@ -245,7 +245,7 @@ function getESLintConfig(options: LyntOptions): ESLintConfig {
 }
 
 function getTSLintConfig(options: LyntOptions) {
-  let config: TSLintConfig  = {
+  let config: TSLintConfig = {
     defaultSeverity: 'error',
     rulesDirectory: ['tslint-microsoft-contrib'],
     rules: {
