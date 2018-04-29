@@ -286,7 +286,7 @@ function getTSLintConfig(options: LyntOptions) {
       'no-eval': true,
       'no-floating-promises': true,
       'no-for-in-array': true,
-      'no-implicit-dependencies': true,
+      'no-implicit-dependencies': [true, 'dev', 'optional'],
       'no-invalid-template-strings': true,
       'no-invalid-this': true,
       'no-misused-new': true,
@@ -298,7 +298,11 @@ function getTSLintConfig(options: LyntOptions) {
       'no-this-assignment': true,
       'no-unnecessary-class': true,
       'no-unsafe-finally': true,
-      'no-unused-expression': true,
+      'no-unused-expression': [
+        true,
+        'allow-fast-null-checks',
+        'allow-tagged-template'
+      ],
       'no-unused-variable': true,
       'no-use-before-declare': true,
       'no-var-keyword': true,
@@ -319,12 +323,22 @@ function getTSLintConfig(options: LyntOptions) {
       'prefer-const': true,
       'prefer-readonly': true,
 
-      // Style (doesn't include any rules that are purely aesthetic)
+      // Style (no aesthetic-only rules however)
       'no-irregular-whitespace': true,
       encoding: true,
       'interface-over-type-literal': true,
       'switch-final-break': true
     }
+  }
+
+  if (options.react) {
+    Object.assign({}, config, {
+      rules: {
+        ...config.rules,
+        'jsx-key': true,
+        'jsx-no-string-ref': true
+      }
+    })
   }
 
   return config

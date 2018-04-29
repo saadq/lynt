@@ -2,7 +2,6 @@
 
 import meow from 'meow'
 import lynt from '.'
-import { LyntResults } from './types'
 
 const help = `
   Usage

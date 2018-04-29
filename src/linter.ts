@@ -2,7 +2,7 @@ import { CLIEngine } from 'eslint'
 import { Linter as TSLinter, Configuration, ILinterOptions } from 'tslint'
 import globby from 'globby'
 import { readFileSync, writeFileSync } from 'fs'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import { getESLintConfig, getTSLintConfig } from './config'
 import { LyntOptions, LyntResults } from './types'
 
@@ -53,7 +53,7 @@ class Linter {
 
     const configData = JSON.stringify(getTSLintConfig(this.options), null, 2)
     const configPath = join(__dirname, 'tslint.json')
-    const configFile = writeFileSync(configPath, configData)
+    writeFileSync(configPath, configData)
     const configuration = Configuration.findConfiguration(configPath).results
 
     const options: ILinterOptions = {

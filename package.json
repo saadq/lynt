@@ -30,6 +30,7 @@
     "globby": "^8.0.1",
     "meow": "^4.0.0",
     "tslint": "^5.9.1",
+    "tslint-react": "^3.5.1",
     "typescript": "^2.8.3"
   },
   "devDependencies": {
