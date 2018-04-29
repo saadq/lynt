@@ -1,5 +1,4 @@
-import Linter from './linter'
-import { LyntOptions, LyntResults } from './types'
+import { LyntOptions, LyntResults, Lynt } from './types'
 
 /**
  * Uses ESLint or TSLint to lint a given set of files.
@@ -11,10 +10,18 @@ import { LyntOptions, LyntResults } from './types'
  */
 function lynt(paths: Array<string>, options: LyntOptions = {}): LyntResults {
   if (!paths || !Array.isArray(paths)) {
-    throw new Error('You must pass an array of paths to lynt()')
+    throw new TypeError('You must pass an array of paths to lynt().')
   }
 
-  const linter = new Linter(options)
+  if (options.flow && options.typescript) {
+    throw new TypeError('You cannot use both Flow and Typescript at once.')
+  }
+
+  const Linter = options.typescript
+    ? require('./tslint').default
+    : require('./eslint').default
+
+  const linter: Lynt = new Linter(options)
   const results = linter.lint(paths)
 
   return results
