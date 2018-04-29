@@ -1,5 +1,5 @@
 import { CLIEngine } from 'eslint'
-import { Linter as TSLinter, Configuration } from 'tslint'
+import { Linter as TSLinter, Configuration, ILinterOptions } from 'tslint'
 import globby from 'globby'
 import { readFileSync, writeFileSync } from 'fs'
 import { join, resolve } from 'path'
@@ -56,7 +56,7 @@ class Linter {
     const configFile = writeFileSync(configPath, configData)
     const configuration = Configuration.findConfiguration(configPath).results
 
-    const options = {
+    const options: ILinterOptions = {
       fix: false,
       formatter: this.options.json ? 'json' : 'stylish'
     }
@@ -65,7 +65,7 @@ class Linter {
     let filesToLint: Array<string>
 
     if (this.options.project) {
-      const program = TSLinter.createProgram(configPath, this.options.project)
+      const program = TSLinter.createProgram('tsconfig.json', this.options.project)
       linter = new TSLinter(options, program)
       filesToLint = TSLinter.getFileNames(program)
     } else {
@@ -89,7 +89,8 @@ class Linter {
   }
 
   /**
-   * Lints files using TypeScript or ESLint based on the user's configured options.
+   * Lints files using TypeScript or ESLint based on the user's configured
+   * options.
    *
    * @param paths Glob patterns of files to lint.
    * @return A results object with an errorCount and output.
