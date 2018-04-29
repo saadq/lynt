@@ -16,9 +16,6 @@ interface LyntOptions {
   /** Add React support. */
   react?: boolean
 
-  /** Add Jest support. */
-  jest?: boolean
-
   /** Glob patterns of files you don't want to lint. */
   ignore?: string | Array<string>
 
@@ -40,4 +37,9 @@ interface LyntResults {
   output: string
 }
 
-export { LyntOptions, LyntResults, ESLintConfig, TSLintConfig }
+interface Lynt {
+  /** Lints the given file paths with ESLint or TSLint. */
+  lint(paths: Array<string>): LyntResults
+}
+
+export { LyntOptions, LyntResults, ESLintConfig, TSLintConfig, Lynt }

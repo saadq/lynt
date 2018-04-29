@@ -8,18 +8,17 @@ const help = `
     $ lynt [files] <options>
 
   Options
-    --project      Specify your project's main directory if it isn't in the root (only use with --typescript).
     --typescript   Add support for TypeScript.
     --flow         Add support for FlowType.
     --react        Add support for React.
-    --jest         Add support for Jest globals.
     --ignore       Glob patterns for paths to ignore.
     --global       Add support for a given global variable.
     --json         Get lint results in JSON format instead of default "stylish" format.
+    --project      Specify your project's main directory if it isn't in the root (only use with --typescript).
 
-  Examples
+  JavaScript Examples
     $ lynt src
-    $ lynt src --jest
+    $ lynt --typescript
     $ lynt src --ignore dist
     $ lynt src --ignore dist --ignore build
     $ lynt src --global chrome
@@ -32,7 +31,6 @@ const cli = meow({
     typescript: 'boolean',
     flow: 'boolean',
     react: 'boolean',
-    jest: 'boolean',
     ignore: 'string',
     global: 'string',
     json: 'boolean',
