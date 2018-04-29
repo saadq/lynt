@@ -3,9 +3,8 @@ import { LyntOptions, LyntResults, Lynt } from './types'
 /**
  * Uses ESLint or TSLint to lint a given set of files.
  *
- * @param paths An array of file globs that you want to lint
+ * @param paths An array of file globs that you want to lint.
  * @param options A configuration object that lets you customize how lynt works.
- *
  * @return A results object with an errorCount and output.
  */
 function lynt(paths: Array<string>, options: LyntOptions = {}): LyntResults {
