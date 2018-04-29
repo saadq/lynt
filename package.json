@@ -3,7 +3,7 @@
   "description": "A zero config JavaScript linter",
   "author": "Saad Quadri",
   "license": "MIT",
-  "version": "0.0.0-prerelease",
+  "version": "0.0.0-alpha",
   "main": "lib/index.js",
   "bin": {
     "lynt": "lib/cli.js"
@@ -30,12 +30,16 @@
     "globby": "^8.0.1",
     "meow": "^4.0.0",
     "tslint": "^5.9.1",
-    "tslint-react": "^3.5.1",
-    "typescript": "^2.8.3"
+    "tslint-microsoft-contrib": "^5.0.3",
+    "tslint-react": "^3.5.1"
   },
   "devDependencies": {
     "prettier": "^1.12.1",
-    "trash-cli": "^1.4.0"
+    "trash-cli": "^1.4.0",
+    "typescript": "^2.8.3"
+  },
+  "peerDependencies": {
+    "typescript": ">=2.0.0"
   },
   "keywords": [
     "eslint",
@@ -44,5 +48,6 @@
     "lynt",
     "tslint"
   ],
-  "typings": "lib/index.d.ts"
+  "typings": "lib/index.d.ts",
+  "optionalDependencies": {}
 }
