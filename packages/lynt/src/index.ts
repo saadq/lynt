@@ -1,28 +1,40 @@
-import { LyntOptions, LyntResults, Lynt } from './types'
+import { Lynter, LyntOptions, LyntResults } from './types'
 
-/**
- * Uses ESLint or TSLint to lint a given set of files.
- *
- * @param paths An array of file globs that you want to lint.
- * @param options A configuration object that lets you customize how lynt works.
- * @return A results object with an errorCount and output.
- */
-function lynt(paths: Array<string>, options: LyntOptions = {}): LyntResults {
-  if (!paths || !Array.isArray(paths)) {
-    throw new TypeError('You must pass an array of paths to lynt().')
+class Lynt {
+  linter: Lynter
+
+  /**
+   * Creates a Lynt instance and sets the internal linter to eslint or tslint.
+   *
+   * @param options A config object that lets you customize how lynt works.
+   */
+  constructor(options: LyntOptions = {}) {
+    const Linter: Lynter = options.typescript
+      ? require('./tslint').default
+      : require('./eslint').default
+
+    this.linter = new Linter(options)
   }
 
-  if (options.flow && options.typescript) {
-    throw new TypeError('You cannot use both Flow and Typescript at once.')
+  /**
+   * Uses ESLint or TSLint to lint the given text.
+   *
+   * @param text The code to be linted.
+   * @return The results of running ESLint or TSLint on the code.
+   */
+  lintText(text: string): LyntResults {
+    return this.linter.lintText(text)
   }
 
-  const lint: Lynt = options.typescript
-    ? require('./tslint').default
-    : require('./eslint').default
-
-  const results = lint(paths, options)
-
-  return results
+  /**
+   * Uses ESLint or TSLint to lint the given set of files.
+   *
+   * @param paths An array of file globs that you want to lint.
+   * @return The results of running ESLint or TSLint on the files.
+   */
+  lintFiles(paths: Array<string>): LyntResults {
+    return this.linter.lintFiles(paths)
+  }
 }
 
-export default lynt
+export default Lynt

@@ -1,9 +1,9 @@
 import { CLIEngine } from 'eslint'
 
-type ESLintConfig = CLIEngine.Options
-
-interface TSLintConfig {
-  [key: string]: any
+interface Lynter {
+  new (options: LyntOptions): Lynter
+  lintText(text: string): LyntResults
+  lintFiles(paths: Array<string>): LyntResults
 }
 
 interface LyntOptions {
@@ -37,7 +37,10 @@ interface LyntResults {
   output: string
 }
 
-/** Lints the given file paths with ESLint or TSLint. */
-type Lynt = (paths: Array<string>, options: LyntOptions) => LyntResults
+type ESLintConfig = CLIEngine.Options
 
-export { LyntOptions, LyntResults, ESLintConfig, TSLintConfig, Lynt }
+interface TSLintConfig {
+  [key: string]: any
+}
+
+export { Lynter, LyntOptions, LyntResults, ESLintConfig, TSLintConfig }

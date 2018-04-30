@@ -1,28 +1,40 @@
-import { CLIEngine as ESLint } from 'eslint'
+import { CLIEngine } from 'eslint'
 import getConfig from './config'
-import { LyntOptions, LyntResults } from '../types'
+import { ESLintConfig, LyntOptions, LyntResults } from '../types'
 
-/**
- * Lint files using TSLint.
- *
- * @param paths Glob patterns of files to lint.
- * @param options A configuration object that lets you customize how lynt works.
- * @return A results object with an errorCount and output.
- */
-function eslint(paths: Array<string>, options: LyntOptions): LyntResults {
-  const config = getConfig(options)
-  const engine = new ESLint(config)
-  const report = engine.executeOnFiles(paths)
-  const format = options.json ? 'json' : 'stylish'
-  const formatter = engine.getFormatter(format)
-  const output = formatter(report.results)
+class ESLint {
+  eslint: CLIEngine
+  format: 'json' | 'stylish'
 
-  const results: LyntResults = {
-    errorCount: report.errorCount,
-    output
+  /**
+   * Create a new ESLint instance.
+   *
+   * @param options A config object that lets you customize how lynt works.
+   */
+  constructor(options: LyntOptions) {
+    const config = getConfig(options)
+    this.eslint = new CLIEngine(config)
+    this.format = options.json ? 'json' : 'stylish'
   }
 
-  return results
+  /**
+   * Lint files using TSLint.
+   *
+   * @param paths Glob patterns of files to lint.
+   * @return A results object with an errorCount and output.
+   */
+  lintFiles(paths: Array<string>): LyntResults {
+    const report = this.eslint.executeOnFiles(paths)
+    const formatter = this.eslint.getFormatter(this.format)
+    const output = formatter(report.results)
+
+    const results: LyntResults = {
+      errorCount: report.errorCount,
+      output
+    }
+
+    return results
+  }
 }
 
-export default eslint
+export default ESLint
