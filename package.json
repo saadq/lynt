@@ -17,7 +17,7 @@
     "build": "tsc",
     "clean": "rm -rf lib",
     "dev": "tsc --watch",
-    "format": "prettier \"src/**/*.ts\" --write --no-semi --single-quote",
+    "format": "prettier \"src/**/*.ts\" --write",
     "prepare": "npm run build"
   },
   "dependencies": {
