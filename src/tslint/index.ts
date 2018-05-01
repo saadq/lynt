@@ -39,7 +39,7 @@ class TSLint {
    * @return A results object with an errorCount and output.
    */
   lintFiles(paths: Array<string>): LyntResults {
-    if (paths.length === 0) {
+    if (!this.projectRoot && paths.length === 0) {
       this.projectRoot = '.'
     }
 
@@ -47,7 +47,8 @@ class TSLint {
     let filesToLint: Array<string>
 
     if (this.projectRoot) {
-      const program = Linter.createProgram('tsconfig.json', this.projectRoot)
+      const tsconfig = join(this.projectRoot, 'tsconfig.json')
+      const program = Linter.createProgram(tsconfig, this.projectRoot)
       tslint = new Linter(this.options, program)
       filesToLint = Linter.getFileNames(program)
     } else {
