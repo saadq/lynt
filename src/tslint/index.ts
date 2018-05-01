@@ -91,4 +91,4 @@ class TSLint {
   }
 }
 
-export default Linter
+export default TSLint
