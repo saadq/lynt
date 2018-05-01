@@ -11,6 +11,7 @@
   "files": [
     "lib"
   ],
+  "typings": "lib/index.d.ts",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc",
@@ -47,7 +48,5 @@
     "linter",
     "lynt",
     "tslint"
-  ],
-  "typings": "lib/index.d.ts",
-  "optionalDependencies": {}
+  ]
 }
