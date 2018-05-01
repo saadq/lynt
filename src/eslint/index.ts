@@ -1,6 +1,6 @@
 import { CLIEngine } from 'eslint'
 import getConfig from './config'
-import { ESLintConfig, LyntOptions, LyntResults } from '../types'
+import { LyntOptions, LyntResults } from '../types'
 
 class ESLint {
   eslint: CLIEngine

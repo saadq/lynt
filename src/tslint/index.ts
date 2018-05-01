@@ -1,10 +1,9 @@
-import { CLIEngine } from 'eslint'
 import { Linter, Configuration, ILinterOptions } from 'tslint'
 import globby from 'globby'
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join } from 'path'
 import getConfig from './config'
-import { Lynter, LyntOptions, LyntResults } from '../types'
+import { LyntOptions, LyntResults } from '../types'
 
 class TSLint {
   projectRoot?: string

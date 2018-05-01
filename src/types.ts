@@ -1,9 +1,9 @@
 import { CLIEngine } from 'eslint'
 
-interface Lynter {
-  new (options: LyntOptions): Lynter
-  lintText(text: string, fileName?: string): LyntResults
+declare class Lynter {
+  constructor(options: LyntOptions)
   lintFiles(paths: Array<string>): LyntResults
+  lintText(text: string, fileName?: string): LyntResults
 }
 
 interface LyntOptions {

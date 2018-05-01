@@ -9,7 +9,7 @@ class Lynt {
    * @param options A config object that lets you customize how lynt works.
    */
   constructor(options: LyntOptions = {}) {
-    const Linter: Lynter = options.typescript
+    const Linter: typeof Lynter = options.typescript
       ? require('./tslint').default
       : require('./eslint').default
 
