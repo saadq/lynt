@@ -17,17 +17,18 @@ class Lynt {
   }
 
   /**
-   * Uses ESLint or TSLint to lint the given text.
+   * Uses ESLint or TSLint to lint some given text.
    *
    * @param text The code to be linted.
+   * @param fileName An optional file name for the given code.
    * @return The results of running ESLint or TSLint on the code.
    */
-  lintText(text: string): LyntResults {
-    return this.linter.lintText(text)
+  lintText(text: string, fileName?: string): LyntResults {
+    return this.linter.lintText(text, fileName)
   }
 
   /**
-   * Uses ESLint or TSLint to lint the given set of files.
+   * Uses ESLint or TSLint to lint a given set of files.
    *
    * @param paths An array of file globs that you want to lint.
    * @return The results of running ESLint or TSLint on the files.
