@@ -14,7 +14,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc",
-    "clean": "trash lib",
+    "clean": "rm -rf lib",
     "dev": "tsc --watch",
     "format": "prettier \"src/**/*.ts\" --write --no-semi --single-quote",
     "prepare": "npm run build"
@@ -36,7 +36,6 @@
   },
   "devDependencies": {
     "prettier": "^1.12.1",
-    "trash-cli": "^1.4.0",
     "typescript": "^2.8.3"
   },
   "peerDependencies": {
