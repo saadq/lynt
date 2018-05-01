@@ -2,7 +2,7 @@ import { CLIEngine } from 'eslint'
 
 interface Lynter {
   new (options: LyntOptions): Lynter
-  lintText(text: string): LyntResults
+  lintText(text: string, fileName?: string): LyntResults
   lintFiles(paths: Array<string>): LyntResults
 }
 
