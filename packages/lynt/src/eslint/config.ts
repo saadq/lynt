@@ -175,6 +175,13 @@ function getConfig(options: LyntOptions): ESLintConfig {
     }
   }
 
+  if (options.fix) {
+    config = {
+      ...config,
+      fix: true
+    }
+  }
+
   return config
 }
 

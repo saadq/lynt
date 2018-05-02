@@ -12,6 +12,7 @@ const help = `
     --flow         Add support for FlowType.
     --react        Add support for React.
     --ignore       Glob patterns for paths to ignore.
+    --fix          Automatically fix linting issues.
     --global       Add support for a given global variable.
     --json         Get lint results in JSON format instead of default "stylish" format.
     --project      Specify your project's main directory if it isn't in the root (only use with --typescript).
@@ -32,6 +33,7 @@ const cli = meow({
     flow: 'boolean',
     react: 'boolean',
     ignore: 'string',
+    fix: 'boolean',
     global: 'string',
     json: 'boolean',
     project: 'string'
