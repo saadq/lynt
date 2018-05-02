@@ -1,6 +1,6 @@
 import { Linter, Configuration, ILinterOptions } from 'tslint'
 import globby from 'globby'
-import { readFileSync, writeFileSync, existsSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import getConfig from './config'
 import { LyntOptions, LyntResults } from '../types'
@@ -16,12 +16,10 @@ class TSLint {
    * @param options A config object that lets you customize how lynt works.
    */
   constructor(options: LyntOptions) {
-    const configData = JSON.stringify(getConfig(options), null, 2)
     const configPath = join(__dirname, 'tslint.json')
+    const configData = getConfig(options)
 
-    if (!existsSync(configPath)) {
-      writeFileSync(configPath, configData)
-    }
+    writeFileSync(configPath, configData)
 
     this.configuration = Configuration.findConfiguration(configPath).results
     this.projectRoot = options.project
