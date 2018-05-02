@@ -5,6 +5,7 @@ import { LyntOptions, LyntResults } from '../types'
 class ESLint {
   eslint: CLIEngine
   formatter: CLIEngine.Formatter
+  fix: boolean
 
   /**
    * Create a new ESLint instance.
@@ -15,6 +16,7 @@ class ESLint {
     const config = getConfig(options)
     this.eslint = new CLIEngine(config)
     this.formatter = this.eslint.getFormatter(options.json ? 'json' : 'stylish')
+    this.fix = !!options.fix
   }
 
   /**
@@ -25,11 +27,14 @@ class ESLint {
    */
   lintFiles(paths: Array<string>): LyntResults {
     const report = this.eslint.executeOnFiles(paths)
-    const output = this.formatter(report.results)
+
+    if (this.fix) {
+      CLIEngine.outputFixes(report)
+    }
 
     return {
       errorCount: report.errorCount,
-      output
+      output: this.formatter(report.results)
     }
   }
 

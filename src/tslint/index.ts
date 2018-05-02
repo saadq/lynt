@@ -26,7 +26,7 @@ class TSLint {
     this.configuration = Configuration.findConfiguration(configPath).results
     this.projectRoot = options.project
     this.options = {
-      fix: false,
+      fix: !!options.fix,
       formatter: options.json ? 'json' : 'stylish'
     }
   }

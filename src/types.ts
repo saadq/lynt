@@ -19,6 +19,9 @@ interface LyntOptions {
   /** Glob patterns of files you don't want to lint. */
   ignore?: string | Array<string>
 
+  /** Automatically fix linting issues. */
+  fix?: boolean
+
   /** Add support for the given global variable(s). */
   global?: string | Array<string>
 
