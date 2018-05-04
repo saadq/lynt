@@ -1,10 +1,6 @@
 import { CLIEngine } from 'eslint'
 
-declare class Lynter {
-  constructor(options: LyntOptions)
-  lintFiles(paths: Array<string>): LyntResults
-  lintText(text: string, fileName?: string): LyntResults
-}
+type Lynt = (paths: Array<string>, options: LyntOptions) => LyntResults
 
 interface LyntOptions {
   /** Add TypeScript support by using TSLint. */
@@ -46,4 +42,4 @@ interface TSLintConfig {
   [key: string]: any
 }
 
-export { Lynter, LyntOptions, LyntResults, ESLintConfig, TSLintConfig }
+export { Lynt, LyntOptions, LyntResults, ESLintConfig, TSLintConfig }

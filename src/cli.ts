@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import meow from 'meow'
-import Lynt from '.'
+import lynt from '.'
 
 const help = `
   Usage
@@ -40,9 +40,7 @@ const cli = meow({
   }
 })
 
-const options = cli.flags
-const linter = new Lynt(options)
-const results = linter.lintFiles(cli.input)
+const results = lynt(cli.input, cli.flags)
 
 if (results.errorCount > 0) {
   process.stderr.write(results.output)

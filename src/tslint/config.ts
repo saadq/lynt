@@ -30,13 +30,11 @@ function getConfig(options: LyntOptions) {
       'no-non-null-assertion': true,
       'no-parameter-reassignment': true,
       'no-reference': true,
-      'no-unnecessary-type-assertion': true,
       'no-var-requires': true,
       'only-arrow-functions': [true, 'allow-named-functions'],
       'prefer-for-of': true,
 
       // Functionality
-      'await-promise': true,
       'ban-comma-operator': true,
       curly: true,
       'no-arg': true,
@@ -48,8 +46,6 @@ function getConfig(options: LyntOptions) {
       'no-dynamic-delete': true,
       'no-empty': true,
       'no-eval': true,
-      'no-floating-promises': true,
-      'no-for-in-array': true,
       'no-implicit-dependencies': [true, 'dev', 'optional'],
       'no-invalid-template-strings': true,
       'no-invalid-this': true,
@@ -67,31 +63,41 @@ function getConfig(options: LyntOptions) {
         'allow-fast-null-checks',
         'allow-tagged-template'
       ],
-      'no-unused-variable': true,
-      'no-use-before-declare': true,
       'no-var-keyword': true,
       'prefer-object-spread': true,
       radix: true,
-      'restrict-plus-operands': true,
-      'strict-type-predicates': true,
       'switch-default': true,
       'triple-equals': true,
-      'use-default-type-parameter': true,
       'use-isnan': true,
 
       // Maintainability
-      deprecation: true,
       eofline: true,
       'no-duplicate-imports': true,
       'no-require-imports': true,
       'prefer-const': true,
-      'prefer-readonly': true,
 
       // Style (no aesthetic-only rules however)
       'no-irregular-whitespace': true,
       encoding: true,
       'interface-over-type-literal': true,
       'switch-final-break': true
+    }
+  }
+
+  if (options.project) {
+    config = {
+      ...config,
+      'no-unnecessary-type-assertion': true,
+      'await-promise': true,
+      'no-floating-promises': true,
+      'no-for-in-array': true,
+      'no-unused-variable': true,
+      'no-use-before-declare': true,
+      'restrict-plus-operands': true,
+      'strict-type-predicates': true,
+      'use-default-type-parameter': true,
+      deprecation: true,
+      'prefer-readonly': true
     }
   }
 
