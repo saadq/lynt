@@ -2,6 +2,13 @@ import { CLIEngine } from 'eslint'
 import getConfig from './config'
 import { LyntOptions, LyntResults } from '../types'
 
+/**
+ * Lint files using ESLint.
+ *
+ * @param paths Glob patterns of files to lint.
+ * @param options A configuration object that lets you customize how lynt works.
+ * @return A `results` object with an errorCount and output.
+ */
 function eslint(paths: Array<string>, options: LyntOptions): LyntResults {
   const config = getConfig(options)
   const engine = new CLIEngine(config)
