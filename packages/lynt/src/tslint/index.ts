@@ -1,6 +1,6 @@
 import { Linter, Configuration, ILinterOptions } from 'tslint'
 import globby from 'globby'
-import { readFileSync, writeFileSync, unlinkSync } from 'fs'
+import { readFileSync, writeFileSync, unlinkSync, existsSync } from 'fs'
 import { join } from 'path'
 import getConfig from './config'
 import { LyntOptions, LyntResults } from '../types'
@@ -34,8 +34,13 @@ function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
   let linter: Linter
   let filesToLint: Array<string>
 
-  if (projectRoot && paths.length === 0) {
+  if (projectRoot) {
     const tsconfig = join(projectRoot, 'tsconfig.json')
+
+    if (!existsSync(tsconfig)) {
+      throw new Error('No tsconfig.json file found in the project root.')
+    }
+
     const program = Linter.createProgram(tsconfig, projectRoot)
     linter = new Linter(tslintOptions, program)
     filesToLint = Linter.getFileNames(program)
