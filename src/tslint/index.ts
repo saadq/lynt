@@ -5,6 +5,14 @@ import { join } from 'path'
 import getConfig from './config'
 import { LyntOptions, LyntResults } from '../types'
 
+/**
+ * Lint files using TSLint. Optionally adds extra React rules if `react` flag is
+ * passed.
+ *
+ * @param paths Glob patterns of files to lint.
+ * @param options A configuration object that lets you customize how lynt works.
+ * @return A `results` object with an errorCount and output.
+ */
 function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
   let projectRoot = options.project
 
