@@ -8,5 +8,8 @@
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": [
+    "test"
+  ]
 }
