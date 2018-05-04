@@ -73,7 +73,6 @@ function getConfig(options: LyntOptions) {
       // Maintainability
       eofline: true,
       'no-duplicate-imports': true,
-      'no-require-imports': true,
       'prefer-const': true,
 
       // Style (no aesthetic-only rules however)
