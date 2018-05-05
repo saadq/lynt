@@ -24,6 +24,8 @@ function getConfig(options: LyntOptions): ESLintConfig {
     'coverage/**'
   ]
 
+  const defaultEnvs = ['es6', 'node', 'browser']
+
   let config: ESLintConfig = {
     useEslintrc: false,
     parserOptions: {
@@ -214,11 +216,11 @@ function getReactConfig(config: ESLintConfig): ESLintConfig {
     parserOptions: {
       ...config.parserOptions,
       ecmaFeatures: {
-        ...config.parserOptions!.ecmaFeatures,
+        ...config.parserOptions.ecmaFeatures,
         jsx: true
       }
     },
-    plugins: [...config.plugins!, 'react'],
+    plugins: [...config.plugins, 'react'],
     rules: {
       ...config.rules,
       'react/display-name': 'error',
@@ -256,7 +258,7 @@ function getFlowConfig(config: ESLintConfig): ESLintConfig {
   return {
     ...config,
     parser: 'babel-eslint',
-    plugins: [...config.plugins!, 'flowtype'],
+    plugins: [...config.plugins, 'flowtype'],
     rules: {
       ...config.rules,
       'flowtype/define-flow-type': 'error',

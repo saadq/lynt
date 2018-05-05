@@ -10,7 +10,7 @@ import { LyntOptions, LyntResults } from '../types'
  * @return A `results` object with an errorCount and output.
  */
 function eslint(paths: Array<string>, options: LyntOptions): LyntResults {
-  const config = getConfig(options)
+  const config = getConfig(options) as CLIEngine.Options
   const engine = new CLIEngine(config)
   const report = engine.executeOnFiles(paths)
   const format = options.json ? 'json' : 'stylish'
