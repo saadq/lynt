@@ -9,6 +9,21 @@ import { LyntOptions, ESLintConfig } from '../types'
  * @return An object that is compatible with ESLint's config format.
  */
 function getConfig(options: LyntOptions): ESLintConfig {
+  const defaultIgnores = [
+    '**/node_modules/**',
+    '**/bower_components/**',
+    '**/flow-typed/**',
+    '**/*.min.js',
+    '**/bundle.js',
+    '{tmp,temp}/**',
+    '{test,tests,spec,__tests__}/fixture{s,}/**',
+    'fixture{-*,}.{js,jsx}',
+    'fixture{s,}/**',
+    'vendor/**',
+    'dist/**',
+    'coverage/**'
+  ]
+
   let config: ESLintConfig = {
     useEslintrc: false,
     parserOptions: {
@@ -20,6 +35,7 @@ function getConfig(options: LyntOptions): ESLintConfig {
     },
     plugins: [],
     envs: ['es6', 'node', 'browser'],
+    ignorePattern: defaultIgnores,
     rules: {
       'no-compare-neg-zero': 'error',
       'no-cond-assign': 'error',
@@ -171,7 +187,7 @@ function getConfig(options: LyntOptions): ESLintConfig {
   if (options.ignore) {
     config = {
       ...config,
-      ignorePattern: options.ignore
+      ignorePattern: defaultIgnores.concat(options.ignore)
     }
   }
 
