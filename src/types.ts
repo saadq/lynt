@@ -56,7 +56,18 @@ interface ESLintConfig {
 }
 
 interface TSLintConfig {
-  [key: string]: any
+  rulesDirectory: Array<string>
+  defaultSeverity: 'error'
+  linterOptions: {
+    exclude: Array<string>
+  }
+  rules: {
+    [key: string]: any
+  }
+  extends?: Array<string>
+  jsRules?: {
+    [key: string]: any
+  }
 }
 
 export { Lynt, LyntOptions, LyntResults, ESLintConfig, TSLintConfig }

@@ -11,6 +11,9 @@ function getConfig(options: LyntOptions) {
   let config: TSLintConfig = {
     defaultSeverity: 'error',
     rulesDirectory: ['tslint-microsoft-contrib'],
+    linterOptions: {
+      exclude: []
+    },
     rules: {
       // TypeScript-specific
       'adjacent-overload-signatures': true,
