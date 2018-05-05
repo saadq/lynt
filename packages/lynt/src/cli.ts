@@ -40,16 +40,8 @@ const cli = meow({
   }
 })
 
-try {
-  const results = lynt(cli.input, cli.flags)
+const results = lynt(cli.input, cli.flags)
+const exitCode = results.errorCount > 0 ? 1 : 0
 
-  if (results.errorCount > 0) {
-    console.error(results.output)
-    process.exit(1)
-  }
-
-  console.log(results.output)
-} catch (err) {
-  console.error(err.message)
-  process.exit(1)
-}
+console.log(results.output)
+process.exit(exitCode)
