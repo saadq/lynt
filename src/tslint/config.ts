@@ -86,17 +86,20 @@ function getConfig(options: LyntOptions) {
   if (options.project) {
     config = {
       ...config,
-      'no-unnecessary-type-assertion': true,
-      'await-promise': true,
-      'no-floating-promises': true,
-      'no-for-in-array': true,
-      'no-unused-variable': true,
-      'no-use-before-declare': true,
-      'restrict-plus-operands': true,
-      'strict-type-predicates': true,
-      'use-default-type-parameter': true,
-      deprecation: true,
-      'prefer-readonly': true
+      rules: {
+        ...config.rules,
+        'no-unnecessary-type-assertion': true,
+        'await-promise': true,
+        'no-floating-promises': true,
+        'no-for-in-array': true,
+        'no-unused-variable': true,
+        'no-use-before-declare': true,
+        'restrict-plus-operands': true,
+        'strict-type-predicates': true,
+        'use-default-type-parameter': true,
+        deprecation: true,
+        'prefer-readonly': true
+      }
     }
   }
 

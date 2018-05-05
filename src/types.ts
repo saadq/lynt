@@ -1,5 +1,3 @@
-import { CLIEngine } from 'eslint'
-
 type Lynt = (paths: Array<string>, options: LyntOptions) => LyntResults
 
 interface LyntOptions {
