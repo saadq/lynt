@@ -13,7 +13,7 @@ function lynt(paths: string | Array<string>, options: LyntOptions = {}) {
   }
 
   if (typeof paths !== 'string' && !Array.isArray(paths)) {
-    throw new TypeError('paths must be a string or array of strings')
+    throw new TypeError('paths must be a string or array of strings.')
   }
 
   if (options.typescript && options.flow) {
