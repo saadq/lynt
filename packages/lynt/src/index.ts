@@ -8,8 +8,16 @@ import { Lynt, LyntOptions, LyntResults } from './types'
  * @return A `results` object with an errorCount and output.
  */
 function lynt(paths: string | Array<string>, options: LyntOptions = {}) {
-  if (!paths || (!Array.isArray(paths) && typeof paths !== 'string')) {
-    throw new TypeError('paths mnust be a string or an array of strings')
+  if (!paths) {
+    throw new TypeError('You must pass in path(s) of files to lint.')
+  }
+
+  if (typeof paths !== 'string' && !Array.isArray(paths)) {
+    throw new TypeError('paths must be a string or array of strings')
+  }
+
+  if (options.typescript && options.flow) {
+    throw new TypeError('You cannot use TypeScript and Flow together.')
   }
 
   const lint: Lynt = options.typescript

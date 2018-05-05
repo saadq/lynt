@@ -24,8 +24,6 @@ function getConfig(options: LyntOptions): ESLintConfig {
     'coverage/**'
   ]
 
-  const defaultEnvs = ['es6', 'node', 'browser']
-
   let config: ESLintConfig = {
     useEslintrc: false,
     parserOptions: {
