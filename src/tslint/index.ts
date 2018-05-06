@@ -38,8 +38,12 @@ function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
     const errorMap: ErrorMap = {}
 
     lintErrors.forEach(lintErr => {
-      let currentErrors = errorMap[lintErr.name]
-      currentErrors = currentErrors ? currentErrors.concat(lintErr) : [lintErr]
+      const currentErrors = errorMap[lintErr.name]
+      if (currentErrors) {
+        currentErrors.push(lintErr)
+      } else {
+        errorMap[lintErr.name] = [lintErr]
+      }
     })
 
     console.log(errorMap)
