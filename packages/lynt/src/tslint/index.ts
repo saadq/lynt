@@ -29,7 +29,6 @@ function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
     const lintErrors: Array<LyntError> = JSON.parse(err.stdout)
 
     if (options.json) {
-      console.log(lintErrors)
       return {
         errorCount: lintErrors.length,
         output: lintErrors
