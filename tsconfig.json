@@ -8,6 +8,7 @@
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
+    "downlevelIteration": true,
     "pretty": true
   },
   "exclude": [

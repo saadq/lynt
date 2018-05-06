@@ -26,12 +26,27 @@ interface LyntOptions {
   project?: string
 }
 
+interface ErrorPosition {
+  character: number
+  line: number
+  position: number
+}
+
+interface LyntError {
+  startPosition: ErrorPosition
+  endPosition: ErrorPosition
+  failure: string
+  name: string
+  ruleName: string
+  ruleSeverity: 'ERROR'
+}
+
 interface LyntResults {
   /** The amount of errors received from linting. */
   errorCount: number
 
   /** The actual lint results received in either "stylish" or "json" format. */
-  output: string
+  output: string | Array<LyntError>
 }
 
 interface ESLintConfig {
@@ -70,4 +85,12 @@ interface TSLintConfig {
   }
 }
 
-export { Lynt, LyntOptions, LyntResults, ESLintConfig, TSLintConfig }
+export {
+  Lynt,
+  LyntOptions,
+  ErrorPosition,
+  LyntError,
+  LyntResults,
+  ESLintConfig,
+  TSLintConfig
+}
