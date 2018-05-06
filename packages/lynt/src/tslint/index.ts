@@ -1,67 +1,60 @@
-import { Linter, Configuration } from 'tslint'
-import globby from 'globby'
-import { readFileSync, writeFileSync, unlinkSync, existsSync } from 'fs'
+import execa from 'execa'
 import { join } from 'path'
+import { writeFileSync, unlinkSync as deleteFileSync } from 'fs'
 import getConfig from './config'
-import { LyntOptions, LyntResults } from '../types'
+import { LyntOptions, LyntError, LyntResults } from '../types'
 
-/**
- * Lint files using TSLint. Optionally adds extra React rules if `react` flag is
- * passed.
- *
- * @param paths Glob patterns of files to lint.
- * @param options A configuration object that lets you customize how lynt works.
- * @return A `results` object with an errorCount and output.
- */
 function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
   if (!options.project && paths.length === 0) {
     options.project = '.'
   }
 
-  const config = getConfig(options)
+  const configData = getConfig(options)
   const configPath = join(__dirname, 'tslint.json')
 
-  writeFileSync(configPath, JSON.stringify(config, null, 2))
+  writeFileSync(configPath, JSON.stringify(configData, null, 2))
 
-  const tslintConfig = Configuration.findConfiguration(configPath).results
-  const tslintOptions = {
-    fix: !!options.fix,
-    formatter: options.json ? 'json' : 'stylish'
-  }
+  const tslintArgs = []
 
-  let linter: Linter
-  let filesToLint: Array<string>
+  tslintArgs.push('--config', configPath)
+  tslintArgs.push('--format', 'json')
 
   if (options.project) {
-    const tsconfig = join(options.project, 'tsconfig.json')
+    tslintArgs.push('--project', options.project)
+  }
 
-    if (!existsSync(tsconfig)) {
-      throw new Error('No tsconfig.json file found in the project root.')
+  try {
+    execa.sync('tslint', tslintArgs)
+  } catch (err) {
+    const lintErrors: Array<LyntError> = JSON.parse(err.stdout)
+
+    if (options.json) {
+      console.log(lintErrors)
+      return {
+        errorCount: lintErrors.length,
+        output: lintErrors
+      }
     }
 
-    const program = Linter.createProgram(tsconfig, options.project)
-    linter = new Linter(tslintOptions, program)
-    filesToLint = Linter.getFileNames(program)
-  } else {
-    linter = new Linter(tslintOptions)
-    filesToLint = globby.sync(paths)
+    const errorMap: Map<string, Array<LyntError>> = new Map()
+
+    lintErrors.forEach(lintErr => {
+      const { name } = lintErr
+      const errorsForCurrentFile = errorMap.get(name)
+      if (errorsForCurrentFile) {
+        errorsForCurrentFile.push(lintErr)
+      } else {
+        errorMap.set(name, [lintErr])
+      }
+    })
   }
 
-  filesToLint.forEach(file => {
-    const fileContents = readFileSync(file, 'utf8')
-    linter.lint(file, fileContents, tslintConfig)
-  })
+  deleteFileSync(configPath)
 
-  unlinkSync(configPath)
-
-  const { errorCount, output } = linter.getResult()
-
-  const results: LyntResults = {
-    errorCount,
-    output
+  return {
+    errorCount: 0,
+    output: ''
   }
-
-  return results
 }
 
 export default tslint
