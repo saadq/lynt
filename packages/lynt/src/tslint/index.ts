@@ -2,7 +2,7 @@ import execa from 'execa'
 import { join } from 'path'
 import { writeFileSync, unlinkSync as deleteFileSync } from 'fs'
 import getConfig from './config'
-import { LyntOptions, LyntError, LyntResults } from '../types'
+import { LyntOptions, LyntError, ErrorMap, LyntResults } from '../types'
 
 function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
   if (!options.project && paths.length === 0) {
@@ -35,17 +35,14 @@ function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
       }
     }
 
-    const errorMap: Map<string, Array<LyntError>> = new Map()
+    const errorMap: ErrorMap = {}
 
     lintErrors.forEach(lintErr => {
-      const { name } = lintErr
-      const errorsForCurrentFile = errorMap.get(name)
-      if (errorsForCurrentFile) {
-        errorsForCurrentFile.push(lintErr)
-      } else {
-        errorMap.set(name, [lintErr])
-      }
+      let currentErrors = errorMap[lintErr.name]
+      currentErrors = currentErrors ? currentErrors.concat(lintErr) : [lintErr]
     })
+
+    console.log(errorMap)
   }
 
   deleteFileSync(configPath)

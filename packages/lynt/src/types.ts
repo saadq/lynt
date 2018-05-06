@@ -32,6 +32,10 @@ interface ErrorPosition {
   position: number
 }
 
+interface ErrorMap {
+  [fileName: string]: Array<LyntError>
+}
+
 interface LyntError {
   startPosition: ErrorPosition
   endPosition: ErrorPosition
@@ -89,6 +93,7 @@ export {
   Lynt,
   LyntOptions,
   ErrorPosition,
+  ErrorMap,
   LyntError,
   LyntResults,
   ESLintConfig,
