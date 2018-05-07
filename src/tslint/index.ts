@@ -2,9 +2,12 @@ import execa from 'execa'
 import { join } from 'path'
 import { writeFileSync, unlinkSync as deleteFileSync } from 'fs'
 import getConfig from './config'
-import { LyntOptions, LyntError, ErrorMap, LyntResults } from '../types'
+import { LyntOptions, LyntError } from '../types'
+import format from './formatter'
 
-function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
+interface Bar {}
+
+function tslint(paths: Array<string>, options: LyntOptions) {
   if (!options.project && paths.length === 0) {
     options.project = '.'
   }
@@ -25,35 +28,15 @@ function tslint(paths: Array<string>, options: LyntOptions): LyntResults {
 
   try {
     execa.sync('tslint', tslintArgs)
+    return { errorCount: 0, output: '' }
   } catch (err) {
     const lintErrors: Array<LyntError> = JSON.parse(err.stdout)
-
-    if (options.json) {
-      return {
-        errorCount: lintErrors.length,
-        output: lintErrors
-      }
+    return {
+      errorCount: lintErrors.length,
+      output: options.json ? lintErrors : format(lintErrors)
     }
-
-    const errorMap: ErrorMap = {}
-
-    lintErrors.forEach(lintErr => {
-      const currentErrors = errorMap[lintErr.name]
-      if (currentErrors) {
-        currentErrors.push(lintErr)
-      } else {
-        errorMap[lintErr.name] = [lintErr]
-      }
-    })
-
-    console.log(errorMap)
-  }
-
-  deleteFileSync(configPath)
-
-  return {
-    errorCount: 0,
-    output: ''
+  } finally {
+    deleteFileSync(configPath)
   }
 }
 
