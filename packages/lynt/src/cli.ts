@@ -40,4 +40,5 @@ const cli = meow({
   }
 })
 
-lynt(cli.input, cli.flags)
+const results = lynt(cli.input, cli.flags)
+console.log(results.output)
