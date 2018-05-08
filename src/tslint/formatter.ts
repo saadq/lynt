@@ -1,12 +1,19 @@
 import { LyntError, ErrorMap } from '../types'
 
+/**
+ * Formats a list of errors into a nice looking table. The output is based on
+ * the "stylish" formatter, but it removes inconsistencies between the outputs
+ * of ESLint and TSLint.
+ *
+ * @param errors An array of the errors produced by running lynt.
+ * @return A formatted "stylish" table display of the errors.
+ */
 function format(errors: Array<LyntError>) {
   const errorMap: ErrorMap = {}
 
   errors.forEach(lintErr => {
-    const currentErrors = errorMap[lintErr.name]
-    if (currentErrors) {
-      currentErrors.push(lintErr)
+    if (errorMap[lintErr.name]) {
+      errorMap[lintErr.name].push(lintErr)
     } else {
       errorMap[lintErr.name] = [lintErr]
     }

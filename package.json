@@ -27,6 +27,7 @@
     "@types/globby": "^6.1.0",
     "@types/meow": "^4.0.1",
     "@types/node": "^9.6.5",
+    "@types/text-table": "^0.2.0",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-plugin-flowtype": "^2.46.3",
