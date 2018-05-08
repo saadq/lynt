@@ -1,4 +1,5 @@
 import execa from 'execa'
+import globby from 'globby'
 import { join } from 'path'
 import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'fs'
 import getConfig from './config'
@@ -25,6 +26,11 @@ function tslint(paths: Array<string>, options: LyntOptions) {
   writeFileSync(configPath, JSON.stringify(configData, null, 2))
 
   const tslintArgs: Array<string> = []
+
+  if (paths) {
+    tslintArgs.push(...globby.sync(paths))
+  }
+
   tslintArgs.push('--config', configPath)
   tslintArgs.push('--format', 'json')
 
@@ -43,7 +49,9 @@ function tslint(paths: Array<string>, options: LyntOptions) {
   }
 
   if (ignores.filter(Boolean).length > 0) {
-    ignores.forEach(ignoreGlob => tslintArgs.push('--exclude', ignoreGlob))
+    globby
+      .sync(ignores)
+      .forEach(ignoreGlob => tslintArgs.push('--exclude', ignoreGlob))
   }
 
   try {
