@@ -3,8 +3,8 @@ import globby from 'globby'
 import { join } from 'path'
 import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'fs'
 import getConfig from './config'
-import { LyntOptions, LyntError } from '../types'
 import format from './formatter'
+import { LyntOptions, LyntError } from '../types'
 
 /**
  * Lints files using the TSLint CLI via a child process.

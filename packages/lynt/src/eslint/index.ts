@@ -3,7 +3,7 @@ import getConfig from './config'
 import { LyntOptions, LyntResults } from '../types'
 
 /**
- * Lint files using ESLint.
+ * Lints files using ESLint.
  *
  * @param paths Glob patterns of files to lint.
  * @param options A configuration object that lets you customize how lynt works.
@@ -12,7 +12,14 @@ import { LyntOptions, LyntResults } from '../types'
 function eslint(paths: Array<string>, options: LyntOptions): LyntResults {
   const config = getConfig(options) as CLIEngine.Options
   const engine = new CLIEngine(config)
-  const report = engine.executeOnFiles(paths)
+
+  let filesToLint = paths
+
+  if (paths.length === 0) {
+    filesToLint = options.react ? ['**/*.js', '**.jsx'] : ['**/*.js']
+  }
+
+  const report = engine.executeOnFiles(filesToLint)
   const format = options.json ? 'json' : 'stylish'
   const formatter = engine.getFormatter(format)
 
