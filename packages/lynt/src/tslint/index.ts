@@ -1,12 +1,20 @@
 import execa from 'execa'
 import { join } from 'path'
-import { writeFileSync, unlinkSync as deleteFileSync } from 'fs'
+import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'fs'
 import getConfig from './config'
 import { LyntOptions, LyntError } from '../types'
 import format from './formatter'
 
-interface Bar {}
-
+/**
+ * Lints files using the TSLint CLI via a child process.
+ *
+ * Though TSLint has a Node API, it only offers a subset of the features that
+ * the CLI has, which is why it is not being used.
+ *
+ * @param paths An array of file globs that you want to lint.
+ * @param options A configuration object that lets you customize how lynt works.
+ * @return A `results` object with an errorCount and output.
+ */
 function tslint(paths: Array<string>, options: LyntOptions) {
   if (!options.project && paths.length === 0) {
     options.project = '.'
@@ -14,16 +22,28 @@ function tslint(paths: Array<string>, options: LyntOptions) {
 
   const configData = getConfig(options)
   const configPath = join(__dirname, 'tslint.json')
-
   writeFileSync(configPath, JSON.stringify(configData, null, 2))
 
-  const tslintArgs = []
-
+  const tslintArgs: Array<string> = []
   tslintArgs.push('--config', configPath)
   tslintArgs.push('--format', 'json')
 
   if (options.project) {
     tslintArgs.push('--project', options.project)
+  }
+
+  let ignores: Array<string> = []
+
+  if (options.ignore) {
+    ignores = ignores.concat(options.ignore)
+  }
+
+  if (existsSync('.lyntignore')) {
+    ignores = ignores.concat(readFileSync('.lyntignore', 'utf8').split('\n'))
+  }
+
+  if (ignores.filter(Boolean).length > 0) {
+    ignores.forEach(ignoreGlob => tslintArgs.push('--exclude', ignoreGlob))
   }
 
   try {
@@ -36,7 +56,7 @@ function tslint(paths: Array<string>, options: LyntOptions) {
       output: options.json ? lintErrors : format(lintErrors)
     }
   } finally {
-    deleteFileSync(configPath)
+    unlinkSync(configPath)
   }
 }
 
