@@ -18,8 +18,7 @@
     "clean": "rm -rf lib",
     "dev": "tsc --watch",
     "format": "prettier \"src/**/*.ts\" --write",
-    "prepare": "npm run build",
-    "test": "ts-node test/index.ts"
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@types/eslint": "^4.16.0",
@@ -41,10 +40,7 @@
     "tslint-react": "^3.5.1"
   },
   "devDependencies": {
-    "@types/tape": "^4.2.32",
     "prettier": "^1.12.1",
-    "tape": "^4.9.0",
-    "ts-node": "^6.0.2",
     "typescript": "^2.8.3"
   },
   "keywords": [
