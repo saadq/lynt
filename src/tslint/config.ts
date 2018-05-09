@@ -1,4 +1,4 @@
-import { LyntOptions, TSLintConfig } from '../types'
+import { Options, TSLintConfig } from '../types'
 
 /**
  * Get the TSLint config for lynt. Optionally adds extra React rules if the
@@ -7,7 +7,7 @@ import { LyntOptions, TSLintConfig } from '../types'
  * @param options A configuration object that lets you customize how lynt works.
  * @return An object that is compatible with TSLint's config format.
  */
-function getConfig(options: LyntOptions) {
+function getConfig(options: Options) {
   let config: TSLintConfig = {
     defaultSeverity: 'error',
     rulesDirectory: ['tslint-microsoft-contrib'],

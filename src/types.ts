@@ -1,6 +1,6 @@
-type Lynt = (paths: Array<string>, options: LyntOptions) => LyntResults
+type Lynt = (paths: Array<string>, options: Options) => Results
 
-interface LyntOptions {
+interface Options {
   /** Add TypeScript support by using TSLint. */
   typescript?: boolean
 
@@ -26,6 +26,14 @@ interface LyntOptions {
   project?: string
 }
 
+interface Results {
+  /** The amount of errors received from linting. */
+  errorCount: number
+
+  /** The actual lint results received in either "stylish" or "json" format. */
+  output: string | Array<LyntError>
+}
+
 interface ErrorPosition {
   character: number
   line: number
@@ -43,14 +51,6 @@ interface LyntError {
   name: string
   ruleName: string
   ruleSeverity: 'ERROR'
-}
-
-interface LyntResults {
-  /** The amount of errors received from linting. */
-  errorCount: number
-
-  /** The actual lint results received in either "stylish" or "json" format. */
-  output: string | Array<LyntError>
 }
 
 interface ESLintConfig {
@@ -91,11 +91,11 @@ interface TSLintConfig {
 
 export {
   Lynt,
-  LyntOptions,
+  Options,
+  Results,
   ErrorPosition,
   ErrorMap,
   LyntError,
-  LyntResults,
   ESLintConfig,
   TSLintConfig
 }

@@ -1,5 +1,5 @@
 import { existsSync } from 'fs'
-import { LyntOptions, ESLintConfig } from '../types'
+import { Options, ESLintConfig } from '../types'
 
 /**
  * Get the ESLint config for lynt. Optionally adds extra React or Flow rules if
@@ -8,7 +8,7 @@ import { LyntOptions, ESLintConfig } from '../types'
  * @param options A configuration object that lets you customize how lynt works.
  * @return An object that is compatible with ESLint's config format.
  */
-function getConfig(options: LyntOptions): ESLintConfig {
+function getConfig(options: Options): ESLintConfig {
   const defaultIgnores = [
     '**/node_modules/**',
     '**/bower_components/**',

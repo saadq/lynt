@@ -1,4 +1,4 @@
-import { Lynt, LyntOptions, LyntResults } from './types'
+import { Lynt, Options, Results } from './types'
 
 /**
  * Uses ESLint or TSLint to lint a given set of files.
@@ -7,7 +7,7 @@ import { Lynt, LyntOptions, LyntResults } from './types'
  * @param options A configuration object that lets you customize how lynt works.
  * @return A `results` object with an errorCount and output.
  */
-function lynt(paths: string | Array<string>, options: LyntOptions = {}) {
+function lynt(paths: string | Array<string>, options: Options = {}): Results {
   if (!paths) {
     throw new TypeError('You must pass in path(s) of files to lint.')
   }

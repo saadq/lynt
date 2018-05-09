@@ -1,6 +1,6 @@
 import { CLIEngine } from 'eslint'
 import getConfig from './config'
-import { LyntOptions, LyntResults } from '../types'
+import { Options, Results } from '../types'
 
 /**
  * Lints files using ESLint.
@@ -9,7 +9,7 @@ import { LyntOptions, LyntResults } from '../types'
  * @param options A configuration object that lets you customize how lynt works.
  * @return A `results` object with an errorCount and output.
  */
-function eslint(paths: Array<string>, options: LyntOptions): LyntResults {
+function eslint(paths: Array<string>, options: Options): Results {
   const config = getConfig(options) as CLIEngine.Options
   const engine = new CLIEngine(config)
 
@@ -27,7 +27,7 @@ function eslint(paths: Array<string>, options: LyntOptions): LyntResults {
     CLIEngine.outputFixes(report)
   }
 
-  const results: LyntResults = {
+  const results: Results = {
     errorCount: report.errorCount,
     output: formatter(report.results)
   }
