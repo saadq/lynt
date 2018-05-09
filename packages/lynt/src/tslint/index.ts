@@ -4,7 +4,7 @@ import { join } from 'path'
 import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'fs'
 import getConfig from './config'
 import format from './formatter'
-import { LyntOptions, LyntError } from '../types'
+import { Options, Results, LyntError } from '../types'
 
 /**
  * Lints files using the TSLint CLI via a child process.
@@ -16,7 +16,7 @@ import { LyntOptions, LyntError } from '../types'
  * @param options A configuration object that lets you customize how lynt works.
  * @return A `results` object with an errorCount and output.
  */
-function tslint(paths: Array<string>, options: LyntOptions) {
+function tslint(paths: Array<string>, options: Options): Results {
   if (!options.project && paths.length === 0) {
     options.project = '.'
   }
@@ -48,23 +48,26 @@ function tslint(paths: Array<string>, options: LyntOptions) {
     ignores = ignores.concat(readFileSync('.lyntignore', 'utf8').split('\n'))
   }
 
-  if (ignores.filter(Boolean).length > 0) {
-    globby
-      .sync(ignores)
-      .forEach(ignoreGlob => tslintArgs.push('--exclude', ignoreGlob))
+  ignores = ignores.filter(Boolean)
+
+  if (ignores.length > 0) {
+    globby.sync(ignores).forEach(glob => tslintArgs.push('--exclude', glob))
+  }
+
+  let results: Results = {
+    errorCount: 0,
+    output: ''
   }
 
   try {
     execa.sync('tslint', tslintArgs)
-    return { errorCount: 0, output: '' }
   } catch (err) {
     const lintErrors: Array<LyntError> = JSON.parse(err.stdout)
-    return {
-      errorCount: lintErrors.length,
-      output: options.json ? lintErrors : format(lintErrors)
-    }
+    results.errorCount = lintErrors.length
+    results.output = options.json ? lintErrors : format(lintErrors)
   } finally {
     unlinkSync(configPath)
+    return results
   }
 }
 
