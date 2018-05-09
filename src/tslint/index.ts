@@ -54,17 +54,13 @@ function tslint(paths: Array<string>, options: Options): Results {
     globby.sync(ignores).forEach(glob => tslintArgs.push('--exclude', glob))
   }
 
-  let results: Results = {
-    errorCount: 0,
-    output: ''
-  }
+  let results: Results = ''
 
   try {
     execa.sync('tslint', tslintArgs)
   } catch (err) {
     const lintErrors: Array<LyntError> = JSON.parse(err.stdout)
-    results.errorCount = lintErrors.length
-    results.output = options.json ? lintErrors : format(lintErrors)
+    results = options.json ? lintErrors : format(lintErrors)
   } finally {
     unlinkSync(configPath)
     return results

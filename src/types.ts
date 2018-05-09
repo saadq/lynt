@@ -26,13 +26,8 @@ interface Options {
   project?: string
 }
 
-interface Results {
-  /** The amount of errors received from linting. */
-  errorCount: number
-
-  /** The actual lint results received in either "stylish" or "json" format. */
-  output: string | Array<LyntError>
-}
+/** The actual lint results received in either "stylish" or "json" format. */
+type Results = string | Array<LyntError>
 
 interface ErrorPosition {
   character: number
