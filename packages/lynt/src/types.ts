@@ -1,5 +1,3 @@
-type Lynt = (paths: Array<string>, options: Options) => Results
-
 interface Options {
   /** Add TypeScript support by using TSLint. */
   typescript?: boolean
@@ -85,7 +83,6 @@ interface TSLintConfig {
 }
 
 export {
-  Lynt,
   Options,
   Results,
   ErrorPosition,

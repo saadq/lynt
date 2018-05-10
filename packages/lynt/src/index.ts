@@ -1,4 +1,6 @@
-import { Lynt, Options, Results } from './types'
+import eslint from './eslint'
+import tslint from './tslint'
+import { Options, Results } from './types'
 
 /**
  * Uses ESLint or TSLint to lint a given set of files.
@@ -20,12 +22,11 @@ function lynt(paths: string | Array<string>, options: Options = {}): Results {
     throw new TypeError('You cannot use TypeScript and Flow together.')
   }
 
-  const lint: Lynt = options.typescript
-    ? require('./tslint').default
-    : require('./eslint').default
-
   const files = Array.isArray(paths) ? paths : [paths]
-  const results = lint(files, options)
+
+  const results = options.typescript
+    ? tslint(files, options)
+    : eslint(files, options)
 
   return results
 }
