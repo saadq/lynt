@@ -27,10 +27,7 @@ function eslint(paths: Array<string>, options: Options): Results {
     CLIEngine.outputFixes(report)
   }
 
-  const results: Results = {
-    errorCount: report.errorCount,
-    output: formatter(report.results)
-  }
+  const results = formatter(report.results)
 
   return results
 }

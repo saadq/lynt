@@ -1,3 +1,6 @@
+import table from 'text-table'
+import chalk from 'chalk'
+import stripAnsi from 'strip-ansi'
 import { LyntError, ErrorMap } from '../types'
 
 /**
@@ -9,9 +12,17 @@ import { LyntError, ErrorMap } from '../types'
  * @return A formatted "stylish" table display of the errors.
  */
 function format(errors: Array<LyntError>) {
+  const sortedErrors = errors.sort((a, b) => {
+    if (a.name !== b.name) {
+      return a.name < b.name ? -1 : 1
+    }
+
+    return a.startPosition.position - b.startPosition.position
+  })
+
   const errorMap: ErrorMap = {}
 
-  errors.forEach(lintErr => {
+  sortedErrors.forEach(lintErr => {
     if (errorMap[lintErr.name]) {
       errorMap[lintErr.name].push(lintErr)
     } else {
@@ -23,24 +34,39 @@ function format(errors: Array<LyntError>) {
   let output = ''
 
   entries.forEach(([fileName, fileErrors], index) => {
-    output += fileName + '\n'
-    output += '============================\n'
+    output += `${chalk.underline(fileName)}\n`
 
-    fileErrors.forEach(err => {
-      output += [
-        `${err.startPosition.line + 1}:${err.startPosition.character + 1}`,
-        'ERROR',
-        err.ruleName,
-        err.failure + '\n'
-      ].join('\t')
-    })
+    const errorTable = fileErrors.map(error => [
+      chalk.red(
+        `  ${error.startPosition.character}:${error.startPosition.line}`
+      ),
+      error.failure,
+      chalk.dim(error.ruleName)
+    ])
 
-    if (index !== entries.length - 1) {
-      output += '\n'
+    const options: table.Options = {
+      stringLength: str => stripAnsi(str).length
     }
+
+    output += `${table(errorTable, options)}\n\n`
   })
 
+  const errCount = errors.length
+  const errMessage = `\u2716 ${errCount} lynt ${pluralize('error', errCount)}`
+  output += chalk.bold.red(errMessage)
+
   return output
+}
+
+/**
+ * Adds the letter 's' to a word if necessary.
+ *
+ * @param word The word to pluralize.
+ * @param count The count used to decide if its necessary to pluralize.
+ * @return The original word with an 's' at the end if it is needed.
+ */
+function pluralize(word: string, count: number) {
+  return count > 1 ? `${word}s` : word
 }
 
 export default format

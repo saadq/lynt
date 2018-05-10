@@ -63,8 +63,9 @@ function tslint(paths: Array<string>, options: Options): Results {
     results = options.json ? lintErrors : format(lintErrors)
   } finally {
     unlinkSync(configPath)
-    return results
   }
+
+  return results
 }
 
 export default tslint
