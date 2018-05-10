@@ -1,5 +1,6 @@
 import execa from 'execa'
 import globby from 'globby'
+import chalk from 'chalk'
 import { join } from 'path'
 import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'fs'
 import getConfig from './config'
@@ -54,10 +55,11 @@ function tslint(paths: Array<string>, options: Options): Results {
     globby.sync(ignores).forEach(glob => tslintArgs.push('--exclude', glob))
   }
 
-  let results: Results = ''
+  let results
 
   try {
     execa.sync('tslint', tslintArgs)
+    results = chalk.bold.green('\u2714 No lynt errors')
   } catch (err) {
     const lintErrors: Array<LyntError> = JSON.parse(err.stdout)
     results = options.json ? lintErrors : format(lintErrors)
