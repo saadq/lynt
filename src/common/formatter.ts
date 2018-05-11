@@ -1,7 +1,7 @@
 import table from 'text-table'
 import chalk from 'chalk'
 import stripAnsi from 'strip-ansi'
-import { LyntError, ErrorMap } from '../types'
+import * as TSLint from '../tslint/types'
 
 /**
  * Formats a list of errors into a nice looking table. The output is based on
@@ -11,7 +11,7 @@ import { LyntError, ErrorMap } from '../types'
  * @param errors An array of the errors produced by running lynt.
  * @return A formatted "stylish" table display of the errors.
  */
-function format(errors: Array<LyntError>) {
+function format(errors: Array<TSLint.LintError>) {
   const sortedErrors = errors.sort((a, b) => {
     if (a.name !== b.name) {
       return a.name < b.name ? -1 : 1
@@ -20,7 +20,7 @@ function format(errors: Array<LyntError>) {
     return a.startPosition.position - b.startPosition.position
   })
 
-  const errorMap: ErrorMap = {}
+  const errorMap: TSLint.ErrorMap = {}
 
   sortedErrors.forEach(lintErr => {
     if (errorMap[lintErr.name]) {
