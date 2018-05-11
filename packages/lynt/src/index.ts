@@ -1,6 +1,6 @@
 import eslint from './eslint'
 import tslint from './tslint'
-import { Options, Results } from './types'
+import { Options, Results } from './common/types'
 
 /**
  * Uses ESLint or TSLint to lint a given set of files.

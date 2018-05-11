@@ -1,5 +1,6 @@
 import { existsSync } from 'fs'
-import { Options, ESLintConfig } from '../types'
+import { Config } from './types'
+import { Options } from '../common/types'
 
 /**
  * Get the ESLint config for lynt. Optionally adds extra React or Flow rules if
@@ -8,7 +9,7 @@ import { Options, ESLintConfig } from '../types'
  * @param options A configuration object that lets you customize how lynt works.
  * @return An object that is compatible with ESLint's config format.
  */
-function getConfig(options: Options): ESLintConfig {
+function getConfig(options: Options): Config {
   const defaultIgnores = [
     '**/node_modules/**',
     '**/bower_components/**',
@@ -24,7 +25,7 @@ function getConfig(options: Options): ESLintConfig {
     'coverage/**'
   ]
 
-  let config: ESLintConfig = {
+  let config: Config = {
     useEslintrc: false,
     parserOptions: {
       ecmaVersion: 8,
@@ -207,7 +208,7 @@ function getConfig(options: Options): ESLintConfig {
  * @param config The current ESLint config.
  * @return A new object with the base config as well as additional React rules.
  */
-function getReactConfig(config: ESLintConfig): ESLintConfig {
+function getReactConfig(config: Config): Config {
   return {
     ...config,
     parser: 'babel-eslint',
@@ -252,7 +253,7 @@ function getReactConfig(config: ESLintConfig): ESLintConfig {
  * @param config The current ESLint config.
  * @return A new object with the base config as well as additional React rules.
  */
-function getFlowConfig(config: ESLintConfig): ESLintConfig {
+function getFlowConfig(config: Config): Config {
   return {
     ...config,
     parser: 'babel-eslint',

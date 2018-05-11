@@ -1,4 +1,5 @@
-import { Options, TSLintConfig } from '../types'
+import { Config } from './types'
+import { Options } from '../common/types'
 
 /**
  * Get the TSLint config for lynt. Optionally adds extra React rules if the
@@ -8,7 +9,7 @@ import { Options, TSLintConfig } from '../types'
  * @return An object that is compatible with TSLint's config format.
  */
 function getConfig(options: Options) {
-  let config: TSLintConfig = {
+  let config: Config = {
     defaultSeverity: 'error',
     rulesDirectory: ['tslint-microsoft-contrib'],
     linterOptions: {
@@ -119,7 +120,7 @@ function getConfig(options: Options) {
  * @param config The current TSLint config.
  * @return A new object with the base config as well as additional React rules.
  */
-function getReactConfig(config: TSLintConfig): TSLintConfig {
+function getReactConfig(config: Config): Config {
   return {
     ...config,
     rules: {

@@ -4,8 +4,9 @@ import chalk from 'chalk'
 import { join } from 'path'
 import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'fs'
 import getConfig from './config'
-import format from './formatter'
-import { Options, Results, LyntError } from '../types'
+import format from '../common/formatter'
+import { LintError } from './types'
+import { Options, Results } from '../common/types'
 
 /**
  * Lints files using the TSLint CLI via a child process.
@@ -61,7 +62,7 @@ function tslint(paths: Array<string>, options: Options): Results {
     execa.sync('tslint', tslintArgs)
     results = chalk.bold.green('\u2714 No lynt errors')
   } catch (err) {
-    const lintErrors: Array<LyntError> = JSON.parse(err.stdout)
+    const lintErrors: Array<LintError> = JSON.parse(err.stdout)
     results = options.json ? lintErrors : format(lintErrors)
   } finally {
     unlinkSync(configPath)
