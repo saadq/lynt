@@ -35,6 +35,7 @@ function getConfig(options: Options): Config {
       sourceType: 'module'
     },
     plugins: [],
+    globals: [],
     envs: ['es6', 'node', 'browser'],
     ignorePattern: defaultIgnores,
     rules: {
@@ -172,14 +173,14 @@ function getConfig(options: Options): Config {
   if (options.global) {
     config = {
       ...config,
-      globals: Array.isArray(options.global) ? options.global : [options.global]
+      globals: config.globals.concat(options.global)
     }
   }
 
   if (options.env) {
     config = {
       ...config,
-      envs: Array.isArray(options.env) ? options.env : [options.env]
+      envs: config.envs.concat(options.env)
     }
   }
 

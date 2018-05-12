@@ -12,6 +12,7 @@ interface Config {
     sourceType: string
   }
   plugins: Array<string>
+  globals: Array<string>
   envs: Array<string>
   ignorePattern: Array<string>
   rules: {
@@ -20,7 +21,6 @@ interface Config {
   parser?: string
   fix?: boolean
   ignorePath?: string
-  globals?: Array<string>
 }
 
 export { Config, Results }
