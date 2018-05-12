@@ -7,7 +7,7 @@ import { Options, Results } from './common/types'
  *
  * @param paths An array of file globs that you want to lint.
  * @param options A configuration object that lets you customize how lynt works.
- * @return An array of lint errors
+ * @return An array of lint errors.
  */
 function lynt(paths: string | Array<string>, options: Options = {}): Results {
   if (!paths) {
