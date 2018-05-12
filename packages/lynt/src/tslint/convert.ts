@@ -24,17 +24,12 @@ function convert(tslintResults: TSLintResults): LyntResults {
   })
 
   const errorMap: ErrorMap = {}
-  let totalFixCount = 0
 
   sortedResults.forEach(result => {
     if (errorMap[result.name]) {
       errorMap[result.name].push(result)
     } else {
       errorMap[result.name] = [result]
-    }
-
-    if (result.fix) {
-      totalFixCount++
     }
   })
 
@@ -43,13 +38,13 @@ function convert(tslintResults: TSLintResults): LyntResults {
     errors: lintErrors.map(lintErr => ({
       ruleName: lintErr.ruleName,
       message: lintErr.failure,
-      line: lintErr.startPosition.line,
-      column: lintErr.startPosition.character,
-      endLine: lintErr.endPosition.line,
-      endColumn: lintErr.endPosition.character
+      line: lintErr.startPosition.line + 1,
+      column: lintErr.startPosition.character + 1,
+      endLine: lintErr.endPosition.line + 1,
+      endColumn: lintErr.endPosition.character + 1
     })),
     errorCount: lintErrors.length,
-    fixCount: totalFixCount
+    fixCount: lintErrors.reduce((sum, curr) => (curr.fix ? sum + 1 : sum), 0)
   }))
 }
 

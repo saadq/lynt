@@ -22,7 +22,7 @@ interface LintError {
   name: string
   ruleName: string
   ruleSeverity: 'ERROR'
-  fix: {
+  fix?: {
     innerStart: number
     innerLength: number
     innerText: string
