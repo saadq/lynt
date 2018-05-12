@@ -14,6 +14,7 @@ const help = `
     --ignore       Glob patterns for paths to ignore.
     --fix          Automatically fix linting issues.
     --global       Add support for a given global variable.
+    --env          Add support for a given environment.
     --json         Get lint results in JSON format instead of default "stylish" format.
     --project      Specify your project's main directory if it isn't in the root (only use with --typescript).
 
@@ -35,6 +36,7 @@ const cli = meow({
     ignore: 'string',
     fix: 'boolean',
     global: 'string',
+    env: 'string',
     json: 'boolean',
     project: 'string'
   }

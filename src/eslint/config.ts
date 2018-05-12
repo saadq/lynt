@@ -176,6 +176,13 @@ function getConfig(options: Options): Config {
     }
   }
 
+  if (options.env) {
+    config = {
+      ...config,
+      envs: Array.isArray(options.env) ? options.env : [options.env]
+    }
+  }
+
   const ignoreFile = '.lyntignore'
 
   if (existsSync(ignoreFile)) {
