@@ -13,37 +13,49 @@ import { Results } from '../common/types'
  */
 function format(lyntResults: Results): string {
   if (lyntResults.length === 0) {
-    return chalk.bold.green('\u2714 No lynt errors')
+    return chalk.bold.green('\n\u2714 No lynt errors\n')
   }
 
-  let output = ''
+  let output = '\n'
+  let totalErrCount = 0
+  let totalFixCount = 0
+
+  const tableOptions: table.Options = {
+    stringLength: str => stripAnsi(str).length
+  }
 
   lyntResults.forEach(result => {
     output += `${chalk.underline(result.filePath)}\n`
 
-    const errorTable = result.errors.map(error => [
+    const formattedErrors = result.errors.map(error => [
       chalk.red(`  ${error.line}:${error.column}`),
       error.message,
       chalk.dim(error.ruleName)
     ])
 
-    const options: table.Options = {
-      stringLength: str => stripAnsi(str).length
-    }
+    output += `${table(formattedErrors, tableOptions)}\n\n`
 
-    output += `${table(errorTable, options)}\n\n`
+    totalErrCount += result.errorCount
+    totalFixCount += result.fixCount
   })
 
-  const errCount = lyntResults.reduce((sum, curr) => sum + curr.errorCount, 0)
-  let errMessage = `\u2716 ${errCount} lynt error`
-
-  if (errCount > 1) {
-    errMessage += 's'
-  }
+  const errWord = pluralize('error', totalErrCount)
+  const errMessage = `\u2716 ${totalErrCount} lynt ${errWord}`
 
   output += chalk.bold.red(errMessage)
 
+  if (totalFixCount > 0) {
+    const fixMessage = `  (${totalFixCount} ${errWord} can be automatically fixed with the \`--fix\` flag)`
+    output += chalk.bold.yellow(fixMessage)
+  }
+
+  output += '\n'
+
   return output
+}
+
+function pluralize(word: string, count: number) {
+  return count === 1 ? word : word + 's'
 }
 
 export default format
