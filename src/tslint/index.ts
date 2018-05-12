@@ -36,7 +36,7 @@ function tslint(paths: Array<string>, options: Options): Results {
   tslintArgs.push('--format', 'json')
 
   if (options.project) {
-    if (!existsSync('tsconfig.json')) {
+    if (!existsSync(join(options.project, 'tsconfig.json'))) {
       throw new Error('You must have a tsconfig.json file in your project root')
     }
 
