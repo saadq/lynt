@@ -24,7 +24,19 @@ interface Options {
   project?: string
 }
 
-/** The actual lint results received in either "stylish" or "json" format. */
-type Results = string | Array<any>
+/** The converted version of the lint results received from ESLint/TSLint. */
+type Results = Array<{
+  filePath: string
+  errors: Array<{
+    ruleName: string
+    message: string
+    line: number
+    column: number
+    endLine?: number
+    endColumn?: number
+  }>
+  errorCount: number
+  fixCount: number
+}>
 
 export { Options, Results }

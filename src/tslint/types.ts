@@ -13,6 +13,8 @@ interface Config {
   }
 }
 
+type Results = Array<LintError>
+
 interface LintError {
   startPosition: ErrorPosition
   endPosition: ErrorPosition
@@ -20,6 +22,11 @@ interface LintError {
   name: string
   ruleName: string
   ruleSeverity: 'ERROR'
+  fix: {
+    innerStart: number
+    innerLength: number
+    innerText: string
+  }
 }
 
 interface ErrorPosition {
@@ -32,4 +39,4 @@ interface ErrorMap {
   [fileName: string]: Array<LintError>
 }
 
-export { Config, LintError, ErrorPosition, ErrorMap }
+export { Config, Results, LintError, ErrorPosition, ErrorMap }

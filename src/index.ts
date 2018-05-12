@@ -7,7 +7,7 @@ import { Options, Results } from './common/types'
  *
  * @param paths An array of file globs that you want to lint.
  * @param options A configuration object that lets you customize how lynt works.
- * @return A `results` object with an errorCount and output.
+ * @return An array of lint errors
  */
 function lynt(paths: string | Array<string>, options: Options = {}): Results {
   if (!paths) {
@@ -31,4 +31,5 @@ function lynt(paths: string | Array<string>, options: Options = {}): Results {
   return results
 }
 
+export { default as format } from './common/format'
 export default lynt

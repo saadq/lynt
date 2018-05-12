@@ -18,7 +18,8 @@
     "clean": "rm -rf lib",
     "dev": "tsc --watch",
     "format": "prettier \"src/**/*.ts\" --write",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test": "tsc --noEmit"
   },
   "dependencies": {
     "@types/eslint": "^4.16.0",

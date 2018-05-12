@@ -1,5 +1,6 @@
 import { CLIEngine } from 'eslint'
 import getConfig from './config'
+import convert from './convert'
 import { Options, Results } from '../common/types'
 
 /**
@@ -20,14 +21,12 @@ function eslint(paths: Array<string>, options: Options): Results {
   }
 
   const report = engine.executeOnFiles(filesToLint)
-  const format = options.json ? 'json' : 'stylish'
-  const formatter = engine.getFormatter(format)
 
   if (options.fix) {
     CLIEngine.outputFixes(report)
   }
 
-  const results = formatter(report.results)
+  const results = convert(report.results)
 
   return results
 }
