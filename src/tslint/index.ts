@@ -68,8 +68,8 @@ function tslint(paths: Array<string>, options: Options): Results {
   try {
     execa.sync('tslint', tslintArgs)
   } catch (err) {
-    const tslintResults: TSLintResults = JSON.parse(err.stdout)
-    results = convert(tslintResults)
+    const tslintResults: TSLintResults | null = JSON.parse(err.stdout)
+    results = tslintResults ? convert(tslintResults) : []
   } finally {
     unlinkSync(configPath)
   }
