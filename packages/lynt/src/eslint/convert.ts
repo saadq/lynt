@@ -12,19 +12,21 @@ import { Results as LyntResults } from '../common/types'
  * @return A modified version of the lint results following the lynt's schema.
  */
 function convert(eslintResults: ESLintResults): LyntResults {
-  return eslintResults.map(eslintResult => ({
-    filePath: eslintResult.filePath,
-    errors: eslintResult.messages.map(message => ({
-      ruleName: message.ruleId || '',
-      message: message.message,
-      line: message.line,
-      endLine: message.endLine,
-      column: message.column,
-      endColumn: message.endColumn
-    })),
-    errorCount: eslintResult.errorCount,
-    fixCount: eslintResult.fixableErrorCount
-  }))
+  return eslintResults
+    .filter(eslintResult => eslintResult.errorCount > 0)
+    .map(eslintResult => ({
+      filePath: eslintResult.filePath,
+      errors: eslintResult.messages.map(message => ({
+        ruleName: message.ruleId || '',
+        message: message.message,
+        line: message.line,
+        endLine: message.endLine,
+        column: message.column,
+        endColumn: message.endColumn
+      })),
+      errorCount: eslintResult.errorCount,
+      fixCount: eslintResult.fixableErrorCount
+    }))
 }
 
 export default convert
