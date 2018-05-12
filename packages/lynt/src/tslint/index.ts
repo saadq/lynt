@@ -1,11 +1,10 @@
 import execa from 'execa'
 import globby from 'globby'
-import chalk from 'chalk'
 import { join } from 'path'
 import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'fs'
 import getConfig from './config'
-import format from '../common/formatter'
-import { LintError } from './types'
+import convert from './convert'
+import { Results as TSLintResults } from './types'
 import { Options, Results } from '../common/types'
 
 /**
@@ -37,7 +36,15 @@ function tslint(paths: Array<string>, options: Options): Results {
   tslintArgs.push('--format', 'json')
 
   if (options.project) {
+    if (!existsSync('tsconfig.json')) {
+      throw new Error('You must have a tsconfig.json file in your project root')
+    }
+
     tslintArgs.push('--project', options.project)
+  }
+
+  if (options.fix) {
+    tslintArgs.push('--fix')
   }
 
   let ignores: Array<string> = []
@@ -56,14 +63,13 @@ function tslint(paths: Array<string>, options: Options): Results {
     globby.sync(ignores).forEach(glob => tslintArgs.push('--exclude', glob))
   }
 
-  let results
+  let results: Results = []
 
   try {
     execa.sync('tslint', tslintArgs)
-    results = chalk.bold.green('\u2714 No lynt errors')
   } catch (err) {
-    const lintErrors: Array<LintError> = JSON.parse(err.stdout)
-    results = options.json ? lintErrors : format(lintErrors)
+    const tslintResults: TSLintResults = JSON.parse(err.stdout)
+    results = convert(tslintResults)
   } finally {
     unlinkSync(configPath)
   }

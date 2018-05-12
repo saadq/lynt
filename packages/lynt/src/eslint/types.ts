@@ -1,3 +1,7 @@
+import { CLIEngine } from 'eslint'
+
+type Results = Array<CLIEngine.LintResult>
+
 interface Config {
   useEslintrc: boolean
   parserOptions: {
@@ -19,4 +23,4 @@ interface Config {
   globals?: Array<string>
 }
 
-export { Config }
+export { Config, Results }

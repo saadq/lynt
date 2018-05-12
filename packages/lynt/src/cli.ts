@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import meow from 'meow'
-import lynt from '.'
+import lynt, { format } from '.'
 
 const help = `
   Usage
@@ -42,4 +42,8 @@ const cli = meow({
 
 const results = lynt(cli.input, cli.flags)
 
-console.log(results)
+const output = cli.flags.json
+  ? JSON.stringify(results, null, 4)
+  : format(results)
+
+console.log(output)
