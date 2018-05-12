@@ -45,7 +45,8 @@ function format(lyntResults: Results): string {
   output += chalk.bold.red(errMessage)
 
   if (totalFixCount > 0) {
-    const fixMessage = ` (${totalFixCount} ${errWord} can be automatically fixed with the \`--fix\` flag)`
+    const fixWord = totalFixCount === 1 ? 'error' : 'errors'
+    const fixMessage = ` (${totalFixCount} ${fixWord} can be automatically fixed with the \`--fix\` flag)`
     output += chalk.bold.yellow(fixMessage)
   }
 
