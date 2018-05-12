@@ -17,6 +17,9 @@ interface Options {
   /** Add support for the given global variable(s). */
   global?: string | Array<string>
 
+  /** Add support for the given env. */
+  env?: string | Array<string>
+
   /** Get lint results in JSON format instead of default "stylish" format. */
   json?: string | Array<string>
 
