@@ -1,7 +1,7 @@
 import table from 'text-table'
 import chalk from 'chalk'
 import stripAnsi from 'strip-ansi'
-import { Results } from '../common/types'
+import { Results } from './types'
 
 /**
  * Formats a list of lynt errors into a nice looking table. The output is based on
@@ -39,7 +39,7 @@ function format(lyntResults: Results): string {
     totalFixCount += result.fixCount
   })
 
-  const errWord = pluralize('error', totalErrCount)
+  const errWord = totalErrCount === 1 ? 'error' : 'errors'
   const errMessage = `\u2716 ${totalErrCount} lynt ${errWord}`
 
   output += chalk.bold.red(errMessage)
@@ -52,10 +52,6 @@ function format(lyntResults: Results): string {
   output += '\n'
 
   return output
-}
-
-function pluralize(word: string, count: number) {
-  return count === 1 ? word : word + 's'
 }
 
 export default format
