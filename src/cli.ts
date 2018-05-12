@@ -43,9 +43,11 @@ const cli = meow({
 })
 
 const results = lynt(cli.input, cli.flags)
+const exitCode = results.length > 0 ? 1 : 0
 
 const output = cli.flags.json
   ? JSON.stringify(results, null, 4)
   : format(results)
 
 console.log(output)
+process.exit(exitCode)
