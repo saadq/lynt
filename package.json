@@ -12,6 +12,20 @@
     "lib"
   ],
   "typings": "lib/index.d.ts",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc",
@@ -19,7 +33,7 @@
     "dev": "tsc --watch",
     "format": "prettier \"src/**/*.ts\" --write",
     "prepare": "npm run build",
-    "test": "tsc --noEmit"
+    "test": "tsc --noEmit && jest"
   },
   "dependencies": {
     "@types/cosmiconfig": "^5.0.0",
@@ -44,7 +58,10 @@
     "tslint-react": "^3.5.1"
   },
   "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "jest": "^22.4.3",
     "prettier": "^1.12.1",
+    "ts-jest": "^22.4.6",
     "typescript": "^2.8.3"
   },
   "keywords": [
