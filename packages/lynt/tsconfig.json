@@ -12,6 +12,6 @@
     "pretty": true
   },
   "exclude": [
-    "test"
+    "tests"
   ]
 }
