@@ -1,7 +1,6 @@
 import execa from 'execa'
-import globby from 'globby'
 import { join } from 'path'
-import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'fs'
+import { writeFileSync, unlinkSync, existsSync } from 'fs'
 import getConfig from './config'
 import convert from './convert'
 import { Results as TSLintResults } from './types'
@@ -29,7 +28,7 @@ function tslint(paths: Array<string>, options: Options): Results {
   const tslintArgs: Array<string> = []
 
   if (paths) {
-    tslintArgs.push(...globby.sync(paths))
+    tslintArgs.push(...paths)
   }
 
   tslintArgs.push('--config', configPath)
@@ -47,20 +46,12 @@ function tslint(paths: Array<string>, options: Options): Results {
     tslintArgs.push('--fix')
   }
 
-  let ignores: Array<string> = []
-
   if (options.ignore) {
-    ignores = ignores.concat(options.ignore)
-  }
+    const ignores = Array.isArray(options.ignore)
+      ? options.ignore
+      : [options.ignore]
 
-  if (existsSync('.lyntignore')) {
-    ignores = ignores.concat(readFileSync('.lyntignore', 'utf8').split('\n'))
-  }
-
-  ignores = ignores.filter(Boolean)
-
-  if (ignores.length > 0) {
-    globby.sync(ignores).forEach(glob => tslintArgs.push('--exclude', glob))
+    ignores.forEach(glob => tslintArgs.push('--exclude', glob))
   }
 
   let results: Results = []
@@ -69,7 +60,9 @@ function tslint(paths: Array<string>, options: Options): Results {
     execa.sync('tslint', tslintArgs)
   } catch (err) {
     const tslintResults: TSLintResults | null = JSON.parse(err.stdout)
-    results = tslintResults ? convert(tslintResults) : []
+    if (tslintResults) {
+      results = convert(tslintResults)
+    }
   } finally {
     unlinkSync(configPath)
   }

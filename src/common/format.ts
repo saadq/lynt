@@ -4,9 +4,9 @@ import stripAnsi from 'strip-ansi'
 import { Results } from './types'
 
 /**
- * Formats a list of lynt errors into a nice looking table. The output is based on
- * the "stylish" formatter, but it removes inconsistencies between the outputs
- * of ESLint's and TSLint's "stylish".
+ * Formats a list of lynt errors into a nice looking table. The output is based
+ * on the "stylish" formatter, but it removes any inconsistencies between the
+ * outputs of ESLint's and TSLint's "stylish".
  *
  * @param errors An array of the errors produced by running lynt.
  * @return A formatted "stylish" table display of the errors.
