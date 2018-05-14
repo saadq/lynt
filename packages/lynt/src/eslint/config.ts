@@ -1,4 +1,3 @@
-import { existsSync } from 'fs'
 import { Config } from './types'
 import { Options } from '../common/types'
 
@@ -181,15 +180,6 @@ function getConfig(options: Options): Config {
     config = {
       ...config,
       envs: config.envs.concat(options.env)
-    }
-  }
-
-  const ignoreFile = '.lyntignore'
-
-  if (existsSync(ignoreFile)) {
-    config = {
-      ...config,
-      ignorePath: ignoreFile
     }
   }
 

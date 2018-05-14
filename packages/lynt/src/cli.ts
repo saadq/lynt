@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import meow from 'meow'
+import cosmiconfig from 'cosmiconfig'
+import { existsSync, readFileSync } from 'fs'
 import lynt, { format } from '.'
 
 const help = `
@@ -42,12 +44,24 @@ const cli = meow({
   }
 })
 
-const results = lynt(cli.input, cli.flags)
-const exitCode = results.length > 0 ? 1 : 0
+const filePaths = cli.input
+const options = cli.flags
+
+const searchPlaces = ['package.json', '.lyntrc']
+const explorer = cosmiconfig('lynt', { searchPlaces })
+const configResults = explorer.searchSync()
+
+if (configResults) {
+  Object.assign(options, configResults.config)
+}
+
+const lyntResults = lynt(filePaths, options)
 
 const output = cli.flags.json
-  ? JSON.stringify(results, null, 4)
-  : format(results)
+  ? JSON.stringify(lyntResults, null, 4)
+  : format(lyntResults)
+
+const exitCode = lyntResults.length > 0 ? 1 : 0
 
 console.log(output)
 process.exit(exitCode)
