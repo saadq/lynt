@@ -9,21 +9,6 @@ import { Options } from '../common/types'
  * @return An object that is compatible with ESLint's config format.
  */
 function getConfig(options: Options): Config {
-  const defaultIgnores = [
-    '**/node_modules/**',
-    '**/bower_components/**',
-    '**/flow-typed/**',
-    '**/*.min.js',
-    '**/bundle.js',
-    '{tmp,temp}/**',
-    '{test,tests,spec,__tests__}/fixture{s,}/**',
-    'fixture{-*,}.{js,jsx}',
-    'fixture{s,}/**',
-    'vendor/**',
-    'dist/**',
-    'coverage/**'
-  ]
-
   let config: Config = {
     useEslintrc: false,
     parserOptions: {
@@ -36,7 +21,20 @@ function getConfig(options: Options): Config {
     plugins: [],
     globals: [],
     envs: ['es6', 'node', 'browser'],
-    ignorePattern: defaultIgnores,
+    ignorePattern: [
+      '**/node_modules/**',
+      '**/bower_components/**',
+      '**/flow-typed/**',
+      '**/*.min.js',
+      '**/bundle.js',
+      '{tmp,temp}/**',
+      '{test,tests,spec,__tests__}/fixture{s,}/**',
+      'fixture{-*,}.{js,jsx}',
+      'fixture{s,}/**',
+      'vendor/**',
+      'dist/**',
+      'coverage/**'
+    ],
     rules: {
       'no-compare-neg-zero': 'error',
       'no-cond-assign': 'error',
@@ -186,7 +184,7 @@ function getConfig(options: Options): Config {
   if (options.ignore) {
     config = {
       ...config,
-      ignorePattern: defaultIgnores.concat(options.ignore)
+      ignorePattern: config.ignorePattern.concat(options.ignore)
     }
   }
 
