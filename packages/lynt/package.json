@@ -12,6 +12,9 @@
     "lib"
   ],
   "typings": "lib/index.d.ts",
+  "engines": {
+    "node": ">=6"
+  },
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc",
