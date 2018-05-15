@@ -33,19 +33,22 @@ function convert(tslintResults: TSLintResults): LyntResults {
     }
   })
 
-  return Object.entries(errorMap).map(([fileName, lintErrors]) => ({
-    filePath: fileName,
-    errors: lintErrors.map(lintErr => ({
-      ruleName: lintErr.ruleName,
-      message: lintErr.failure,
-      line: lintErr.startPosition.line + 1,
-      column: lintErr.startPosition.character + 1,
-      endLine: lintErr.endPosition.line + 1,
-      endColumn: lintErr.endPosition.character + 1
-    })),
-    errorCount: lintErrors.length,
-    fixCount: lintErrors.reduce((sum, curr) => (curr.fix ? sum + 1 : sum), 0)
-  }))
+  return Object.keys(errorMap).map(fileName => {
+    const lintErrors = errorMap[fileName]
+    return {
+      filePath: fileName,
+      errors: lintErrors.map(lintErr => ({
+        ruleName: lintErr.ruleName,
+        message: lintErr.failure,
+        line: lintErr.startPosition.line + 1,
+        column: lintErr.startPosition.character + 1,
+        endLine: lintErr.endPosition.line + 1,
+        endColumn: lintErr.endPosition.character + 1
+      })),
+      errorCount: lintErrors.length,
+      fixCount: lintErrors.reduce((sum, curr) => (curr.fix ? sum + 1 : sum), 0)
+    }
+  })
 }
 
 export default convert
