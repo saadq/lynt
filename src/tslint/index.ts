@@ -60,15 +60,15 @@ function tslint(paths: Array<string>, options: Options): Results {
     execa.sync('tslint', tslintArgs)
   } catch (lynt) {
     try {
-      const tslintResults: TSLintResults | null = JSON.parse(lynt.stdout)
-      if (tslintResults) {
-        results = convert(tslintResults)
-      }
+      const tslintResults: TSLintResults = JSON.parse(lynt.stdout)
+      results = convert(tslintResults)
     } catch (jsonErr) {
       throw new Error(lynt.stdout || lynt.stderr)
     }
   } finally {
-    unlinkSync(configPath)
+    if (existsSync(configPath)) {
+      unlinkSync(configPath)
+    }
   }
 
   return results

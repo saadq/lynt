@@ -259,7 +259,6 @@ function getFlowConfig(config: Config): Config {
     rules: {
       ...config.rules,
       'flowtype/define-flow-type': 'error',
-      'flowtype/delimiter-dangle': ['error', 'never'],
       'flowtype/no-dupe-keys': 'error',
       'flowtype/no-primitive-constructor-types': 'error',
       'flowtype/no-types-missing-file-annotation': 'error',
