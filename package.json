@@ -2,8 +2,9 @@
   "name": "lynt",
   "description": "A zero config JavaScript linter",
   "author": "Saad Quadri",
+  "repository": "saadq/lynt",
   "license": "MIT",
-  "version": "0.0.1-alpha",
+  "version": "0.1.0",
   "main": "lib/index.js",
   "bin": {
     "lynt": "lib/cli.js"
