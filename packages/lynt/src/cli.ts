@@ -57,7 +57,7 @@ if (configResults) {
 
 const lyntResults = lynt(filePaths, options)
 
-const output = cli.flags.json
+const output = options.json
   ? JSON.stringify(lyntResults, null, 4)
   : format(lyntResults)
 
