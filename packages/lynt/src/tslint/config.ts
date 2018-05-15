@@ -10,6 +10,7 @@ import { Options } from '../common/types'
  */
 function getConfig(options: Options) {
   let config: Config = {
+    extends: [],
     defaultSeverity: 'error',
     rulesDirectory: ['tslint-microsoft-contrib'],
     linterOptions: {
@@ -123,6 +124,7 @@ function getConfig(options: Options) {
 function getReactConfig(config: Config): Config {
   return {
     ...config,
+    extends: [...config.extends, 'tslint-react'],
     rules: {
       ...config.rules,
       'jsx-key': true,

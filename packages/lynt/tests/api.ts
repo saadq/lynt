@@ -10,8 +10,8 @@ describe('api', () => {
 
     const results = lynt([], options)
 
-    expect(results.length).toBe(0)
     console.log(`Linting source code... ${format(results)}`)
+    expect(results.length).toBe(0)
   })
 
   it('should be able to lint typescript files', () => {
@@ -21,35 +21,38 @@ describe('api', () => {
 
     const files = join(__dirname, 'ts-files', 'prefer-const.ts')
     const results = lynt(files, options)
-    const error = results[0]
+    const result = results[0]
 
     expect(results.length).toBe(1)
-    expect(error.errorCount).toBe(1)
-    expect(error.errors[0].ruleName).toBe('prefer-const')
+    expect(result.errorCount).toBe(1)
+    expect(result.errors[0].ruleName).toBe('prefer-const')
+  })
+
+  it('should be able to lint typescript/react files', () => {
+    const options = {
+      typescript: true,
+      react: true
+    }
+
+    const files = join(__dirname, 'ts-files', 'react.tsx')
+    const results = lynt(files, options)
+    const result = results[0]
+    const [typescriptErr, reactErr] = result.errors
+
+    expect(results.length).toBe(1)
+    expect(result.errorCount).toBe(2)
+    expect(typescriptErr.ruleName).toBe('ban-types')
+    expect(reactErr.ruleName).toBe('jsx-no-string-ref')
   })
 
   it('should be able to lint javascript files', () => {
     const files = join(__dirname, 'js-files', 'prefer-const.js')
     const results = lynt(files)
-    const error = results[0]
-
-    expect(results.length).toBe(1)
-    expect(error.errorCount).toBe(1)
-    expect(error.errors[0].ruleName).toBe('prefer-const')
-  })
-
-  it('should be able to lint javascript/react files', () => {
-    const files = join(__dirname, 'js-files', 'react.js')
-    const options = {
-      react: true
-    }
-
-    const results = lynt(files, { react: true })
     const result = results[0]
 
     expect(results.length).toBe(1)
     expect(result.errorCount).toBe(1)
-    expect(result.errors[0].ruleName).toBe('react/react-in-jsx-scope')
+    expect(result.errors[0].ruleName).toBe('prefer-const')
   })
 
   it('should be able to lint javascript/flow files', () => {
@@ -66,11 +69,25 @@ describe('api', () => {
     expect(result.errors[0].ruleName).toBe('flowtype/no-dupe-keys')
   })
 
-  it('should be able to lint javascript/react/flow files', () => {
-    const files = join(__dirname, 'js-files', 'react-flow.js')
+  it('should be able to lint javascript/react files', () => {
+    const files = join(__dirname, 'js-files', 'react.js')
     const options = {
-      react: true,
-      flow: true
+      react: true
+    }
+
+    const results = lynt(files, { react: true })
+    const result = results[0]
+
+    expect(results.length).toBe(1)
+    expect(result.errorCount).toBe(1)
+    expect(result.errors[0].ruleName).toBe('react/react-in-jsx-scope')
+  })
+
+  it('should be able to lint javascript/flow/react files', () => {
+    const files = join(__dirname, 'js-files', 'flow-react.js')
+    const options = {
+      flow: true,
+      react: true
     }
 
     const results = lynt(files, options)

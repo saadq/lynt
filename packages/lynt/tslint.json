@@ -1,4 +1,5 @@
 {
+  "extends": ["tslint-react"],
   "defaultSeverity": "error",
   "rulesDirectory": [
     "tslint-microsoft-contrib"
@@ -89,6 +90,10 @@
     "no-irregular-whitespace": true,
     "encoding": true,
     "interface-over-type-literal": true,
-    "switch-final-break": true
+    "switch-final-break": true,
+    "jsx-key": true,
+    "jsx-no-string-ref": true,
+    "react-anchor-blank-noopener": true,
+    "react-iframe-missing-sandbox": true
   }
 }

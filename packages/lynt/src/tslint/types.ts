@@ -1,4 +1,5 @@
 interface Config {
+  extends: Array<string>
   rulesDirectory: Array<string>
   defaultSeverity: 'error'
   linterOptions: {
@@ -7,7 +8,6 @@ interface Config {
   rules: {
     [key: string]: any
   }
-  extends?: Array<string>
   jsRules?: {
     [key: string]: any
   }
