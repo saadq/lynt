@@ -21,12 +21,20 @@ const help = `
     --project      Specify your project's main directory if it isn't in the root (only use with --typescript).
 
   JavaScript Examples
+    $ lynt
+    $ lynt --react
+    $ lynt --flow
+    $ lynt --react --flow
     $ lynt src
-    $ lynt --typescript
-    $ lynt src --ignore dist
-    $ lynt src --ignore dist --ignore build
-    $ lynt src --global chrome
+    $ lynt src --ignore dist --ignore build --env jest
     $ lynt src --global chrome --global atom
+
+  TypeScript Examples
+    $ lynt --typescript
+    $ lynt --typescript --react
+    $ lynt --typescript --project .
+    $ lynt src --typescript
+    $ lynt src --typescript --ignore dist --ignore build
 `
 
 const cli = meow({
