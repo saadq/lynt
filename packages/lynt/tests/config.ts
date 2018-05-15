@@ -314,14 +314,78 @@ describe('tslint config', () => {
     expect(actual).toEqual(expected)
   })
 
+  it('can add extra typechecking rules when a project path is given', () => {
+    const options = {
+      project: '.'
+    }
+
+    const expected = {
+      ...baseTSLintConfig,
+      rules: {
+        ...baseTSLintConfig.rules,
+        'no-unnecessary-type-assertion': true,
+        'await-promise': true,
+        'no-floating-promises': true,
+        'no-for-in-array': true,
+        'no-unused-variable': true,
+        'no-use-before-declare': true,
+        'restrict-plus-operands': true,
+        'strict-type-predicates': true,
+        'use-default-type-parameter': true,
+        deprecation: true,
+        'prefer-readonly': true
+      }
+    }
+
+    const actual = getTSLintConfig(options)
+
+    expect(actual).toEqual(expected)
+  })
+
   it('can optionally add react support', () => {
-    const options = { react: true }
+    const options = {
+      react: true
+    }
 
     const expected = {
       ...baseTSLintConfig,
       extends: ['tslint-react'],
       rules: {
         ...baseTSLintConfig.rules,
+        'jsx-key': true,
+        'jsx-no-string-ref': true,
+        'react-anchor-blank-noopener': true,
+        'react-iframe-missing-sandbox': true
+      }
+    }
+
+    const actual = getTSLintConfig(options)
+
+    expect(actual).toEqual(expected)
+  })
+
+  it('can have extra typechecking rules and react support', () => {
+    const options = {
+      project: '.',
+      react: true
+    }
+
+    const expected = {
+      ...baseTSLintConfig,
+      extends: ['tslint-react'],
+      rules: {
+        ...baseTSLintConfig.rules,
+        'no-unnecessary-type-assertion': true,
+        'await-promise': true,
+        'no-floating-promises': true,
+        'no-for-in-array': true,
+        'no-unused-variable': true,
+        'no-use-before-declare': true,
+        'restrict-plus-operands': true,
+        'strict-type-predicates': true,
+        'use-default-type-parameter': true,
+        deprecation: true,
+        'prefer-readonly': true,
         'jsx-key': true,
         'jsx-no-string-ref': true,
         'react-anchor-blank-noopener': true,
