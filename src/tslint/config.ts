@@ -27,7 +27,6 @@ function getConfig(options: Options) {
           ['Symbol', 'Did you mean `symbol`?']
         ]
       },
-      'no-empty-interface': true,
       'no-import-side-effect': true,
       'no-internal-module': true,
       'no-namespace': true,
