@@ -17,7 +17,6 @@ function getConfig(options: Options) {
       exclude: []
     },
     rules: {
-      // TypeScript-specific
       'adjacent-overload-signatures': true,
       'ban-types': {
         options: [
@@ -38,8 +37,6 @@ function getConfig(options: Options) {
       'no-var-requires': true,
       'only-arrow-functions': [true, 'allow-named-functions'],
       'prefer-for-of': true,
-
-      // Functionality
       'ban-comma-operator': true,
       curly: true,
       'no-arg': true,
@@ -74,13 +71,9 @@ function getConfig(options: Options) {
       'switch-default': true,
       'triple-equals': true,
       'use-isnan': true,
-
-      // Maintainability
       eofline: true,
       'no-duplicate-imports': true,
       'prefer-const': true,
-
-      // Style (no aesthetic-only rules however)
       'no-irregular-whitespace': true,
       encoding: true,
       'interface-over-type-literal': true,
