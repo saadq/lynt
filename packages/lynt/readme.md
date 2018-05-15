@@ -4,6 +4,9 @@
 
 > A zero config JavaScript linter with support for React, Flow, and Typescript.
 
+[![Build Status](https://travis-ci.org/saadq/lynt.svg?branch=master)](https://travis-ci.org/saadq/lynt)
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/lynt)
+
 Lynt has two main philosophies:
 
 1.  **Zero configuration**. Whether you're using React, Flow, TypeScript, you don't need to worry about configuring big `.rc` files or managing parsers, tool-specific rules, etc. It just works :)
