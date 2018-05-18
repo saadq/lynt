@@ -63,6 +63,8 @@ And then run the script in your terminal whenever you want to lint your code:
 $ npm run lint
 ```
 
+By default, folders like `dist` and `node_modules` are ignored.
+
 If you only want to lint a subset of your project or individual files, you can pass globs:
 
 ```json
@@ -133,7 +135,7 @@ Lastly, just remember that if you have `lynt` installed globally and are trying 
     $ lynt --react
     $ lynt --react --flow --env jest
     $ lynt src
-    $ lynt src --ignore dist --ignore build
+    $ lynt src --ignore out/**/*.* --ignore tests/**/*.*
     $ lynt src --global chrome --global atom
 
   TypeScript Examples
@@ -141,7 +143,7 @@ Lastly, just remember that if you have `lynt` installed globally and are trying 
     $ lynt --typescript --react
     $ lynt --typescript --project .
     $ lynt src --typescript
-    $ lynt src --typescript --ignore dist --ignore build
+    $ lynt src --typescript --ignore out/**/*.* --ignore tests/**/*.*
 ```
 
 ## Settings
