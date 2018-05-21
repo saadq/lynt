@@ -236,7 +236,6 @@ function getReactConfig(config: Config): Config {
       'react/no-string-refs': 'error',
       'react/no-unescaped-entities': 'error',
       'react/no-unknown-property': 'error',
-      'react/prop-types': 'error',
       'react/react-in-jsx-scope': 'error',
       'react/require-render-return': 'error'
     }
