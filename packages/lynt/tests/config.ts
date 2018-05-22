@@ -17,6 +17,7 @@ const baseESLintConfig = {
     '**/node_modules/**',
     '**/bower_components/**',
     '**/flow-typed/**',
+    '**/elm-stuff/**',
     '**/*.min.js',
     '**/bundle.js',
     '{tmp,temp}/**',
