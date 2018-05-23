@@ -4,7 +4,7 @@
   "author": "Saad Quadri",
   "repository": "saadq/lynt",
   "license": "MIT",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "bin": {
     "lynt": "lib/cli.js"
