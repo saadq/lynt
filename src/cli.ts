@@ -2,7 +2,6 @@
 
 import meow from 'meow'
 import cosmiconfig from 'cosmiconfig'
-import { existsSync, readFileSync } from 'fs'
 import lynt, { format } from '.'
 
 const help = `
