@@ -169,7 +169,6 @@ const baseTSLintConfig = {
         ['Symbol', 'Did you mean `symbol`?']
       ]
     },
-    'no-import-side-effect': true,
     'no-internal-module': true,
     'no-namespace': true,
     'no-non-null-assertion': true,
@@ -185,7 +184,6 @@ const baseTSLintConfig = {
     'no-construct': true,
     'no-duplicate-super': true,
     'no-duplicate-switch-case': true,
-    'no-duplicate-variable': true,
     'no-dynamic-delete': true,
     'no-empty': true,
     'no-eval': true,
@@ -194,12 +192,10 @@ const baseTSLintConfig = {
     'no-invalid-this': true,
     'no-misused-new': true,
     'no-return-await': true,
-    'no-shadowed-variable': true,
     'no-sparse-arrays': true,
     'no-string-throw': true,
     'no-switch-case-fall-through': true,
     'no-this-assignment': true,
-    'no-unnecessary-class': true,
     'no-unsafe-finally': true,
     'no-unused-expression': [
       true,
@@ -207,17 +203,14 @@ const baseTSLintConfig = {
       'allow-tagged-template'
     ],
     'no-var-keyword': true,
-    'prefer-object-spread': true,
     radix: true,
-    'switch-default': true,
     'triple-equals': true,
     'use-isnan': true,
     eofline: true,
     'no-duplicate-imports': true,
     'no-irregular-whitespace': true,
     encoding: true,
-    'interface-over-type-literal': true,
-    'switch-final-break': true
+    'interface-over-type-literal': true
   }
 }
 
@@ -322,15 +315,13 @@ describe('tslint config', () => {
         ...baseTSLintConfig.rules,
         'no-unnecessary-type-assertion': true,
         'await-promise': true,
-        'no-floating-promises': true,
         'no-for-in-array': true,
         'no-unused-variable': true,
         'no-use-before-declare': true,
         'restrict-plus-operands': true,
         'strict-type-predicates': true,
         'use-default-type-parameter': true,
-        deprecation: true,
-        'prefer-readonly': true
+        deprecation: true
       }
     }
 
@@ -374,7 +365,6 @@ describe('tslint config', () => {
         ...baseTSLintConfig.rules,
         'no-unnecessary-type-assertion': true,
         'await-promise': true,
-        'no-floating-promises': true,
         'no-for-in-array': true,
         'no-unused-variable': true,
         'no-use-before-declare': true,
@@ -382,7 +372,6 @@ describe('tslint config', () => {
         'strict-type-predicates': true,
         'use-default-type-parameter': true,
         deprecation: true,
-        'prefer-readonly': true,
         'jsx-key': true,
         'jsx-no-string-ref': true,
         'react-anchor-blank-noopener': true,

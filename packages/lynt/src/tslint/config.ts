@@ -27,7 +27,6 @@ function getConfig(options: Options) {
           ['Symbol', 'Did you mean `symbol`?']
         ]
       },
-      'no-import-side-effect': true,
       'no-internal-module': true,
       'no-namespace': true,
       'no-non-null-assertion': true,
@@ -43,7 +42,6 @@ function getConfig(options: Options) {
       'no-construct': true,
       'no-duplicate-super': true,
       'no-duplicate-switch-case': true,
-      'no-duplicate-variable': true,
       'no-dynamic-delete': true,
       'no-empty': true,
       'no-eval': true,
@@ -52,12 +50,10 @@ function getConfig(options: Options) {
       'no-invalid-this': true,
       'no-misused-new': true,
       'no-return-await': true,
-      'no-shadowed-variable': true,
       'no-sparse-arrays': true,
       'no-string-throw': true,
       'no-switch-case-fall-through': true,
       'no-this-assignment': true,
-      'no-unnecessary-class': true,
       'no-unsafe-finally': true,
       'no-unused-expression': [
         true,
@@ -65,17 +61,14 @@ function getConfig(options: Options) {
         'allow-tagged-template'
       ],
       'no-var-keyword': true,
-      'prefer-object-spread': true,
       radix: true,
-      'switch-default': true,
       'triple-equals': true,
       'use-isnan': true,
       eofline: true,
       'no-duplicate-imports': true,
       'no-irregular-whitespace': true,
       encoding: true,
-      'interface-over-type-literal': true,
-      'switch-final-break': true
+      'interface-over-type-literal': true
     }
   }
 
@@ -86,15 +79,13 @@ function getConfig(options: Options) {
         ...config.rules,
         'no-unnecessary-type-assertion': true,
         'await-promise': true,
-        'no-floating-promises': true,
         'no-for-in-array': true,
         'no-unused-variable': true,
         'no-use-before-declare': true,
         'restrict-plus-operands': true,
         'strict-type-predicates': true,
         'use-default-type-parameter': true,
-        deprecation: true,
-        'prefer-readonly': true
+        deprecation: true
       }
     }
   }
