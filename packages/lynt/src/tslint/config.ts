@@ -72,7 +72,6 @@ function getConfig(options: Options) {
       'use-isnan': true,
       eofline: true,
       'no-duplicate-imports': true,
-      'prefer-const': true,
       'no-irregular-whitespace': true,
       encoding: true,
       'interface-over-type-literal': true,

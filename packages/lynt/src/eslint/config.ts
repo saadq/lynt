@@ -155,7 +155,6 @@ function getConfig(options: Options): Config {
       'no-useless-computed-key': 'error',
       'no-useless-constructor': 'error',
       'no-useless-rename': 'error',
-      'prefer-const': 'error',
       'symbol-description': 'error'
     }
   }
