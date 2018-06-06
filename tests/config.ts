@@ -147,7 +147,6 @@ const baseESLintConfig = {
     'no-useless-computed-key': 'error',
     'no-useless-constructor': 'error',
     'no-useless-rename': 'error',
-    'prefer-const': 'error',
     'symbol-description': 'error'
   }
 }
@@ -215,7 +214,6 @@ const baseTSLintConfig = {
     'use-isnan': true,
     eofline: true,
     'no-duplicate-imports': true,
-    'prefer-const': true,
     'no-irregular-whitespace': true,
     encoding: true,
     'interface-over-type-literal': true,

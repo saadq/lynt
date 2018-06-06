@@ -19,13 +19,13 @@ describe('api', () => {
       typescript: true
     }
 
-    const files = join(__dirname, 'ts-files', 'prefer-const.ts')
+    const files = join(__dirname, 'ts-files', 'no-duplicate-switch-case.ts')
     const results = lynt(files, options)
     const result = results[0]
 
     expect(results.length).toBe(1)
     expect(result.errorCount).toBe(1)
-    expect(result.errors[0].ruleName).toBe('prefer-const')
+    expect(result.errors[0].ruleName).toBe('no-duplicate-switch-case')
   })
 
   it('should be able to lint typescript/react files', () => {
@@ -46,13 +46,13 @@ describe('api', () => {
   })
 
   it('should be able to lint javascript files', () => {
-    const files = join(__dirname, 'js-files', 'prefer-const.js')
+    const files = join(__dirname, 'js-files', 'no-unused-expressions.js')
     const results = lynt(files)
     const result = results[0]
 
     expect(results.length).toBe(1)
     expect(result.errorCount).toBe(1)
-    expect(result.errors[0].ruleName).toBe('prefer-const')
+    expect(result.errors[0].ruleName).toBe('no-unused-expressions')
   })
 
   it('should be able to lint javascript/flow files', () => {
