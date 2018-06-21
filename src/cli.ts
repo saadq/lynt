@@ -53,7 +53,6 @@ const cli = meow({
 
 const filePaths = cli.input
 const options = cli.flags
-
 const searchPlaces = ['package.json', '.lyntrc']
 const explorer = cosmiconfig('lynt', { searchPlaces })
 const configResults = explorer.searchSync()

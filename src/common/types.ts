@@ -25,6 +25,9 @@ interface Options {
 
   /** Specify your project's main directory if it isn't in the root. */
   project?: string
+
+  /** Specify your own desired rules to be merged with lynt's config (style rules are still not permissible) */
+  rules?: { [key: string]: any }
 }
 
 /** The converted version of the lint results received from ESLint/TSLint. */
