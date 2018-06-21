@@ -23,4 +23,6 @@ interface Config {
   ignorePath?: string
 }
 
-export { Config, Results }
+type Rules = Config['rules']
+
+export { Config, Results, Rules }

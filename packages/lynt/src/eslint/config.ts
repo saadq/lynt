@@ -1,4 +1,4 @@
-import { Config } from './types'
+import { Config, Rules } from './types'
 import { Options } from '../common/types'
 
 /**
@@ -195,6 +195,10 @@ function getConfig(options: Options): Config {
     }
   }
 
+  if (options.rules) {
+    config = normalizeRules(config, options.rules)
+  }
+
   return config
 }
 
@@ -261,6 +265,140 @@ function getFlowConfig(config: Config): Config {
       'flowtype/no-types-missing-file-annotation': 'error',
       'flowtype/object-type-delimiter': ['error', 'comma'],
       'flowtype/use-flow-type': 'error'
+    }
+  }
+}
+
+/**
+ * Takes the base ESLint config and adds additional rules that the user wants to
+ * add to it. Style rules are still ignored and won't be added to the config.
+ *
+ * @param config The current ESLint config.
+ * @param rules The custom rules the user wants to merge into the base config.
+ * @return A new object with the base config as well as additional custom rules.
+ */
+function normalizeRules(config: Config, rules: Rules): Config {
+  const styleRules = [
+    'array-bracket-newline',
+    'array-bracket-spacing',
+    'array-element-newline',
+    'block-spacing',
+    'brace-style',
+    'camelcase',
+    'capitalized-comments',
+    'comma-dangle',
+    'comma-spacing',
+    'comma-style',
+    'computed-property-spacing',
+    'consistent-this',
+    'eol-last',
+    'func-call-spacing',
+    'func-name-matching',
+    'func-names',
+    'func-style',
+    'function-paren-newline',
+    'id-blacklist',
+    'id-length',
+    'id-match',
+    'implicit-arrow-linebreak',
+    'indent',
+    'jsx-quotes',
+    'key-spacing',
+    'keyword-spacing',
+    'line-comment-position',
+    'linebreak-style',
+    'lines-around-comment',
+    'lines-between-class-members',
+    'max-depth',
+    'max-len',
+    'max-lines',
+    'max-nested-callbacks',
+    'max-params',
+    'max-statements',
+    'max-statements-per-line',
+    'multiline-comment-style',
+    'multiline-ternary',
+    'new-cap',
+    'new-parens',
+    'newline-per-chained-call',
+    'no-array-constructor',
+    'no-bitwise',
+    'no-continue',
+    'no-inline-comments',
+    'no-lonely-if',
+    'no-mixed-operators',
+    'no-mixed-spaces-and-tabs',
+    'no-multi-assign',
+    'no-multiple-empty-lines',
+    'no-negated-condition',
+    'no-nested-ternary',
+    'no-new-object',
+    'no-plusplus',
+    'no-restricted-syntax',
+    'no-tabs',
+    'no-ternary',
+    'no-trailing-spaces',
+    'no-underscore-dangle',
+    'no-unneeded-ternary',
+    'no-whitespace-before-property',
+    'nonblock-statement-body-position',
+    'object-curly-newline',
+    'object-curly-spacing',
+    'object-property-newline',
+    'one-var',
+    'one-var-declaration-per-line',
+    'operator-assignment',
+    'operator-linebreak',
+    'padded-blocks',
+    'padding-line-between-statements',
+    'prefer-object-spread',
+    'quote-props',
+    'quotes',
+    'require-jsdoc',
+    'semi',
+    'semi-spacing',
+    'semi-style',
+    'sort-keys',
+    'sort-vars',
+    'space-before-blocks',
+    'space-before-function-paren',
+    'space-in-parens',
+    'space-infix-ops',
+    'space-unary-ops',
+    'spaced-comment',
+    'switch-colon-spacing',
+    'template-tag-spacing',
+    'unicode-bom',
+    'wrap-regex'
+  ]
+
+  // Remove style rules and allow usage of 'off/on' for rules
+  const rulesWithoutStyles: Rules = Object.keys(rules)
+    .filter(ruleName => !styleRules.includes(ruleName))
+    .reduce((acc: Rules, ruleName) => {
+      switch (rules[ruleName]) {
+        case 'off':
+        case false:
+          acc[ruleName] = 'off'
+          break
+
+        case 'on':
+        case true:
+          acc[ruleName] = 'error'
+          break
+
+        default:
+          acc[ruleName] = rules[ruleName]
+      }
+
+      return acc
+    }, {})
+
+  return {
+    ...config,
+    rules: {
+      ...config.rules,
+      ...rulesWithoutStyles
     }
   }
 }

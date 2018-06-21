@@ -13,6 +13,8 @@ interface Config {
   }
 }
 
+type Rules = Config['rules']
+
 type Results = Array<LintError>
 
 interface LintError {
@@ -39,4 +41,4 @@ interface ErrorMap {
   [fileName: string]: Array<LintError>
 }
 
-export { Config, Results, LintError, ErrorPosition, ErrorMap }
+export { Config, Results, LintError, ErrorPosition, ErrorMap, Rules }

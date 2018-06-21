@@ -28,6 +28,25 @@ describe('api', () => {
     expect(result.errors[0].ruleName).toBe('no-duplicate-switch-case')
   })
 
+  it('should be able to lint typescript files with rule overrides', () => {
+    const options = {
+      typescript: true,
+      rules: {
+        'no-duplicate-switch-case': 'off',
+        "no-console": [true, "log", "error"]
+      }
+    }
+
+    const files = join(__dirname, 'ts-files', 'no-duplicate-switch-case.ts')
+    const results = lynt(files, options)
+    const result = results[0]
+
+    expect(results.length).toBe(1)
+    expect(result.errorCount).toBe(2)
+    expect(result.errors[0].ruleName).toBe('no-console')
+    expect(result.errors[1].ruleName).toBe('no-console')
+  })
+
   it('should be able to lint typescript/react files', () => {
     const options = {
       typescript: true,
@@ -98,5 +117,13 @@ describe('api', () => {
     expect(result.errorCount).toBe(2)
     expect(flowErr.ruleName).toBe('flowtype/no-primitive-constructor-types')
     expect(reactErr.ruleName).toBe('react/no-string-refs')
+  })
+
+  it('should be able to lint javascript files with rule overrides', () => {
+    const files = join(__dirname, 'js-files', 'no-unused-expressions.js')
+    const options = { rules: { 'no-unused-expressions': 'off' } }
+    const results = lynt(files, options)
+
+    expect(results.length).toBe(0)
   })
 })

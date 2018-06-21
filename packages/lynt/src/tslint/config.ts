@@ -1,4 +1,4 @@
-import { Config } from './types'
+import { Config, Rules } from './types'
 import { Options } from '../common/types'
 
 /**
@@ -94,6 +94,10 @@ function getConfig(options: Options) {
     config = getReactConfig(config)
   }
 
+  if (options.rules) {
+    config = normalizeRules(config, options.rules)
+  }
+
   return config
 }
 
@@ -113,6 +117,99 @@ function getReactConfig(config: Config): Config {
       'jsx-no-string-ref': true,
       'react-anchor-blank-noopener': true,
       'react-iframe-missing-sandbox': true
+    }
+  }
+}
+
+/**
+ * Takes the base TSLint config and adds additional rules that the user wants to
+ * add to it. Style rules are still ignored and won't be added to the config.
+ *
+ * @param config The current TSLint config.
+ * @param rules The custom rules the user wants to merge into the base config.
+ * @return A new object with the base config as well as additional custom rules.
+ */
+function normalizeRules(config: Config, rules: Rules): Config {
+  const styleRules = [
+    'align',
+    'array-type',
+    'arrow-parens',
+    'arrow-return-shorthand',
+    'binary-expression-operand-order',
+    'callable-types',
+    'class-name',
+    'comment-format',
+    'completed-docs',
+    'encoding',
+    'file-header',
+    'import-spacing',
+    'interface-name',
+    'interace-over-type-literal',
+    'jsdoc-format',
+    'match-default-export-name',
+    'newline-before-return',
+    'newline-per-chained-call',
+    'new-parens',
+    'no-angle-bracket-type-assertion',
+    'no-boolean-literal-compare',
+    'no-consecutive-blank-lines',
+    'no-irregular-whitespace',
+    'no-parameter-properties',
+    'no-redundant-jsdoc',
+    'no-reference-import',
+    'no-trailing-whitespace',
+    'no-unnecessary-callback-wrapper',
+    'no-unnecessary-initializer',
+    'no-unnecessary-qualifier',
+    'number-literal-format',
+    'object-literal-key-quotes',
+    'object-literal-shorthand',
+    'one-line',
+    'one-variable-per-declaration',
+    'ordered-imports',
+    'prefer-function-over-method',
+    'prefer-method-signature',
+    'prefer-switch',
+    'prefer-template',
+    'prefer-while',
+    'quotemark',
+    'return-undefined',
+    'semicolon',
+    'space-before-function-paren',
+    'space-within-parens',
+    'switch-final-break',
+    'type-literal-delimeter',
+    'variable-name',
+    'whitespace'
+  ]
+
+  // Remove style rules and allow usage of 'off/on' for rules
+  const rulesWithoutStyles: Rules = Object.keys(rules)
+    .filter(ruleName => !styleRules.includes(ruleName))
+    .reduce((acc: Rules, ruleName) => {
+      switch (rules[ruleName]) {
+        case 'off':
+        case false:
+          acc[ruleName] = false
+          break
+
+        case 'on':
+        case true:
+          acc[ruleName] = true
+          break
+
+        default:
+          acc[ruleName] = rules[ruleName]
+      }
+
+      return acc
+    }, {})
+
+  return {
+    ...config,
+    rules: {
+      ...config.rules,
+      ...rulesWithoutStyles
     }
   }
 }

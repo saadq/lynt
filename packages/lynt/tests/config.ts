@@ -223,6 +223,43 @@ describe('eslint config', () => {
     expect(actual).toEqual(expected)
   })
 
+  it('can override default rules', () => {
+    const options = {
+      rules: {
+        'prefer-const': 'on',
+        radix: 'off',
+        'no-unused-expressions': [
+          'error',
+          {
+            allowShortCircuit: true
+          }
+        ],
+        semi: 'on' // Style rules should still be ignored
+      }
+    }
+
+    const { radix, ...rules } = baseESLintConfig.rules
+
+    const expected = {
+      ...baseESLintConfig,
+      rules: {
+        ...rules,
+        'prefer-const': 'error',
+        radix: 'off',
+        'no-unused-expressions': [
+          'error',
+          {
+            allowShortCircuit: true
+          }
+        ]
+      }
+    }
+
+    const actual = getESLintConfig(options)
+
+    expect(actual).toEqual(expected)
+  })
+
   it('can optionally add react support', () => {
     const options = {
       react: true
@@ -297,8 +334,39 @@ describe('eslint config', () => {
 
 describe('tslint config', () => {
   it('should have a base config by default', () => {
-    const options = {}
+    const options = {
+      typescript: true,
+    }
+
     const expected = baseTSLintConfig
+    const actual = getTSLintConfig(options)
+
+    expect(actual).toEqual(expected)
+  })
+
+  it('can override default rules', () => {
+    const options = {
+      typescript: true,
+      rules: {
+        'prefer-const': 'on',
+        "member-ordering": [true, {"order": "fields-first"}],
+        curly: 'off',
+        semicolon: 'on' // Style rules should still be ignored
+      }
+    }
+
+    const { curly, ...rules } = baseTSLintConfig.rules
+
+    const expected = {
+      ...baseTSLintConfig,
+      rules: {
+        ...rules,
+        'prefer-const': true,
+        "member-ordering": [true, {"order": "fields-first"}],
+        curly: false
+      }
+    }
+
     const actual = getTSLintConfig(options)
 
     expect(actual).toEqual(expected)
@@ -306,6 +374,7 @@ describe('tslint config', () => {
 
   it('can add extra typechecking rules when a project path is given', () => {
     const options = {
+      typescript: true,
       project: '.'
     }
 
@@ -332,6 +401,7 @@ describe('tslint config', () => {
 
   it('can optionally add react support', () => {
     const options = {
+      typescript: true,
       react: true
     }
 
@@ -354,6 +424,7 @@ describe('tslint config', () => {
 
   it('can have extra typechecking rules and react support', () => {
     const options = {
+      typescript: true,
       project: '.',
       react: true
     }
