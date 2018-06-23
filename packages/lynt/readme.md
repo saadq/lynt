@@ -9,7 +9,7 @@
 
 Lynt has two main philosophies:
 
-1.  **Zero configuration**. Whether you're using React, Flow, TypeScript, you don't need to worry about configuring big `.rc` files or managing parsers, tool-specific rules, etc. It just works :)
+1.  **Zero configuration by default**. Out of the box, Lynt is a working linter and does not need any configuration. However, if you would like to add or remove rules from the default Lynt config, you have the option to do so.
 2.  **No style rules**. Lynt is completely unopinionated when it comes to code style. It doesn't care whether or not you use semicolons, tabs or spaces, trailing commas, etc. Lynt only handles the error checking side of things and it leaves code style up to better-suited tools like [`prettier`](https://github.com/prettier/prettier).
 
 ---
@@ -29,6 +29,7 @@ It will know which linter to use as well as which rules/parsers/ignores/etc to a
 ![output](./media/output.png)
 
 ## Installation
+
 Make sure you have [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) installed first.
 
 You can install the package locally for a single project:
@@ -146,17 +147,17 @@ Lastly, just remember that if you have `lynt` installed globally and are trying 
     $ lynt src --typescript --ignore out/**/*.* --ignore tests/**/*.*
 ```
 
-## Settings
+## Configuration
 
-There are three ways you can specify your settings for Lynt:
+You can specify your Lynt configuration in two ways:
 
-1. Use CLI flags:
+1.  Use CLI flags:
 
 ```bash
 $ lynt --typescript --react --ignore tests/**/*.* --ignore fixtures/**/*.*
 ```
 
-2. Have a `"lynt"` property in your `package.json` like so:
+2.  Have a `"lynt"` property in your `package.json`:
 
 ```json
 {
@@ -168,7 +169,7 @@ $ lynt --typescript --react --ignore tests/**/*.* --ignore fixtures/**/*.*
 }
 ```
 
-3. Have a `.lyntrc` file in your root project folder:
+3.  Have a `.lyntrc` file in your root project folder:
 
 ```json
 {
@@ -177,6 +178,40 @@ $ lynt --typescript --react --ignore tests/**/*.* --ignore fixtures/**/*.*
   "ignore": ["tests/**/*.*", "fixtures/**/*.*"]
 }
 ```
+
+### Rule Configuration
+
+If you want to turn off any of the default `lynt` rules, or add your own custom rules, you can add a `rules` object in your configuration.
+Note that rule configuration cannot be done from the CLI, you must use a `lynt` property in `package.json` or use a `.lyntrc` file.
+
+#### Disabling a default rule
+
+You can set a value to `'off'` to turn off a default rule.
+
+```json
+{
+  "rules": {
+    "curly": "off",
+    "no-unused-vars": "off"
+  }
+}
+```
+
+#### Adding a rule
+
+If you want to add a rule, you can set it to `on` to use the rule's default setting, or set it to something more complicated.
+
+```json
+{
+  "rules": {
+    "prefer-const": "on",
+    "no-console": "on",
+    "no-magic-numbers": ["error", { "ignore": [1] }]
+  }
+}
+```
+
+**Note**: Style rules will still be ignored.
 
 ## API
 
@@ -209,7 +244,10 @@ Here are the possible options you can pass:
   global?: string | Array<string>
   env?: string | Array<string>
   json?: string | Array<string>
-  project?: string
+  project?: string,
+	rules?: {
+		[ruleName: string]: any
+	}
 }
 ```
 
@@ -231,7 +269,10 @@ import lynt from 'lynt'
 
 const options = {
   flow: true,
-  react: true
+  react: true,
+  rules: {
+    'no-unused-vars': 'off'
+  }
 }
 
 const results = lynt(['foo.js', 'bar.js'], options)
@@ -277,7 +318,7 @@ console.log(table)
 
 ### Why not [`standard`](https://github.com/standard/standard) or [`xo`](https://github.com/xojs/xo)?
 
-I think these are awesome projects, and I have been a user of both. I definitely drew a lot of inspiration from them – however, one the main philosophies of `lynt` was to be an error-checker, not a style guide. Both `standard` and `xo` are very opinionated when it comes to style. `xo` is actually configurable, so you can manually remove the style rules, but you may as well just use ESLint at that point. TypeScript and Flow are another major concern – trying to get either of these to work correctly with `standard` or `xo` can be a pain – with `lynt` it is seamless.
+I think these are awesome projects, and I have been a user of both. I definitely drew a lot of inspiration from them – however, one the main philosophies of `lynt` was to be an error-checker, not a style guide. Both `standard` and `xo` are very opinionated when it comes to style. `xo` is actually configurable, so you can manually remove all the style rules, but it is still troublesome when trying to use it with TypeScript and Flow – with `lynt` it is seamless.
 
 ### Are the current rules set in stone?
 
