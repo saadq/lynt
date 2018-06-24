@@ -149,7 +149,7 @@ Lastly, just remember that if you have `lynt` installed globally and are trying 
 
 ## Configuration
 
-You can specify your Lynt configuration in two ways:
+You can specify your Lynt configuration in one of three ways:
 
 1.  Use CLI flags:
 
