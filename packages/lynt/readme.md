@@ -20,13 +20,13 @@ Lynt has two main philosophies:
 
 ---
 
+![output](./media/output.png)
+
 ## How It Works
 
 Under the hood, Lynt uses [ESLint](https://github.com/eslint/eslint) and [TSLint](https://github.com/palantir/tslint) to lint your files.
 
 It will know which linter to use as well as which rules/parsers/ignores/etc to apply based on the options you pass to it.
-
-![output](./media/output.png)
 
 ## Installation
 
