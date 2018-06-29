@@ -2,6 +2,8 @@
 
 > The base ESLint config for [Lynt](https://github.com/saadq/lynt).
 
+[![Build Status](https://travis-ci.org/saadq/eslint-config-lynt.svg?branch=master)](https://travis-ci.org/saadq/eslint-config-lynt)
+
 **Note**: This package is currently in beta.
 
 ## Installation
