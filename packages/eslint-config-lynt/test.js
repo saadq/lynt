@@ -1,9 +1,9 @@
-const { CLIEngine } = require("eslint")
+const { CLIEngine } = require('eslint')
 
-test("eslint-config-lynt", () => {
+test('eslint-config-lynt', () => {
   const engine = new CLIEngine({
     useEslintrc: false,
-    configFile: ".eslintrc.json"
+    configFile: '.eslintrc.json'
   })
 
   const goodCode = `
@@ -20,5 +20,7 @@ test("eslint-config-lynt", () => {
 
   expect(engine.executeOnText(goodCode).errorCount).toBe(0)
   expect(engine.executeOnText(badCode).errorCount).toBe(1)
-  expect(engine.executeOnText(badCode).results[0].messages[0].ruleId).toBe('curly')
+  expect(engine.executeOnText(badCode).results[0].messages[0].ruleId).toBe(
+    'curly'
+  )
 })

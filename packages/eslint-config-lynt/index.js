@@ -1,3 +1,3 @@
-const config = require("./.eslintrc.json")
+const config = require('./.eslintrc.json')
 
 module.exports = config
