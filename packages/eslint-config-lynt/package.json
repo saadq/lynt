@@ -1,0 +1,52 @@
+{
+  "name": "eslint-config-lynt",
+  "description": "The base ESLint config for Lynt",
+  "version": "0.1.0-beta",
+  "author": "Saad Quadri",
+  "repository": "saadq/eslint-config-lynt",
+  "license": "MIT",
+  "main": "index.js",
+  "engines": {
+    "node": ">=6"
+  },
+  "keywords": [
+    "eslint",
+    "lint",
+    "linter",
+    "lynt",
+    "tslint"
+  ],
+  "scripts": {
+    "format": "prettier \"*.{js,json}\" --write",
+    "lint": "lynt",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@types/cosmiconfig": "^5.0.1",
+    "@types/eslint": "^4.16.2",
+    "@types/execa": "^0.9.0",
+    "@types/meow": "^4.0.1",
+    "@types/node": "^9.6.21",
+    "@types/strip-ansi": "^3.0.0",
+    "@types/text-table": "^0.2.0",
+    "babel-eslint": "^8.2.3",
+    "chalk": "^2.4.1",
+    "cosmiconfig": "^5.0.5",
+    "eslint": "^4.19.1",
+    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-react": "^7.9.1",
+    "execa": "^0.10.0",
+    "meow": "^4.0.0",
+    "strip-ansi": "^4.0.0",
+    "text-table": "^0.2.0",
+    "tslint": "^5.10.0",
+    "tslint-microsoft-contrib": "^5.0.3",
+    "tslint-react": "^3.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "jest": "^23.2.0",
+    "lynt": "^0.4.0",
+    "prettier": "^1.13.7"
+  }
+}
