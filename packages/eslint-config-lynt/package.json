@@ -19,7 +19,7 @@
   "scripts": {
     "format": "prettier \"*.{js,json}\" --write",
     "lint": "lynt",
-    "test": "jest"
+    "test": "npm run lint && jest"
   },
   "dependencies": {
     "@types/cosmiconfig": "^5.0.1",
