@@ -1,3 +1,4 @@
+/** The options the user passes in to customize Lynt. */
 interface Options {
   /** Add TypeScript support by using TSLint. */
   typescript?: boolean
@@ -27,12 +28,15 @@ interface Options {
   project?: string
 
   /** Specify your own desired rules to be merged with lynt's config (style rules are still not permissible) */
-  rules?: { [key: string]: any }
+  rules?: Record<string, any>
 }
 
 /** The converted version of the lint results received from ESLint/TSLint. */
 type Results = Array<{
+  /** The full path to the given file with lint errors. */
   filePath: string
+
+  /** A collection of errors for the given file. */
   errors: Array<{
     ruleName: string
     message: string
@@ -41,7 +45,11 @@ type Results = Array<{
     endLine?: number
     endColumn?: number
   }>
+
+  /** The amount of errors for the given file. */
   errorCount: number
+
+  /** The amount of errors that can automatically be fixed for the given file.*/
   fixCount: number
 }>
 

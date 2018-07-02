@@ -1,9 +1,6 @@
-// @flow
-
 type Person = {
   name: string,
-  age: number,
-  name: string
+  age: number
 }
 
 export type { Person }

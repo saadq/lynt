@@ -63,7 +63,7 @@ function tslint(paths: Array<string>, options: Options): Results {
       const tslintResults: TSLintResults = JSON.parse(lynt.stdout)
       results = convert(tslintResults)
     } catch (jsonErr) {
-      throw new Error(lynt.stdout || lynt.stderr)
+      throw new Error(lynt.stdout || lynt.stderr || jsonErr)
     }
   } finally {
     if (existsSync(configPath)) {
