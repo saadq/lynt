@@ -9,7 +9,7 @@
 ## Installation
 
 ```bash
-npm install eslint-config-lynt
+npm install eslint-config-lynt --save-dev
 ```
 
 ## Usage

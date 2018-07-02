@@ -127,7 +127,6 @@
         "variables": false
       }
     ],
-    "handle-callback-err": ["error", "^(err|error)$"],
     "no-new-require": "error",
     "no-path-concat": "error",
     "constructor-super": "error",
