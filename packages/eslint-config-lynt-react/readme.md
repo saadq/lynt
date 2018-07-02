@@ -7,7 +7,7 @@
 ## Installation
 
 ```bash
-npm install eslint-config-lynt-react
+npm install eslint-config-lynt-react --save-dev
 ```
 
 ## Usage
