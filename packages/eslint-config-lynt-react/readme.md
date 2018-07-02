@@ -1,4 +1,4 @@
-# eslint-config-lynt
+# eslint-config-lynt-react
 
 > The React ESLint config for [Lynt](https://github.com/saadq/lynt).
 
