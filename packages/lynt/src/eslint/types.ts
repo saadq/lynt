@@ -1,28 +1,23 @@
 import { CLIEngine } from 'eslint'
 
 type Results = Array<CLIEngine.LintResult>
+type Rules = Record<string, any>
 
 interface Config {
-  useEslintrc: boolean
-  parserOptions: {
-    ecmaVersion: number
-    ecmaFeatures: {
-      [key: string]: boolean
-    }
-    sourceType: string
-  }
-  plugins: Array<string>
-  globals: Array<string>
-  envs: Array<string>
-  ignorePattern: Array<string>
-  rules: {
-    [key: string]: any
-  }
-  parser?: string
-  fix?: boolean
-  ignorePath?: string
+  extends: Array<string>
+  rules?: Rules
+  [name: string]: any
 }
 
-type Rules = Config['rules']
+interface ESLintOptions {
+  useEslintrc: boolean
+  baseConfig: Config
+  ignorePattern: Array<string>
+  parser: string
+  fix: boolean
+  globals?: Array<string>
+  envs?: Array<string>
+  rules?: Record<string, any>
+}
 
-export { Config, Results, Rules }
+export { Results, ESLintOptions, Config, Rules }

@@ -1,12 +1,13 @@
-import { format } from '../src'
-import chalk from 'chalk'
 import stripAnsi from 'strip-ansi'
+import { format } from '../../src'
 
 describe('format', () => {
   it('should print a message on success', () => {
     const lyntResults = []
     const output = stripAnsi(format(lyntResults))
-    const expected = '\n✔ No lynt errors\n'
+    const expected = `
+✔ No lynt errors
+`
     expect(output).toBe(expected)
   })
 

@@ -6,6 +6,7 @@
     "lib": ["esnext"],
     "target": "es5",
     "module": "commonjs",
+    "resolveJsonModule": true,
     "strict": true,
     "esModuleInterop": true,
     "downlevelIteration": true,

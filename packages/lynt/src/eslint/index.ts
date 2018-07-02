@@ -11,7 +11,7 @@ import { Options, Results } from '../common/types'
  * @return A `results` object with an errorCount and output.
  */
 function eslint(paths: Array<string>, options: Options): Results {
-  const config = getConfig(options) as CLIEngine.Options
+  const config = getConfig(options)
   const engine = new CLIEngine(config)
 
   let filesToLint = paths
