@@ -26,6 +26,8 @@ test('eslint-config-lynt-flow', () => {
       age: number,
       name: string
     |}
+
+    export { Person }
   `
 
   expect(engine.executeOnText(goodCode).errorCount).toBe(0)
