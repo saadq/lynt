@@ -1,6 +1,8 @@
 # style-rules
 > Get a list of all style rules for ESLint or TSLint.
 
+[![Build Status](https://travis-ci.org/saadq/style-rules.svg?branch=master)](https://travis-ci.org/saadq/style-rules)
+
 ## Installation
 ```bash
 npm install style-rules
