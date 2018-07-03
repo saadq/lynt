@@ -1,0 +1,25 @@
+{
+  "name": "style-rules",
+  "version": "1.0.0",
+  "description": "Get a list of all style rules for ESLint or TSLint",
+  "main": "index.js",
+  "keywords": [
+    "eslint",
+    "tslint",
+    "lynt",
+    "style",
+    "rules"
+  ],
+  "author": "Saad Quadri",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "test": "lynt && jest"
+  },
+  "devDependencies": {
+    "jest": "^23.2.0",
+    "lynt": "^0.4.0"
+  }
+}
