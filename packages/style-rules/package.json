@@ -1,6 +1,6 @@
 {
   "name": "style-rules",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Get a list of all style rules for ESLint or TSLint",
   "main": "index.js",
   "types": "index.d.ts",
