@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Get a list of all style rules for ESLint or TSLint",
   "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "keywords": [
     "eslint",
     "tslint",
@@ -16,10 +21,9 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "lynt && jest"
+    "test": "lynt"
   },
   "devDependencies": {
-    "jest": "^23.2.0",
     "lynt": "^0.4.0"
   }
 }
