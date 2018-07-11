@@ -7,5 +7,6 @@ const person: Person = {
   name: 'Saad'
 }
 
+// This should trigger no-empty
 if (person.age) {
-} // This should trigger no-empty
+}
