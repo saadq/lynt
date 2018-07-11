@@ -2,6 +2,8 @@
 
 >  TSLint config for Lynt with additional rules that require typechecking information.
 
+[![Build Status](https://travis-ci.org/saadq/tslint-config-lynt-typed.svg?branch=master)](https://travis-ci.org/saadq/tslint-config-lynt-typed)
+
 ## Installation
 
 ```bash
