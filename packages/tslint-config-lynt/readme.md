@@ -2,7 +2,7 @@
 
 > The base TSLint config for [Lynt](https://github.com/saadq/lynt).
 
-**Note**: This package is currently in beta.
+[![Build Status](https://travis-ci.org/saadq/tslint-config-lynt.svg?branch=master)](https://travis-ci.org/saadq/tslint-config-lynt)
 
 ## Installation
 
@@ -20,5 +20,8 @@ Put the following in your TSLint config:
 }
 ```
 
+None of these rules require any typechecking information. If you want to add additional typechecking rules (recommended), please include [`tslint-config-lynt-typed`](https://github.com/saadq/tslint-config-lynt-typed) as well.
+
 ## License
+
 MIT &copy; Saad Quadri
