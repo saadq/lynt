@@ -6,6 +6,10 @@
   "repository": "saadq/tslint-config-lynt",
   "license": "MIT",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "tslint.json"
+  ],
   "engines": {
     "node": ">=6"
   },
