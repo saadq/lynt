@@ -1,0 +1,14 @@
+{
+  "defaultSeverity": "error",
+  "rules": {
+    "no-unnecessary-type-assertion": true,
+    "await-promise": true,
+    "no-for-in-array": true,
+    "no-unused-variable": true,
+    "no-use-before-declare": true,
+    "restrict-plus-operands": true,
+    "strict-type-predicates": true,
+    "use-default-type-parameter": true,
+    "deprecation": true
+  }
+}
