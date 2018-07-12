@@ -2,6 +2,8 @@
 
 >  TSLint config for [Lynt](https://github.com/saadq/lynt) with additional React rules.
 
+[![Build Status](https://travis-ci.org/saadq/tslint-config-lynt-react.svg?branch=master)](https://travis-ci.org/saadq/tslint-config-lynt-react)
+
 ## Installation
 
 ```bash
