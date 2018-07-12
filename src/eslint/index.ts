@@ -1,5 +1,5 @@
 import { CLIEngine } from 'eslint'
-import getConfig from './config'
+import { getESLintOptions } from './config'
 import convert from './convert'
 import { Options, Results } from '../common/types'
 
@@ -11,8 +11,8 @@ import { Options, Results } from '../common/types'
  * @return A `results` object with an errorCount and output.
  */
 function eslint(paths: Array<string>, options: Options): Results {
-  const config = getConfig(options)
-  const engine = new CLIEngine(config)
+  const eslintOptions = getESLintOptions(options)
+  const engine = new CLIEngine(eslintOptions)
 
   let filesToLint = paths
 

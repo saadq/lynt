@@ -1,21 +1,13 @@
 interface Config {
   extends: Array<string>
-  rulesDirectory: Array<string>
-  defaultSeverity: 'error'
   linterOptions: {
     exclude: Array<string>
   }
-  rules: {
-    [key: string]: any
-  }
-  jsRules?: {
-    [key: string]: any
-  }
+  [name: string]: any
 }
 
-type Rules = Config['rules']
-
 type Results = Array<LintError>
+type Rules = Record<string, any>
 
 interface LintError {
   startPosition: ErrorPosition

@@ -94,7 +94,6 @@ function getESLintIgnores(userIgnores?: Options['ignore']): Array<string> {
  * add to it. Users can simply set rules to `on` or `off`, or use a more complex
  * setting. Style rules are still ignored and won't be added to the config.
  *
- * @param config The current ESLint config.
  * @param rules The custom rules the user wants to merge into the base config.
  * @return A new object with the base config as well as additional custom rules.
  */
@@ -121,5 +120,4 @@ function normalizeRules(rules: Rules): Rules {
     }, {})
 }
 
-export { getESLintConfig, getESLintIgnores }
-export default getESLintOptions
+export { getESLintOptions, getESLintConfig, getESLintIgnores }
