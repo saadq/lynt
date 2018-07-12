@@ -12,12 +12,10 @@
       ]
     },
     "no-internal-module": true,
-    "no-namespace": true,
     "no-non-null-assertion": true,
     "no-parameter-reassignment": true,
     "no-reference": true,
     "no-var-requires": true,
-    "only-arrow-functions": [true, "allow-named-functions"],
     "prefer-for-of": true,
     "ban-comma-operator": true,
     "curly": true,
@@ -29,7 +27,6 @@
     "no-dynamic-delete": true,
     "no-empty": true,
     "no-eval": true,
-    "no-implicit-dependencies": [true, "dev", "optional"],
     "no-invalid-template-strings": true,
     "no-invalid-this": true,
     "no-misused-new": true,
@@ -37,7 +34,6 @@
     "no-sparse-arrays": true,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "no-this-assignment": true,
     "no-unsafe-finally": true,
     "no-unused-expression": [
       true,
