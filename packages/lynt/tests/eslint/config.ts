@@ -1,4 +1,5 @@
-import getESLintOptions, {
+import {
+  getESLintOptions,
   getESLintConfig,
   getESLintIgnores
 } from '../../src/eslint/config'

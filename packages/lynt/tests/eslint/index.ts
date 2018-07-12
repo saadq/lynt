@@ -1,7 +1,6 @@
-import { CLIEngine } from 'eslint'
-import { readdirSync } from 'fs'
-import { join } from 'path'
+import { join, dirname } from 'path'
 import eslint from '../../src/eslint'
+import { errResultsToHaveRuleName } from '../fixtures'
 
 describe('eslint', () => {
   it('can lint js files with base config', () => {
@@ -10,7 +9,7 @@ describe('eslint', () => {
     const results = eslint([filesToLint], options)
     expect(results.length).toBe(1)
     expect(results[0].errorCount).toBe(1)
-    expect(results[0].errors[0].ruleName).toBe('no-unused-vars')
+    expect(errResultsToHaveRuleName(results, 'no-unused-vars')).toBe(true)
   })
 
   it('can lint files with additional react rules', () => {
@@ -23,7 +22,9 @@ describe('eslint', () => {
     const results = eslint([filesToLint], options)
     expect(results.length).toBe(1)
     expect(results[0].errorCount).toBe(1)
-    expect(results[0].errors[0].ruleName).toBe('react/require-render-return')
+    expect(
+      errResultsToHaveRuleName(results, 'react/require-render-return')
+    ).toBe(true)
   })
 
   it('can lint files with additional flow rules', () => {
@@ -36,11 +37,11 @@ describe('eslint', () => {
     const results = eslint([filesToLint], options)
     expect(results.length).toBe(1)
     expect(results[0].errorCount).toBe(2)
-    expect(results[0].errors[0].ruleName).toBe(
-      'flowtype/no-types-missing-file-annotation'
-    )
-    expect(results[0].errors[1].ruleName).toBe(
-      'flowtype/no-types-missing-file-annotation'
+    expect(
+      errResultsToHaveRuleName(
+        results,
+        'flowtype/no-types-missing-file-annotation'
+      )
     )
   })
 
@@ -53,8 +54,24 @@ describe('eslint', () => {
     const options = { flow: true, react: true }
     const results = eslint([filesToLint], options)
     expect(results.length).toBe(1)
-    expect(results[0].errorCount).toBe(2)
-    expect(results[0].errors[0].ruleName).toBe('flowtype/no-dupe-keys')
-    expect(results[0].errors[1].ruleName).toBe('react/no-string-refs')
+    expect(errResultsToHaveRuleName(results, 'flowtype/no-dupe-keys')).toBe(
+      true
+    )
+    expect(errResultsToHaveRuleName(results, 'react/no-string-refs')).toBe(true)
+  })
+
+  it('can ignore files', () => {
+    const filesToLint = join(
+      __dirname,
+      'files-to-lint',
+      'react-flow-combination.js'
+    )
+    const options = {
+      flow: true,
+      react: true,
+      ignore: 'react-flow-combination.js'
+    }
+    const results = eslint([filesToLint], options)
+    expect(results.length).toBe(0)
   })
 })

@@ -1,7 +1,7 @@
 import execa from 'execa'
 import { join } from 'path'
-import { writeFileSync, unlinkSync, existsSync } from 'fs'
-import getConfig from './config'
+import { writeFileSync, existsSync } from 'fs'
+import { getTSLintConfig } from './config'
 import convert from './convert'
 import { Results as TSLintResults } from './types'
 import { Options, Results } from '../common/types'
@@ -21,7 +21,7 @@ function tslint(paths: Array<string>, options: Options): Results {
     options.project = '.'
   }
 
-  const configData = getConfig(options)
+  const configData = getTSLintConfig(options)
   const configPath = join(__dirname, 'tslint.json')
   writeFileSync(configPath, JSON.stringify(configData, null, 2))
 
@@ -36,7 +36,9 @@ function tslint(paths: Array<string>, options: Options): Results {
 
   if (options.project) {
     if (!existsSync(join(options.project, 'tsconfig.json'))) {
-      throw new Error('You must have a tsconfig.json file in your project root')
+      throw new Error(
+        'You must have a tsconfig.json file in your project root or point to it with a --project flag'
+      )
     }
 
     tslintArgs.push('--project', options.project)
@@ -64,10 +66,6 @@ function tslint(paths: Array<string>, options: Options): Results {
       results = convert(tslintResults)
     } catch (jsonErr) {
       throw new Error(lynt.stdout || lynt.stderr || jsonErr)
-    }
-  } finally {
-    if (existsSync(configPath)) {
-      unlinkSync(configPath)
     }
   }
 

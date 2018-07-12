@@ -2,7 +2,7 @@ import { Results as ESLintResults } from './types'
 import { Results as LyntResults } from '../common/types'
 
 /**
- * Converts ESLint's JSON response into lynt's desired output.
+ * Converts ESLint's JSON format to Lynt's JSON format.
  *
  * The main reason `eslint` and `tslint` have a `convert` file is to have a
  * unified JSON output – ESLint and TSLint have different JSON outputs by
