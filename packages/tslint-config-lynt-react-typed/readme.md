@@ -2,7 +2,7 @@
 
 >  TSLint config for [Lynt](https://github.com/saadq/lynt) with additional typechecking React rules.
 
-[![Build Status](https://travis-ci.org/saadq/tslint-config-lynt-react.svg?branch=master)](https://travis-ci.org/saadq/tslint-config-lynt-react)
+[![Build Status](https://travis-ci.org/saadq/tslint-config-lynt-react-typed.svg?branch=master)](https://travis-ci.org/saadq/tslint-config-lynt-react-typed)
 
 ## Installation
 
