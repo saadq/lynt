@@ -1,7 +1,7 @@
 {
   "name": "tslint-config-lynt-react",
   "description": "TSLint config for Lynt with additional React rules",
-  "version": "0.1.0-beta",
+  "version": "0.1.1-beta",
   "author": "Saad Quadri",
   "repository": "saadq/tslint-config-lynt-react",
   "license": "MIT",
@@ -26,7 +26,6 @@
     "test": "npm run lint && jest"
   },
   "dependencies": {
-    "tslint-microsoft-contrib": "^5.0.3",
     "tslint-react": "^3.6.0"
   },
   "devDependencies": {
