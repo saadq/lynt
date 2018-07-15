@@ -21,7 +21,7 @@
     "build": "tsc",
     "clean": "rm -rf lib",
     "dev": "tsc --watch",
-    "format": "prettier \"src/**/*.ts\" --write",
+    "format": "prettier {src,tests}/**/*.{ts,tsx} --write",
     "prepare": "npm run build",
     "test": "tsc --noEmit && jest --runInBand --bail"
   },

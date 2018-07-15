@@ -1,6 +1,6 @@
 import { join, dirname } from 'path'
 import eslint from '../../src/eslint'
-import { errResultsToHaveRuleName } from '../fixtures'
+import { errResultsHaveRuleName } from '../fixtures'
 
 describe('eslint', () => {
   it('can lint js files with base config', () => {
@@ -9,7 +9,7 @@ describe('eslint', () => {
     const results = eslint([filesToLint], options)
     expect(results.length).toBe(1)
     expect(results[0].errorCount).toBe(1)
-    expect(errResultsToHaveRuleName(results, 'no-unused-vars')).toBe(true)
+    expect(errResultsHaveRuleName(results, 'no-unused-vars')).toBe(true)
   })
 
   it('can lint files with additional react rules', () => {
@@ -22,9 +22,9 @@ describe('eslint', () => {
     const results = eslint([filesToLint], options)
     expect(results.length).toBe(1)
     expect(results[0].errorCount).toBe(1)
-    expect(
-      errResultsToHaveRuleName(results, 'react/require-render-return')
-    ).toBe(true)
+    expect(errResultsHaveRuleName(results, 'react/require-render-return')).toBe(
+      true
+    )
   })
 
   it('can lint files with additional flow rules', () => {
@@ -38,7 +38,7 @@ describe('eslint', () => {
     expect(results.length).toBe(1)
     expect(results[0].errorCount).toBe(2)
     expect(
-      errResultsToHaveRuleName(
+      errResultsHaveRuleName(
         results,
         'flowtype/no-types-missing-file-annotation'
       )
@@ -54,10 +54,8 @@ describe('eslint', () => {
     const options = { flow: true, react: true }
     const results = eslint([filesToLint], options)
     expect(results.length).toBe(1)
-    expect(errResultsToHaveRuleName(results, 'flowtype/no-dupe-keys')).toBe(
-      true
-    )
-    expect(errResultsToHaveRuleName(results, 'react/no-string-refs')).toBe(true)
+    expect(errResultsHaveRuleName(results, 'flowtype/no-dupe-keys')).toBe(true)
+    expect(errResultsHaveRuleName(results, 'react/no-string-refs')).toBe(true)
   })
 
   it('can ignore files', () => {
