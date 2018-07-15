@@ -145,7 +145,7 @@ describe('getTSLintIgnores()', () => {
       'fixture{s,}/**',
       'vendor/**',
       'dist/**',
-      'coverage/**',
+      'coverage/**'
     ])
   })
 

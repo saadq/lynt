@@ -1,6 +1,6 @@
 import { join } from 'path'
 import lynt, { format } from '../src'
-import { errResultsToHaveRuleName } from './fixtures'
+import { errResultsHaveRuleName } from './fixtures'
 
 describe('lynt', () => {
   it('can lint itself', () => {
@@ -8,10 +8,8 @@ describe('lynt', () => {
       typescript: true,
       project: join(__dirname, '..')
     }
-
     const results = lynt([], options)
-
-    console.log(`Linting source code... ${format(results)}`)
+    console.log(format(results))
     expect(results.length).toBe(0)
   })
 
@@ -26,7 +24,7 @@ describe('lynt', () => {
       const results = lynt([filesToLint])
       expect(results.length).toBe(1)
       expect(results[0].errorCount).toBe(1)
-      expect(errResultsToHaveRuleName(results, 'no-unused-vars')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'no-unused-vars')).toBe(true)
     })
 
     it('can lint files with additional react rules', () => {
@@ -41,7 +39,7 @@ describe('lynt', () => {
       expect(results.length).toBe(1)
       expect(results[0].errorCount).toBe(1)
       expect(
-        errResultsToHaveRuleName(results, 'react/require-render-return')
+        errResultsHaveRuleName(results, 'react/require-render-return')
       ).toBe(true)
     })
 
@@ -57,7 +55,7 @@ describe('lynt', () => {
       expect(results.length).toBe(1)
       expect(results[0].errorCount).toBe(2)
       expect(
-        errResultsToHaveRuleName(
+        errResultsHaveRuleName(
           results,
           'flowtype/no-types-missing-file-annotation'
         )
@@ -74,12 +72,10 @@ describe('lynt', () => {
       const options = { flow: true, react: true }
       const results = lynt([filesToLint], options)
       expect(results.length).toBe(1)
-      expect(errResultsToHaveRuleName(results, 'flowtype/no-dupe-keys')).toBe(
+      expect(errResultsHaveRuleName(results, 'flowtype/no-dupe-keys')).toBe(
         true
       )
-      expect(errResultsToHaveRuleName(results, 'react/no-string-refs')).toBe(
-        true
-      )
+      expect(errResultsHaveRuleName(results, 'react/no-string-refs')).toBe(true)
     })
 
     it('can ignore files', () => {
@@ -106,7 +102,7 @@ describe('lynt', () => {
       const results = lynt([fileToLint], options)
       expect(results.length).toBe(1)
       expect(results[0].errorCount).toBe(1)
-      expect(errResultsToHaveRuleName(results, 'curly')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'curly')).toBe(true)
     })
 
     it('can lint files with react rules', () => {
@@ -120,15 +116,15 @@ describe('lynt', () => {
       const results = lynt([fileToLint], options)
       expect(results.length).toBe(1)
       expect(results[0].errorCount).toBe(1)
-      expect(errResultsToHaveRuleName(results, 'jsx-no-string-ref')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'jsx-no-string-ref')).toBe(true)
     })
 
     it('can lint files with additional typechecking rules', () => {
       const project = join(__dirname, 'tslint', 'files-to-lint', 'project')
       const options = { typescript: true, project }
       const results = lynt([], options)
-      expect(errResultsToHaveRuleName(results, 'curly')).toBe(true)
-      expect(errResultsToHaveRuleName(results, 'no-unused-variable')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'curly')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'no-unused-variable')).toBe(true)
     })
 
     it('can lint files with additional typechecking react rules', () => {
@@ -140,11 +136,11 @@ describe('lynt', () => {
       )
       const options = { typescript: true, react: true, project }
       const results = lynt([], options)
-      expect(errResultsToHaveRuleName(results, 'curly')).toBe(true)
-      expect(errResultsToHaveRuleName(results, 'jsx-no-string-ref')).toBe(true)
-      expect(errResultsToHaveRuleName(results, 'no-unused-variable')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'curly')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'jsx-no-string-ref')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'no-unused-variable')).toBe(true)
       expect(
-        errResultsToHaveRuleName(results, 'react-anchor-blank-noopener')
+        errResultsHaveRuleName(results, 'react-anchor-blank-noopener')
       ).toBe(true)
     })
 
@@ -162,11 +158,11 @@ describe('lynt', () => {
         ignore: '**/curly.ts'
       }
       const results = lynt([], options)
-      expect(errResultsToHaveRuleName(results, 'curly')).toBe(false)
-      expect(errResultsToHaveRuleName(results, 'jsx-no-string-ref')).toBe(true)
-      expect(errResultsToHaveRuleName(results, 'no-unused-variable')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'curly')).toBe(false)
+      expect(errResultsHaveRuleName(results, 'jsx-no-string-ref')).toBe(true)
+      expect(errResultsHaveRuleName(results, 'no-unused-variable')).toBe(true)
       expect(
-        errResultsToHaveRuleName(results, 'react-anchor-blank-noopener')
+        errResultsHaveRuleName(results, 'react-anchor-blank-noopener')
       ).toBe(true)
     })
   })
