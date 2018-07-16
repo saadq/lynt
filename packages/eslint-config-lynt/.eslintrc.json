@@ -138,6 +138,8 @@
     "no-useless-computed-key": "error",
     "no-useless-constructor": "error",
     "no-useless-rename": "error",
-    "symbol-description": "error"
+    "symbol-description": "error",
+    "no-var": "error",
+    "prefer-const": "error"
   }
 }
