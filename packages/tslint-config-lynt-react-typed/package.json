@@ -1,7 +1,7 @@
 {
   "name": "tslint-config-lynt-react-typed",
   "description": "TSLint config for Lynt with additional React typechecking rules",
-  "version": "0.1.0-beta",
+  "version": "0.1.0",
   "author": "Saad Quadri",
   "repository": "saadq/tslint-config-lynt-react-typed",
   "license": "MIT",
