@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-lynt-flow",
   "description": "The Flowtype ESLint config for Lynt",
-  "version": "0.1.1-beta",
+  "version": "0.1.0",
   "author": "Saad Quadri",
   "repository": "saadq/eslint-config-lynt-flow",
   "license": "MIT",
