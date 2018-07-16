@@ -5,7 +5,7 @@ test('tslint-config-lynt', () => {
   const configFileName = 'tslint.json'
   const fileToLintName = 'fixture.ts'
   const fileToLintContents = fs.readFileSync(fileToLintName, 'utf8')
-  const linter = new Linter({ fix: false, formatter: 'stylish' })
+  const linter = new Linter({ fix: false, formatter: 'json' })
   const config = Configuration.findConfiguration(configFileName, fileToLintName)
     .results
 

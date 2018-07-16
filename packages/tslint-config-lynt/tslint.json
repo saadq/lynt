@@ -15,7 +15,6 @@
     "no-non-null-assertion": true,
     "no-parameter-reassignment": true,
     "no-reference": true,
-    "no-var-requires": true,
     "prefer-for-of": true,
     "ban-comma-operator": true,
     "curly": true,
@@ -48,6 +47,7 @@
     "no-duplicate-imports": true,
     "no-irregular-whitespace": true,
     "encoding": true,
-    "interface-over-type-literal": true
+    "interface-over-type-literal": true,
+    "prefer-const": true
   }
 }
