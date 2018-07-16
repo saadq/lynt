@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 
 import meow from 'meow'
+import chalk from 'chalk'
 import cosmiconfig from 'cosmiconfig'
+import { writeFileSync } from 'fs'
 import lynt, { format } from '.'
+import { getTSLintConfig } from './tslint/config'
+import { getESLintConfig, getESLintIgnores } from './eslint/config'
 
 const help = `
   Usage
     $ lynt [files] <options>
 
   Options
+    --exportConfig Export tslint or eslint config to use with editors.
     --typescript   Add support for TypeScript.
     --flow         Add support for FlowType.
     --react        Add support for React.
@@ -39,6 +44,7 @@ const help = `
 const cli = meow({
   help,
   flags: {
+    exportConfig: 'boolean',
     typescript: 'boolean',
     flow: 'boolean',
     react: 'boolean',
@@ -59,6 +65,22 @@ const configResults = explorer.searchSync()
 
 if (configResults) {
   Object.assign(options, configResults.config)
+}
+
+if (options.exportConfig) {
+  if (options.typescript) {
+    const config = getTSLintConfig(options)
+    writeFileSync('./tslint.json', JSON.stringify(config, null, 2))
+    console.log(chalk.bold.green('\n\u2714 tslint.json generated\n'))
+  } else {
+    const config = getESLintConfig(options)
+    const ignore = getESLintIgnores(options.ignore)
+    writeFileSync('./eslintrc.json', JSON.stringify(config, null, 2))
+    writeFileSync('./.eslintignore', ignore.join('\n'))
+    console.log(chalk.bold.green('\n\u2714 eslintrc.json generated'))
+    console.log(chalk.bold.green('\u2714 .eslintignore generated\n'))
+  }
+  process.exit(0)
 }
 
 const lyntResults = lynt(filePaths, options)
