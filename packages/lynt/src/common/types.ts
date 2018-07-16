@@ -1,5 +1,8 @@
 /** The options the user passes in to customize Lynt. */
 interface Options {
+  /** Export tslint or eslint config to use with editors. */
+  exportConfig?: boolean
+
   /** Add TypeScript support by using TSLint. */
   typescript?: boolean
 
