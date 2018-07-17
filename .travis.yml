@@ -13,5 +13,3 @@ before_install:
   - npm i -g npm@6
 install:
   - npm ci
-test:
-  - npm ci
