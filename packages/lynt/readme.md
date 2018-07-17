@@ -5,7 +5,9 @@
 > A zero config JavaScript linter with support for React, Flow, and Typescript.
 
 [![Build Status](https://travis-ci.org/saadq/lynt.svg?branch=master)](https://travis-ci.org/saadq/lynt)
-[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/lynt)
+[![linter: lynt](https://img.shields.io/badge/linter-lynt-E81AAF.svg)](https://github.com/saadq/lynt)
+[![style: prettier](https://img.shields.io/badge/style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![tests](https://img.shields.io/badge/tests-jest-99424f.svg)](https://github.com/facebook/jest)
 
 Lynt has two main philosophies:
 
@@ -90,29 +92,21 @@ You can see a full list of flags you can pass to `lynt` in the [CLI](#cli) secti
 
 ## Notes on TypeScript Usage
 
-Lynt uses TSLint to lint TypeScript files, and some TSLint rules require type information about your project in order to work. If your `tsconfig.json` file is in your root project folder, simply running
+Lynt uses TSLint to lint TypeScript files, and some TSLint rules need to get information from your project's `tsconfig.json` file.
+
+If your `tsconfig.json` is in your root project folder, just run:
 
 ```bash
 $ lynt --typescript
 ```
 
-is enough. If your `tsconfig.json` file is elsewhere (for example, `./config/tsconfig.json`, you can point to it with a `--project` flag.
+If your `tsconfig.json` file is somewhere else (for example, `./config/tsconfig.json`, you can point to it with a `--project` flag.
 
 ```bash
 $ lynt --typescript --project config
 ```
 
-Note that if you only choose to lint a subset of your project by doing something like this:
-
-```bash
-$ lynt src/index.ts --typescript
-```
-
-You will be opting-out of some of the lint rules that require type information. You cannot lint a subset of your project and still specify a `--project` at the same time.
-
-One other thing to note is that the `--env` and `--global` flag are not supported with `--typescript`, though you shouldn't really need them as things like globals should be set with type declaration files.
-
-Lastly, just remember that if you have `lynt` installed globally and are trying to use it with `--typescript`, you will need to make sure that you have `typescript` installed globally as well.
+If you have `lynt` installed globally and are trying to use it with `--typescript`, you will need to make sure that you have `typescript` installed globally as well.
 
 ## CLI
 
@@ -312,6 +306,18 @@ const results = lynt(['foo.js', 'bar.js'])
 const table = format(results)
 
 console.log(table)
+```
+
+## Badge
+
+You can show off that your project uses Lynt with this badge:
+
+[![linter: lynt](https://img.shields.io/badge/linter-lynt-E81AAF.svg)](https://github.com/saadq/lynt)
+
+Just put the following in your README:
+
+```md
+[![linter: lynt](https://img.shields.io/badge/linter-lynt-E81AAF.svg)](https://github.com/saadq/lynt)
 ```
 
 ## FAQ
