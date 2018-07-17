@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-lynt",
   "description": "The base ESLint config for Lynt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Saad Quadri",
   "repository": "saadq/eslint-config-lynt",
   "license": "MIT",
