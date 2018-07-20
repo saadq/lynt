@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-lynt-flow",
   "description": "The Flowtype ESLint config for Lynt",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Saad Quadri",
   "repository": "saadq/eslint-config-lynt-flow",
   "license": "MIT",
@@ -22,7 +22,6 @@
     "lint": "lynt",
     "test": "npm run lint && jest"
   },
-  "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^8.2.5",
     "eslint": "^4.19.1",
