@@ -1,5 +1,5 @@
 <h1 align="center">
-	<img src="./media/logo.png" alt="lynt">
+  <img src="../../media/logo.png" alt="lynt">
 </h1>
 
 > A zero config JavaScript linter with support for React, Flow, and Typescript.
@@ -22,7 +22,7 @@ Lynt has two main philosophies:
 
 ---
 
-![output](./media/output.png)
+![output](../../media/output.png)
 
 ## How It Works
 

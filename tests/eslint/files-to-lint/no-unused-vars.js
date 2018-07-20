@@ -1,1 +1,0 @@
-const num = 10
