@@ -1,0 +1,41 @@
+{
+  "name": "tslint-config-lynt-react-typed",
+  "description": "TSLint config for Lynt with additional React typechecking rules",
+  "version": "0.1.2",
+  "author": "Saad Quadri",
+  "repository": "saadq/tslint-config-lynt-react-typed",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=6"
+  },
+  "keywords": [
+    "eslint",
+    "lint",
+    "linter",
+    "lynt",
+    "tslint",
+    "react"
+  ],
+  "scripts": {
+    "format": "prettier --no-semi --single-quote \"*.{js,ts}\" --write",
+    "lint": "lynt --typescript --ignore fixture.tsx",
+    "test": "npm run lint && jest"
+  },
+  "dependencies": {
+    "tslint-microsoft-contrib": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.5",
+    "@types/react": "^16.4.6",
+    "jest": "^23.4.0",
+    "lynt": "^0.4.0",
+    "prettier": "^1.13.7",
+    "ts-jest": "^23.0.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
+  }
+}

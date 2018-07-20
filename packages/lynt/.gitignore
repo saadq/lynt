@@ -3,4 +3,4 @@ lib
 .DS_Store
 *.tgz
 *.sketch
-*.log
+tslint.json

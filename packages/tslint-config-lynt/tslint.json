@@ -1,0 +1,53 @@
+{
+  "defaultSeverity": "error",
+  "rules": {
+    "adjacent-overload-signatures": true,
+    "ban-types": {
+      "options": [
+        ["Object", "Did you mean `object`?"],
+        ["Boolean", "Did you mean `boolean`?"],
+        ["Number", "Did you mean `number`?"],
+        ["String", "Did you mean `string`?"],
+        ["Symbol", "Did you mean `symbol`?"]
+      ]
+    },
+    "no-internal-module": true,
+    "no-non-null-assertion": true,
+    "no-parameter-reassignment": true,
+    "no-reference": true,
+    "prefer-for-of": true,
+    "ban-comma-operator": true,
+    "curly": true,
+    "no-arg": true,
+    "no-conditional-assignment": true,
+    "no-construct": true,
+    "no-duplicate-super": true,
+    "no-duplicate-switch-case": true,
+    "no-dynamic-delete": true,
+    "no-empty": true,
+    "no-eval": true,
+    "no-invalid-template-strings": true,
+    "no-invalid-this": true,
+    "no-misused-new": true,
+    "no-return-await": true,
+    "no-sparse-arrays": true,
+    "no-string-throw": true,
+    "no-switch-case-fall-through": true,
+    "no-unsafe-finally": true,
+    "no-unused-expression": [
+      true,
+      "allow-fast-null-checks",
+      "allow-tagged-template"
+    ],
+    "no-var-keyword": true,
+    "radix": true,
+    "triple-equals": true,
+    "use-isnan": true,
+    "eofline": true,
+    "no-duplicate-imports": true,
+    "no-irregular-whitespace": true,
+    "encoding": true,
+    "interface-over-type-literal": true,
+    "prefer-const": true
+  }
+}

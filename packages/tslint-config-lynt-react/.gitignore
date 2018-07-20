@@ -1,6 +1,3 @@
 node_modules
-lib
 .DS_Store
-*.tgz
-*.sketch
 *.log

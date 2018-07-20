@@ -1,0 +1,37 @@
+{
+  "name": "tslint-config-lynt",
+  "description": "The base TSLint config for Lynt",
+  "version": "0.1.2",
+  "author": "Saad Quadri",
+  "repository": "saadq/tslint-config-lynt",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "tslint.json"
+  ],
+  "engines": {
+    "node": ">=6"
+  },
+  "keywords": [
+    "eslint",
+    "lint",
+    "linter",
+    "lynt",
+    "tslint"
+  ],
+  "scripts": {
+    "format": "prettier --no-semi --single-quote \"*.{js,ts}\" --write",
+    "lint": "lynt --typescript --ignore fixture.ts",
+    "test": "npm run lint && jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.5",
+    "jest": "^23.4.0",
+    "lynt": "^0.4.0",
+    "prettier": "^1.13.7",
+    "ts-jest": "^23.0.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
+  }
+}
