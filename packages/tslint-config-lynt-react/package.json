@@ -1,7 +1,7 @@
 {
   "name": "tslint-config-lynt-react",
   "description": "TSLint config for Lynt with additional React rules",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Saad Quadri",
   "repository": "saadq/tslint-config-lynt-react",
   "license": "MIT",
