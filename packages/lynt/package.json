@@ -1,6 +1,6 @@
 {
   "name": "lynt",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A zero config JavaScript linter",
   "author": "Saad Quadri",
   "repository": "saadq/lynt",
