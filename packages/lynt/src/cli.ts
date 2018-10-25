@@ -69,6 +69,10 @@ if (configResults) {
 
 if (options.exportConfig) {
   if (options.typescript) {
+    if (!options.project && filePaths.length === 0) {
+      options.project = '.'
+    }
+
     const config = getTSLintConfig(options)
     writeFileSync('./tslint.json', JSON.stringify(config, null, 2))
     console.log(chalk.bold.green('\n\u2714 tslint.json generated\n'))
