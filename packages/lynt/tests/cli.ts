@@ -103,7 +103,7 @@ describe('cli', () => {
     })
 
     it('can create a config file with --exportConfig', () => {
-      const args = ['--typescript', '--exportConfig']
+      const args = ['src', '--typescript', '--exportConfig']
       const results = spawnSync(CMD, args).stdout.toString()
 
       expect(results).toContain('✔ tslint.json generated')
