@@ -1,5 +1,6 @@
 import { CLIEngine } from 'eslint'
-import { getESLintOptions } from './config'
+import globby from 'globby'
+import { getESLintOptions, getESLintIgnores } from './config'
 import convert from './convert'
 import { Options, Results } from '../common/types'
 
@@ -13,6 +14,7 @@ import { Options, Results } from '../common/types'
 function eslint(paths: Array<string>, options: Options): Results {
   const eslintOptions = getESLintOptions(options)
   const engine = new CLIEngine(eslintOptions)
+  const ignores = getESLintIgnores(options.ignore)
 
   let filesToLint = paths
 
@@ -20,7 +22,8 @@ function eslint(paths: Array<string>, options: Options): Results {
     filesToLint = options.react ? ['**/*.js', '**.jsx'] : ['**/*.js']
   }
 
-  const report = engine.executeOnFiles(filesToLint)
+  const deglobbedFiles = globby.sync(filesToLint, { ignore: ignores })
+  const report = engine.executeOnFiles(deglobbedFiles)
 
   if (options.fix) {
     CLIEngine.outputFixes(report)
