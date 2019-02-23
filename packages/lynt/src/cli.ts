@@ -5,6 +5,7 @@ import chalk from 'chalk'
 import cosmiconfig from 'cosmiconfig'
 import { writeFileSync } from 'fs'
 import lynt, { format } from '.'
+import { Options } from './common/types'
 import { getTSLintConfig } from './tslint/config'
 import { getESLintConfig, getESLintIgnores } from './eslint/config'
 
@@ -43,6 +44,7 @@ const help = `
 
 const cli = meow({
   help,
+  booleanDefault: undefined,
   flags: {
     exportConfig: 'boolean',
     typescript: 'boolean',
@@ -58,14 +60,13 @@ const cli = meow({
 })
 
 const filePaths = cli.input
-const options = cli.flags
 const searchPlaces = ['package.json', '.lyntrc']
 const explorer = cosmiconfig('lynt', { searchPlaces })
 const configResults = explorer.searchSync()
 
-if (configResults) {
-  Object.assign(options, configResults.config)
-}
+const options: Options = configResults
+  ? Object.assign({}, configResults.config, cli.flags)
+  : cli.flags
 
 if (options.exportConfig) {
   if (options.typescript) {
